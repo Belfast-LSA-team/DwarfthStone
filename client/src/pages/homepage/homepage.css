@@ -1,0 +1,7 @@
+.main {
+	height: 500px;
+
+	&__title {
+		font-size: 100px;
+	}
+}

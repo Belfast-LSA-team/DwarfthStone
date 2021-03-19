@@ -1,8 +1,12 @@
 import React from "react";
-import "./homepage.postcss";
+import "./homepage.css";
 
 const Homepage: React.FC = () => {
-    return <h1 className="main-title">Homepages</h1>;
+    return (
+        <div className="main">
+            <h1 className="main__title">Homepages</h1>
+        </div>
+    );
 };
 
 export default Homepage;
