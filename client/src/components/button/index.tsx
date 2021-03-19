@@ -1,3 +1,3 @@
-export const Button = (props: any) => {
-    return <button {...props}></button>;
-};
+import { Button } from "./Button";
+
+export default Button;
