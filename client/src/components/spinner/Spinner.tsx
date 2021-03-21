@@ -8,9 +8,9 @@ type SpinnerProps = {
     color: "blue" | "orange";
 };
 
-export const Spinner: React.FC<SpinnerProps> = ({ color }) => {
+export const Spinner = (props: SpinnerProps) => {
     let className = "spinner";
-    className += ` ${color}`;
+    className += ` ${props.color}`;
 
     return (
         <svg
