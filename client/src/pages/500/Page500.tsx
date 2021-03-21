@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./page404.css";
+import "./page500.css";
 
 type Page500Props = {
     message: string;
 };
 
-export const Page404: React.FC<Page500Props> = ({ message }) => {
+export const Page500 = (props: Page500Props) => {
     return (
         <div className="main">
             <div className="main-content">
@@ -26,7 +26,7 @@ export const Page404: React.FC<Page500Props> = ({ message }) => {
                     </svg>
                 </div>
                 <div className="main-content__description">
-                    <p>Cтраница не найдена</p>
+                    <p>{props.message}</p>
                 </div>
                 <div className="main-content__button-home">
                     <Link to="/">Вернуться на главную</Link>

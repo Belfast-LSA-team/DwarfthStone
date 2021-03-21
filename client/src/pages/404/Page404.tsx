@@ -7,7 +7,7 @@ type Page404Props = {
     message: string;
 };
 
-export const Page404: React.FC<Page404Props> = ({ message }) => {
+export const Page404 = (props: Page404Props) => {
     return (
         <div className="main">
             <div className="main-content">
@@ -26,7 +26,7 @@ export const Page404: React.FC<Page404Props> = ({ message }) => {
                     </svg>
                 </div>
                 <div className="main-content__description">
-                    <p>{message}</p>
+                    <p>{props.message}</p>
                 </div>
                 <div className="main-content__button-home">
                     <Link to="/">Вернуться на главную</Link>
