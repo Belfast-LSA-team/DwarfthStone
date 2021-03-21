@@ -9,12 +9,12 @@ type SpinnerProps = {
 };
 
 export const Spinner: React.FC<SpinnerProps> = ({ color }) => {
-    let class_name = "spinner";
-    class_name += ` ${color}`;
+    let className = "spinner";
+    className += ` ${color}`;
 
     return (
         <svg
-            className={class_name}
+            className={className}
             viewBox="0 0 100 100"
             preserveAspectRatio="xMidYMid"
         >
