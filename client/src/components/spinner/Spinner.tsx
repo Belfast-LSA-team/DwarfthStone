@@ -8,7 +8,7 @@ type SpinnerProps = {
     color: "blue" | "orange";
 };
 
-export const Spinner = (props: SpinnerProps) => {
+export const Spinner = (props: SpinnerProps): JSX.Element => {
     let className = "spinner";
     className += ` ${props.color}`;
 
