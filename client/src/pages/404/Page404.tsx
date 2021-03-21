@@ -7,7 +7,7 @@ type Page404Props = {
     message: string;
 };
 
-export const Page404 = (props: Page404Props) => {
+export const Page404 = (props: Page404Props): JSX.Element => {
     return (
         <div className="main">
             <div className="main-content">

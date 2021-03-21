@@ -7,7 +7,7 @@ type Page500Props = {
     message: string;
 };
 
-export const Page500 = (props: Page500Props) => {
+export const Page500 = (props: Page500Props): JSX.Element => {
     return (
         <div className="main">
             <div className="main-content">
