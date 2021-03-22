@@ -13,10 +13,10 @@ type ButtonProps = {
 };
 
 export const Button = (props: ButtonProps) => {
-    const { className, type, style, stretch, clickHandler, children } = props,
-        classNames = classnames("button", `button_${style}`, className, {
-            button_fullwidth: stretch,
-        });
+    const { className, type, style, stretch, clickHandler, children } = props;
+    const classNames = classnames("button", `button_${style}`, className, {
+        button_fullwidth: stretch,
+    });
 
     return (
         <button className={classNames} type={type} onClick={clickHandler}>
