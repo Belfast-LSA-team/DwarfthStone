@@ -5,13 +5,13 @@
     width: 100px;
     height: 100px;
 
-    .spinner_dark {
+    &_dark {
         path {
             fill: var(--secondary-color);
         }
     }
 
-    .spinner_light {
+    &_light {
         path {
             fill: var(--important-color);
         }
