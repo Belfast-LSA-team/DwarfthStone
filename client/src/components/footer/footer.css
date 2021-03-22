@@ -1,7 +1,6 @@
 footer {
-    background: #1e2734;
+    background: var(--secondary-color);
     bottom: 0px;
-    position: absolute;
     width: 100%;
     text-align: right;
 
@@ -11,8 +10,7 @@ footer {
         padding: 0px 15px;
         &__allrights {
             p {
-                color: #fff;
-                font-family: Montserrat;
+                color: var(--text-light-color);
                 font-style: normal;
                 font-weight: normal;
                 font-size: 18px;
