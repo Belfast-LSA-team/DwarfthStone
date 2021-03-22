@@ -1,16 +1,16 @@
 import React from "react";
+import classnames from "classnames";
 import "./spinner.css";
 
 // build here https://loading.io/
 // example <Spinner color={"blue"} />
 
 type SpinnerProps = {
-    color: "blue" | "orange";
+    color: "dark" | "light";
 };
 
 export const Spinner = (props: SpinnerProps): JSX.Element => {
-    let className = "spinner";
-    className += ` ${props.color}`;
+    let className = classnames("spinner", `spinner_${props.color}`);
 
     return (
         <svg
