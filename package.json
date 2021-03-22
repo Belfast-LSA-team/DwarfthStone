@@ -56,6 +56,7 @@
     "stylelint-config-recommended": "4.0.0"
   },
   "dependencies": {
+    "@types/classnames": "2.2.11",
     "@types/jest": "26.0.20",
     "@types/prettier": "2.2.3",
     "@types/react": "17.0.3",
@@ -63,6 +64,7 @@
     "@types/react-redux": "7.1.16",
     "axios": "0.21.1",
     "body-parser": "1.19.0",
+    "classnames": "2.2.6",
     "compression": "1.7.4",
     "express": "4.17.1",
     "express-validator": "6.10.0",
