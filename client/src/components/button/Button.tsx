@@ -1,30 +1,25 @@
 import React from "react";
+import classnames from "classnames";
 
 import "./button.css";
 
 type ButtonProps = {
-    type: "button" | "submit";
+    className?: string;
+    type: "button" | "submit" | "reset";
     style: "primary" | "secondary";
-    stretch: Boolean;
+    stretch?: boolean;
     clickHandler: React.MouseEventHandler<HTMLButtonElement>;
+    children: React.ReactNode;
 };
 
-export const Button: React.FC<ButtonProps> = ({ children, ...otherProps }) => {
-    let class_name = "button";
-
-    class_name +=
-        otherProps.style === "primary"
-            ? " button_primary"
-            : " button_secondary";
-
-    class_name += otherProps.stretch ? " button_fullwidth" : "";
+export const Button = (props: ButtonProps) => {
+    const { className, type, style, stretch, clickHandler, children } = props,
+        classNames = classnames("button", `button_${style}`, className, {
+            button_fullwidth: stretch,
+        });
 
     return (
-        <button
-            className={class_name}
-            type={otherProps.type}
-            onClick={otherProps.clickHandler}
-        >
+        <button className={classNames} type={type} onClick={clickHandler}>
             {children}
         </button>
     );
