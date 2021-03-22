@@ -1,0 +1,16 @@
+.global{
+	min-height: 100vh;
+	
+	&.important{
+		/* background:var(--important-color); */
+		background:#FCBC5D;
+	}
+	&.secondary{
+		/* background:var(--secondary-color); */
+		background:#1E2734;
+	}
+	&__inner{
+
+	}
+}
+

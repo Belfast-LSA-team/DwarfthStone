@@ -1,38 +1,38 @@
 .main {
-	max-width: 340px;
-	width: 100%;
-	display: flex;
-	align-content: center;
-	align-self: center;
-	margin: auto;
-	text-align: center;
-	height: 90vh;
+    max-width: 340px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-self: center;
+    margin: auto;
+    text-align: center;
+    height: 90vh;
 
-	&-content {
-		border-radius: 5px;
-		margin: auto;
-		min-width: 340px;
+    &-content {
+        border-radius: 5px;
+        margin: auto;
+        min-width: 340px;
 
-		&__description  {
-			p{
-				font-family: Mulish;
-				font-style: normal;
-				font-weight: normal;
-				font-size: 22px;
-				line-height: 28px;
-				color: #1E2734;
-			}
-		}
+        &__description {
+            p {
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 28px;
+                color: #1e2734;
+            }
+        }
 
-		&__button-home {
-			a {
-				font-family: Mulish;
-				font-style: normal;
-				font-weight: normal;
-				font-size: 16px;
-				line-height: 20px;
-				color: #1E2734;
-		}
-		}
-	}
+        &__button-home {
+            a {
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 20px;
+                color: #1e2734;
+            }
+        }
+    }
 }

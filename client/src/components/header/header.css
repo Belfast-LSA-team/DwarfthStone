@@ -1,0 +1,38 @@
+/* FCBC5D 
+1E2734
+*/
+
+/* upd common */
+body {
+    box-sizing: content-box;
+    margin: 0px;
+}
+/* upd common */
+
+header {
+    &.type-blue {
+        background: #1e2734;
+
+        /* background:var(--secondary-color); */
+    }
+
+    &.type-transparent {
+        background: transparent;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        max-width: 1280px;
+        margin: auto;
+        padding: 0px 15px;
+
+        &__logo-menu {
+            display: flex;
+            min-width: 50%;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
