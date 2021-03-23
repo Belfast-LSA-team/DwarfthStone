@@ -1,3 +1,1 @@
-export const Input = (props: any) => {
-    return <input {...props} />;
-};
+export { InputField as default } from "./InputField";

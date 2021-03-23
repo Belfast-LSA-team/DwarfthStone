@@ -1,0 +1,22 @@
+.auth {
+    width: 470px;
+
+    &__title {
+        margin: 0 0 30px 0;
+        font-size: 48px;
+        text-align: center;
+    }
+
+    &__input:not(:first-child) {
+        margin-top: 20px;
+    }
+
+    &__input:last-of-type {
+        margin-bottom: 75px;
+    }
+
+    &__btn:not(:first-child) {
+        margin-top: 20px;
+    }
+}
+
