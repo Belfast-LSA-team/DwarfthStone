@@ -7,11 +7,14 @@ type TitleProps = {
     text: string;
     className?: string;
     level: 1 | 2 | 3 | 4 | 5 | 6;
+    dark: boolean;
 };
 
 export const Title = (props: TitleProps) => {
-    const { text, className, level } = props;
-    const classNames = classnames("title", `h${level}`, className);
+    const { text, className, level, dark } = props;
+    const classNames = classnames("title", `h${level}`, className, {
+        title_dark: dark,
+    });
 
     switch (level) {
         case 1:
@@ -29,4 +32,8 @@ export const Title = (props: TitleProps) => {
         default:
             return null;
     }
+};
+
+Title.defaultProps = {
+    dark: false,
 };
