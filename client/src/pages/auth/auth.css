@@ -8,7 +8,7 @@
     }
 
     &__input {
-        border: 1px solid var(--border-color);
+        position: relative;
 
         &:not(:first-child) {
             margin-top: 20px;

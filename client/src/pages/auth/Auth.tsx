@@ -5,9 +5,11 @@ import BoxWrapper from "../../components/boxwrapper";
 import GameLayout from "../../components/gamelayout";
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
+import validator from "../../utils/validator";
 
 import "./auth.css";
 
+type ValueErrors = Record<string, string>;
 type AuthProps = {
     form: "login" | "register";
 };
@@ -29,6 +31,7 @@ export const Auth = (props: AuthProps) => {
               };
 
     const [formValues, setFormValue] = useState(initialFormValues);
+    const [formErrors, setFormErrors] = useState({} as ValueErrors);
 
     const onInputChange = (e: React.ChangeEvent) => {
         const input = e.target as HTMLInputElement;
@@ -37,7 +40,16 @@ export const Auth = (props: AuthProps) => {
 
     const onFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(formValues);
+
+        const form = e.currentTarget as HTMLFormElement;
+        const validation = validator(form);
+
+        if (!validation.valid) {
+            setFormErrors(validation.errors);
+        } else {
+            setFormErrors({});
+            console.log("Отправили форму");
+        }
     };
 
     const onRegisterClick = () => {
@@ -65,7 +77,7 @@ export const Auth = (props: AuthProps) => {
         formView = (
             <React.Fragment>
                 <h1 className="auth__title">Вход</h1>
-                <form onSubmit={onFormSubmit}>
+                <form className="auth__form" onSubmit={onFormSubmit}>
                     <InputField
                         className="auth__input"
                         type="text"
@@ -73,6 +85,7 @@ export const Auth = (props: AuthProps) => {
                         stretch={true}
                         value={formValues.login}
                         placeholder="Логин"
+                        error={formErrors.login_error}
                         onChange={onInputChange}
                     />
                     <InputField
@@ -82,6 +95,7 @@ export const Auth = (props: AuthProps) => {
                         stretch={true}
                         value={formValues.password}
                         placeholder="Пароль"
+                        error={formErrors.password_error}
                         onChange={onInputChange}
                     />
                     <Button
@@ -110,7 +124,7 @@ export const Auth = (props: AuthProps) => {
         formView = (
             <React.Fragment>
                 <h1 className="auth__title">Регистрация</h1>
-                <form onSubmit={onFormSubmit}>
+                <form className="auth__form" onSubmit={onFormSubmit}>
                     <InputField
                         className="auth__input"
                         type="email"
@@ -118,6 +132,7 @@ export const Auth = (props: AuthProps) => {
                         stretch={true}
                         value={formValues.email!}
                         placeholder="Почта"
+                        error={formErrors.email_error}
                         onChange={onInputChange}
                     />
                     <InputField
@@ -127,6 +142,7 @@ export const Auth = (props: AuthProps) => {
                         stretch={true}
                         value={formValues.phone!}
                         placeholder="Телефон"
+                        error={formErrors.phone_error}
                         onChange={onInputChange}
                     />
                     <InputField
@@ -136,6 +152,7 @@ export const Auth = (props: AuthProps) => {
                         stretch={true}
                         value={formValues.login}
                         placeholder="Логин"
+                        error={formErrors.login_error}
                         onChange={onInputChange}
                     />
                     <InputField
@@ -145,6 +162,7 @@ export const Auth = (props: AuthProps) => {
                         stretch={true}
                         value={formValues.password}
                         placeholder="Пароль"
+                        error={formErrors.password_error}
                         onChange={onInputChange}
                     />
                     <Button

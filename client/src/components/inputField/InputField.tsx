@@ -10,6 +10,7 @@ type InputFieldProps = {
     name: string;
     value: string;
     placeholder: string;
+    error?: string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -22,20 +23,24 @@ export const InputField = (props: InputFieldProps) => {
         value,
         placeholder,
         onChange,
+        error,
     } = props;
 
-    const classNames = classnames("input-field", className, {
+    const inputClassNames = classnames("input-field", {
         "input-field_fullwidth": stretch,
     });
 
     return (
-        <input
-            className={classNames}
-            type={type}
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-        />
+        <div className={className}>
+            <input
+                className={inputClassNames}
+                type={type}
+                name={name}
+                value={value}
+                placeholder={placeholder}
+                onChange={onChange}
+            />
+            <span className="input-error">{error}</span>
+        </div>
     );
 };
