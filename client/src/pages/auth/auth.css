@@ -7,12 +7,16 @@
         text-align: center;
     }
 
-    &__input:not(:first-child) {
-        margin-top: 20px;
-    }
+    &__input {
+        border: 1px solid var(--border-color);
 
-    &__input:last-of-type {
-        margin-bottom: 75px;
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        &:last-of-type {
+            margin-bottom: 75px;
+        }
     }
 
     &__btn:not(:first-child) {

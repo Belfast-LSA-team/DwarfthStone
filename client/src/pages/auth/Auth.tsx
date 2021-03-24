@@ -42,6 +42,20 @@ export const Auth = (props: AuthProps) => {
 
     const onRegisterClick = () => {
         history.push("/register");
+        setFormValue({
+            email: "",
+            phone: "",
+            login: "",
+            password: "",
+        });
+    };
+
+    const onLoginClick = () => {
+        history.push("/login");
+        setFormValue({
+            login: "",
+            password: "",
+        });
     };
 
     let formView;
@@ -95,7 +109,7 @@ export const Auth = (props: AuthProps) => {
         /* Register Form */
         formView = (
             <React.Fragment>
-                <h1 className="auth__title">Вход</h1>
+                <h1 className="auth__title">Регистрация</h1>
                 <form onSubmit={onFormSubmit}>
                     <InputField
                         className="auth__input"
@@ -148,7 +162,7 @@ export const Auth = (props: AuthProps) => {
                     type="button"
                     stretch={true}
                     style="secondary"
-                    clickHandler={onRegisterClick}
+                    clickHandler={onLoginClick}
                 >
                     Войти
                 </Button>
