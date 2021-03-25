@@ -10,8 +10,7 @@ type TitleProps = {
     dark: boolean;
 };
 
-export const Title = (props: TitleProps) => {
-    const { text, className, level, dark } = props;
+export const Title = ({ text, className, level, dark }: TitleProps) => {
     const classNames = classnames("title", `h${level}`, className, {
         title_dark: dark,
     });
