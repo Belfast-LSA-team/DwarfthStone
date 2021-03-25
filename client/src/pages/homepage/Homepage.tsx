@@ -6,9 +6,13 @@ import homeImg from "../../assets/images/GameMedia.png";
 import { SiteLayout } from "../../layouts/SiteLayout/SiteLayout";
 import { LogoHome } from "../../components/logos/Logo";
 import Button from "../../components/button";
-import { homeDescription } from "../../data/content";
+import {
+    homeDescription,
+    darkButtonHomeLabel,
+    lightButtonHomeLabel,
+} from "../../data/content";
 
-const Homepage = () => {
+export const Homepage = () => {
     const history = useHistory();
 
     const contactUsHandler = () => {
@@ -19,21 +23,21 @@ const Homepage = () => {
     };
     return (
         <SiteLayout bgColor={"important"}>
-            <div className="home_content">
-                <div className="home_content_image">
+            <div className="home-content">
+                <div className="home-content__image">
                     <img src={homeImg} alt="home-cards-display" />
                 </div>
-                <div className="home_content_description">
+                <div className="home-content__description">
                     <LogoHome />
                     <p>{homeDescription}</p>
-                    <div className="home_content_button">
+                    <div className="home-content__button">
                         <Button
                             type="button"
                             style="dark"
                             stretch={false}
                             clickHandler={contactUsHandler}
                         >
-                            Связаться с нами
+                            {darkButtonHomeLabel}
                         </Button>
                         <Button
                             type="button"
@@ -41,7 +45,7 @@ const Homepage = () => {
                             stretch={false}
                             clickHandler={donateHandler}
                         >
-                            На кофе
+                            {lightButtonHomeLabel}
                         </Button>
                     </div>
                 </div>
@@ -49,5 +53,3 @@ const Homepage = () => {
         </SiteLayout>
     );
 };
-
-export default Homepage;

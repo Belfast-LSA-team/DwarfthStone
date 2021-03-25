@@ -1,4 +1,4 @@
-.home_content {
+.home-content {
     height: 100%;
     max-width: 1280px;
     padding: 0px 15px;
@@ -8,7 +8,7 @@
     margin: auto;
     margin-top: 10vh;
 
-    &_description {
+    &__description {
         width: 40%;
         p {
             line-height: 25px;
@@ -30,7 +30,7 @@
             max-width: 380px;
         }
     }
-    &_button {
+    &__button {
         padding-bottom: 20px;
 
         button:first-child {

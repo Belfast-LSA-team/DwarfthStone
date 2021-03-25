@@ -1,8 +1,14 @@
-footer {
-    background: var(--secondary-color);
+.footer {
     bottom: 0px;
     width: 100%;
     text-align: right;
+
+    &_transparent {
+        background: transparent;
+    }
+    &_dark {
+        background: var(--secondary-color);
+    }
 
     .footer-content {
         max-width: 1280px;

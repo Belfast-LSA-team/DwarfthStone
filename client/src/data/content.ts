@@ -9,3 +9,7 @@ export const menuForum = "Форум";
 export const menuContact = "Связаться с нами";
 export const menuLogin = "Логин";
 export const menuRegister = "Регистрация";
+
+
+export const darkButtonHomeLabel = 'Связаться с нами';
+export const lightButtonHomeLabel = 'На кофе';
