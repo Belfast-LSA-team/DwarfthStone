@@ -1,5 +1,5 @@
 .title {
-    color: --text-light-color;
+    color: var(--text-light-color);
     font-weight: 400;
     margin: 15px 0;
     text-align: center;
