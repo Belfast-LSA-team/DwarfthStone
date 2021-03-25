@@ -62,7 +62,7 @@ export const Login = () => {
                                 className="auth__form"
                                 onSubmit={handleSubmit}
                             >
-                                {InputList(formValues, "auth__input", false)}
+                                {InputList(formValues, "auth__input", true)}
                                 <Button
                                     className="auth__btn"
                                     type="submit"
