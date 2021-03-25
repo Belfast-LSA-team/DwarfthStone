@@ -15,22 +15,11 @@ export const Title = ({ text, className, level, dark }: TitleProps) => {
         title_dark: dark,
     });
 
-    switch (level) {
-        case 1:
-            return <h1 className={classNames}>{text}</h1>;
-        case 2:
-            return <h2 className={classNames}>{text}</h2>;
-        case 3:
-            return <h3 className={classNames}>{text}</h3>;
-        case 4:
-            return <h4 className={classNames}>{text}</h4>;
-        case 5:
-            return <h5 className={classNames}>{text}</h5>;
-        case 6:
-            return <h6 className={classNames}>{text}</h6>;
-        default:
-            return null;
-    }
+const Tag = `h${level}`;
+
+return (
+  <Tag className={className}>{text}</Tag>
+);
 };
 
 Title.defaultProps = {
