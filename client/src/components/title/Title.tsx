@@ -7,21 +7,14 @@ type TitleProps = {
     text: string;
     className?: string;
     level: 1 | 2 | 3 | 4 | 5 | 6;
-    dark: boolean;
+    dark?: boolean;
 };
 
-export const Title = ({ text, className, level, dark }: TitleProps) => {
+export const Title = ({ text, className, level, dark = false }: TitleProps) => {
+    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
     const classNames = classnames("title", `h${level}`, className, {
         title_dark: dark,
     });
 
-const Tag = `h${level}`;
-
-return (
-  <Tag className={className}>{text}</Tag>
-);
-};
-
-Title.defaultProps = {
-    dark: false,
+    return <Tag className={classNames}>{text}</Tag>;
 };
