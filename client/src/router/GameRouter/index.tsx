@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Homepage from "../../pages/homepage";
 import Auth from "../../pages/auth";
+import Login from "../../pages/login";
+import Register from "../../pages/register";
 
 export const GameRouter = (): JSX.Element => (
     <Router>
@@ -11,10 +13,10 @@ export const GameRouter = (): JSX.Element => (
                 <Homepage />
             </Route>
             <Route path="/login">
-                <Auth form="login" />
+                <Login />
             </Route>
             <Route path="/register">
-                <Auth form="register" />
+                <Register />
             </Route>
         </Switch>
     </Router>

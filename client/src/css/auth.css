@@ -22,5 +22,8 @@
     &__btn:not(:first-child) {
         margin-top: 20px;
     }
-}
 
+    &__error {
+        color: var(--text-error-color);
+    }
+}

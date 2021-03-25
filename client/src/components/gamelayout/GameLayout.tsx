@@ -1,6 +1,4 @@
-import React from "react";
-import classnames from "classnames";
-import BoxWrapper from "../../components/boxwrapper";
+import React, { Fragment } from "react";
 
 import "./gamelayout.css";
 
@@ -12,11 +10,10 @@ export const GameLayout = (props: GameLayoutProps) => {
     const { children } = props;
 
     return (
-        <React.Fragment>
+        <Fragment>
             <div className="main">
-                <div className="background"></div>
                 <div className="content">{children}</div>
             </div>
-        </React.Fragment>
+        </Fragment>
     );
 };
