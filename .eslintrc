@@ -18,5 +18,13 @@
   },
   "settings": {
     "import/resolver": "webpack"
-  }
+  },
+  "overrides": [
+    {
+        "files": ["*.ts", "*.tsx"],
+        "rules": {
+            "no-undef": "off"
+        }
+    }
+  ]
 }
