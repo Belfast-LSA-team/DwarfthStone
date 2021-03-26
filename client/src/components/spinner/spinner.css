@@ -1,22 +1,19 @@
-.spinner{
-	margin: auto;
-	display: block;
-	shape-rendering: auto;
-	width:100px;
-	height: 100px;
+.spinner {
+    margin: auto;
+    display: block;
+    shape-rendering: auto;
+    width: 100px;
+    height: 100px;
 
-	&.blue{
-		path{
-			fill:var(--secondary-color);
-		}
+    &_dark {
+        path {
+            fill: var(--secondary-color);
+        }
+    }
 
-	}
-	
-	&.orange{
-
-		path{
-			fill:var(--important-color);
-		}
-
-	}
+    &_light {
+        path {
+            fill: var(--important-color);
+        }
+    }
 }
