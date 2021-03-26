@@ -1,0 +1,7 @@
+.boxwrapper {
+    padding: 30px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px var(--border-color);
+    color: var(--text-light-color);
+}
