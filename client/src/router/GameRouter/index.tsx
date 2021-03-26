@@ -13,14 +13,14 @@ export const GameRouter = (): JSX.Element => (
             <Route exact path="/">
                 <Homepage />
             </Route>
-            <Route path="*">
-                <Page404 message="Страница не найдена" />
-            </Route>
             <Route path="/login">
                 <Login />
             </Route>
             <Route path="/register">
                 <Register />
+            </Route>
+            <Route path="*">
+                <Page404 message="Страница не найдена" />
             </Route>
         </Switch>
     </Router>
