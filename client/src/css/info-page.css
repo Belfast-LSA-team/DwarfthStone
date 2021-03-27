@@ -1,0 +1,14 @@
+.info-page {
+    display: flex;
+    height: 100vh;
+    background-color: var(--bg-color);
+
+    &__main {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        padding: 65px 40px 0;
+        align-items: center;
+        overflow-y: scroll;
+    }
+}
