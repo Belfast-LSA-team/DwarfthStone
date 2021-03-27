@@ -1,0 +1,36 @@
+.main {
+    max-width: 340px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-self: center;
+    margin: auto;
+    text-align: center;
+    height: 90vh;
+
+    &-content {
+        border-radius: 5px;
+        margin: auto;
+        min-width: 340px;
+
+        &__description {
+            p {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 28px;
+                color: var(--secondary-color);
+            }
+        }
+
+        &__button-home {
+            a {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 20px;
+                color: var(--secondary-color);
+            }
+        }
+    }
+}
