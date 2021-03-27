@@ -1,0 +1,17 @@
+.global {
+    min-height: 100vh;
+
+    &.important {
+        background: var(--important-color);
+    }
+    &.secondary {
+        background: var(--secondary-color);
+    }
+    &__inner {
+        height: 100%;
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
