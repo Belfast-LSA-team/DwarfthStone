@@ -5,7 +5,7 @@ module.exports = {
     mode: "production",
     entry: "./client/src/index.tsx",
     output: {
-        path: path.join(__dirname, "/public"),
+        path: path.join(__dirname, "/dist"),
         filename: "bundle.js",
     },
     resolve: {
@@ -25,6 +25,15 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                 },
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif|ico|ogg|mp3|wav)$/,
+                exclude: /node_modules/,
+                use: ["file-loader?name=assets/[name].[ext]"],
+            },
+            {
+                test: /\.(woff2|woff|ttf|eot)$/,
+                use: ["file-loader"],
             },
             {
                 test: /\.css$/,

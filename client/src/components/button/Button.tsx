@@ -6,7 +6,7 @@ import "./button.css";
 type ButtonProps = {
     className?: string;
     type: "button" | "submit" | "reset";
-    style: "primary" | "secondary";
+    style: "primary" | "secondary" | "dark" | "light";
     stretch?: boolean;
     clickHandler: React.MouseEventHandler<HTMLButtonElement>;
     children: React.ReactNode;
