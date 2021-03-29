@@ -5,10 +5,10 @@ import Footer from "../../components/footer";
 
 import "./siteLayout.css";
 
-interface SiteInterface {
+type SiteInterface = {
     children: ReactNode;
     bgColor: "important" | "secondary";
-}
+};
 
 export const SiteLayout = ({
     children,
