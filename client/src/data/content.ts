@@ -13,3 +13,8 @@ export const menuRegister = "Регистрация";
 
 export const darkButtonHomeLabel = 'Связаться с нами';
 export const lightButtonHomeLabel = 'На кофе';
+
+export const nameLabel = 'Имя';
+export const emailLabel = 'Почта';
+export const titleLabel = 'Заголовок';
+export const messageLabel = 'Сообщение';

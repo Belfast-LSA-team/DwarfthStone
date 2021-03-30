@@ -6,14 +6,15 @@ import "./inputfield.css";
 
 type InputFieldProps = {
     className?: string;
-    type: string;
+    type?: string;
+    rows?: string;
     stretch?: boolean;
     name: string;
     placeholder: string;
 };
 
 export const InputField = (props: InputFieldProps) => {
-    const { className, type, stretch, name, placeholder } = props;
+    const { className, type, stretch, name, placeholder, rows } = props;
 
     const inputClassNames = classnames("input-field", {
         "input-field_fullwidth": stretch,
@@ -22,21 +23,39 @@ export const InputField = (props: InputFieldProps) => {
     return (
         <div className={className}>
             <Field name={name}>
-                {({ input, meta }) => (
-                    <Fragment>
-                        <input
-                            {...input}
-                            className={inputClassNames}
-                            type={type}
-                            placeholder={placeholder}
-                        />
-                        {(meta.error || meta.submitError) && meta.touched ? (
-                            <span className="input-error">
-                                {meta.error || meta.submitError}
-                            </span>
-                        ) : null}
-                    </Fragment>
-                )}
+                {rows
+                    ? ({ textarea, meta }) => (
+                          <Fragment>
+                              <input
+                                  {...textarea}
+                                  className={inputClassNames}
+                                  rows={rows}
+                                  placeholder={placeholder}
+                              />
+                              {(meta.error || meta.submitError) &&
+                              meta.touched ? (
+                                  <span className="input-error">
+                                      {meta.error || meta.submitError}
+                                  </span>
+                              ) : null}
+                          </Fragment>
+                      )
+                    : ({ input, meta }) => (
+                          <Fragment>
+                              <input
+                                  {...input}
+                                  className={inputClassNames}
+                                  type={type}
+                                  placeholder={placeholder}
+                              />
+                              {(meta.error || meta.submitError) &&
+                              meta.touched ? (
+                                  <span className="input-error">
+                                      {meta.error || meta.submitError}
+                                  </span>
+                              ) : null}
+                          </Fragment>
+                      )}
             </Field>
         </div>
     );

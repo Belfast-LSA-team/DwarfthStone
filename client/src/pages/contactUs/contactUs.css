@@ -1,0 +1,17 @@
+.contact {
+    height: 100%;
+    max-width: 1280px;
+    padding: 0px 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    margin-top: 10vh;
+
+    &-left {
+        width: 50%;
+    }
+    &-right {
+        width: 50%;
+    }
+}
