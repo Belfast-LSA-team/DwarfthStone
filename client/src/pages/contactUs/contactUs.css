@@ -7,6 +7,23 @@
     align-items: center;
     margin: auto;
     margin-top: 10vh;
+    width: 100%;
+
+    &__message-success {
+        color: #fff;
+        text-align: center;
+        width: 80%;
+        margin: auto;
+        margin-top: 10%;
+    }
+
+    &__input {
+        margin: 20px 0px;
+        position: relative;
+        textarea {
+            min-height: 134px;
+        }
+    }
 
     &-left {
         width: 50%;

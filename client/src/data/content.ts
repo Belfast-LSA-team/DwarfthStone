@@ -18,3 +18,5 @@ export const nameLabel = 'Имя';
 export const emailLabel = 'Почта';
 export const titleLabel = 'Заголовок';
 export const messageLabel = 'Сообщение';
+export const contactUsTitle = 'Написать нам';
+export const thankYouText = 'Спасибо ваще сообщение принято! Мы отреагируем в ближайшее время';

@@ -24,21 +24,21 @@ export const InputField = (props: InputFieldProps) => {
         <div className={className}>
             <Field name={name}>
                 {rows
-                    ? ({ textarea, meta }) => (
-                          <Fragment>
-                              <input
-                                  {...textarea}
+                    ? ({ input, meta }) => (
+                          <div className="textarea-wrapper">
+                              <textarea
+                                  {...input}
                                   className={inputClassNames}
-                                  rows={rows}
+                                  rows={+rows}
                                   placeholder={placeholder}
-                              />
+                              ></textarea>
                               {(meta.error || meta.submitError) &&
                               meta.touched ? (
                                   <span className="input-error">
                                       {meta.error || meta.submitError}
                                   </span>
                               ) : null}
-                          </Fragment>
+                          </div>
                       )
                     : ({ input, meta }) => (
                           <Fragment>
