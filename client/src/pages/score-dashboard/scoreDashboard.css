@@ -1,0 +1,13 @@
+.score-dashboard {
+    width: 100%;
+    max-width: 570px;
+
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-light-color);
+        font-weight: 400;
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+}
