@@ -8,9 +8,9 @@ type Page404Props = {
 };
 
 export const Page404 = ({ message }: Page404Props): JSX.Element => (
-    <div className="main">
-        <div className="main-content">
-            <div className="main-content__title">
+    <div className="error">
+        <div className="error-content">
+            <div className="error-content__title">
                 <svg
                     width="215"
                     height="88"
@@ -24,10 +24,10 @@ export const Page404 = ({ message }: Page404Props): JSX.Element => (
                     />
                 </svg>
             </div>
-            <div className="main-content__description">
+            <div className="error-content__description">
                 <p>{message}</p>
             </div>
-            <div className="main-content__button-home">
+            <div className="error-content__button-home">
                 <Link to="/">Вернуться на главную</Link>
             </div>
         </div>
