@@ -1,0 +1,19 @@
+.spinner {
+    margin: auto;
+    display: block;
+    shape-rendering: auto;
+    width: 100px;
+    height: 100px;
+
+    &_dark {
+        path {
+            fill: var(--secondary-color);
+        }
+    }
+
+    &_light {
+        path {
+            fill: var(--important-color);
+        }
+    }
+}

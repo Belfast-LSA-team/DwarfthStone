@@ -1,0 +1,25 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        padding: 0px;
+
+        li {
+            display: flex;
+            margin: 0px 15px;
+
+            a {
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 20px;
+                color: #f9f6f6;
+                text-decoration: none;
+            }
+        }
+    }
+}
