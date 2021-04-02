@@ -6,6 +6,12 @@ import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import { FormErrors, RegisterFormData } from "../../types/auth";
+import {
+    loginError,
+    passwordError,
+    emailError,
+    phoneError,
+} from "../../data/content";
 
 import "../../css/auth.css";
 
@@ -43,22 +49,19 @@ const validate = (data: RegisterFormData) => {
     };
 
     if (!data.login || !fields.login.test(data.login)) {
-        errors.login =
-            "Логин может содержать латинские буквы и цифры и быть от 2 до 12 символов";
+        errors.login = loginError;
     }
 
     if (!data.password || !fields.password.test(data.password)) {
-        errors.password =
-            "Пароль может содержать латинские буквы и цифры и быть не короче 6 символов";
+        errors.password = passwordError;
     }
 
     if (!data.email || !fields.email.test(data.email)) {
-        errors.email = "Введите валидный email";
+        errors.email = emailError;
     }
 
     if (!data.phone || !fields.phone.test(data.phone)) {
-        errors.phone =
-            'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
+        errors.phone = phoneError;
     }
 
     return errors;

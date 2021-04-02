@@ -5,6 +5,12 @@ import GameLayout from "../../layouts/gamelayout";
 import Button from "../../components/button";
 import ProfileField from "./components/profilefield";
 import { FORM_ERROR } from "final-form";
+import {
+    loginError,
+    passwordError,
+    emailError,
+    phoneError,
+} from "../../data/content";
 
 import "./profile.css";
 
@@ -26,17 +32,15 @@ const onFormSubmit = (data: ProfileData) => {
     const errors: FormErrors = {};
 
     if (!data.email || !fields.email.test(data.email)) {
-        errors[FORM_ERROR] = "Введите валидный email";
+        errors[FORM_ERROR] = emailError;
     }
 
     if (!data.login || !fields.login.test(data.login)) {
-        errors[FORM_ERROR] =
-            "Логин может содержать латинские буквы и цифры и быть от 2 до 12 символов";
+        errors[FORM_ERROR] = loginError;
     }
 
     if (!data.phone || !fields.phone.test(data.phone)) {
-        errors[FORM_ERROR] =
-            'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
+        errors[FORM_ERROR] = phoneError;
     }
 
     if (errors[FORM_ERROR]) {
