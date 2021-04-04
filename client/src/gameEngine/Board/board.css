@@ -1,0 +1,13 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    canvas {
+        width: 100%;
+        max-width: 1280px;
+        height: 100%;
+        min-height: 720px;
+        margin: auto;
+        position: relative;
+        z-index: 1;
+    }
+}
