@@ -1,31 +1,47 @@
 import React from "react";
-import Modal from "react-modal";
+import ReactModal from "react-modal";
 import classnames from "classnames";
-import { toggleElement } from "../../utils/index";
+import Button from "../button";
 
 import "./modal.css";
 
 type ModalProps = {
     className?: string;
     children: React.ReactNode;
+    isOpen: boolean;
+    closeModalHandler: () => void;
 };
 
-function closeModalOnOutClick(event: React.MouseEvent) {
-    if ((event.target as HTMLElement).classList.contains("modal")) {
-        toggleElement(".modal");
-    }
-}
+export const Modal = ({
+    className,
+    children,
+    isOpen,
+    closeModalHandler,
+}: ModalProps) => {
+    const classNames = classnames("modal__content", className);
 
-export const Modal = (props: ModalProps) => {
-    const { className, children } = props;
-    const classNames = classnames("modal", className);
+    ReactModal.setAppElement("#root");
 
     return (
-        <div
+        <ReactModal
+            isOpen={isOpen}
+            portalClassName="modal__protal"
+            overlayClassName="modal__overlay"
             className={classNames}
-            onClick={(e: React.MouseEvent) => closeModalOnOutClick(e)}
+            onRequestClose={closeModalHandler}
+            contentElement={(props, children) => (
+                <div {...props}>{children}</div>
+            )}
         >
             {children}
-        </div>
+            <Button
+                type="button"
+                style="dark"
+                className="button_close-modal"
+                clickHandler={closeModalHandler}
+            >
+                x
+            </Button>
+        </ReactModal>
     );
 };
