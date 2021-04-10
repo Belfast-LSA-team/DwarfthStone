@@ -3,16 +3,16 @@ import BoxWrapper from "../../components/boxwrapper";
 import GameLayout from "../../components/gamelayout";
 import Button from "../../components/button";
 
-import "../../css/auth.css";
+import "../../css/page.css";
 
 export const Start = () => {
     return (
         <Fragment>
             <GameLayout>
-                <BoxWrapper className="auth">
-                    <h1 className="auth__title">DwarfthStone</h1>
+                <BoxWrapper className="page">
+                    <h1 className="page__title">DwarfthStone</h1>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="submit"
                         stretch={true}
                         style="primary"
@@ -21,7 +21,7 @@ export const Start = () => {
                         Собрать колоду
                     </Button>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="submit"
                         stretch={true}
                         style="primary"
@@ -30,7 +30,7 @@ export const Start = () => {
                         Начать игру
                     </Button>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="button"
                         stretch={true}
                         style="secondary"
@@ -39,7 +39,7 @@ export const Start = () => {
                         Лучшие результаты
                     </Button>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="button"
                         stretch={true}
                         style="secondary"

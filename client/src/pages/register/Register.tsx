@@ -7,7 +7,7 @@ import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import { FormErrors, RegisterFormData } from "../../types/auth";
 
-import "../../css/auth.css";
+import "../../css/page.css";
 
 const formValues = [
     {
@@ -80,19 +80,19 @@ export const Register = () => {
     return (
         <Fragment>
             <GameLayout>
-                <BoxWrapper className="auth">
-                    <h1 className="auth__title">Регистрация</h1>
+                <BoxWrapper className="page">
+                    <h1 className="page__title">Регистрация</h1>
                     <Form
                         validate={validate}
                         onSubmit={onFormSubmit}
                         render={({ handleSubmit }) => (
                             <form
-                                className="auth__form"
+                                className="page__form"
                                 onSubmit={handleSubmit}
                             >
-                                {InputList(formValues, "auth__input", true)}
+                                {InputList(formValues, "page__input", true)}
                                 <Button
-                                    className="auth__btn"
+                                    className="page__btn"
                                     type="submit"
                                     stretch={true}
                                     style="primary"
@@ -104,7 +104,7 @@ export const Register = () => {
                         )}
                     ></Form>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="button"
                         stretch={true}
                         style="secondary"
