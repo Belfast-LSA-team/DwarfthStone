@@ -33,6 +33,17 @@ import Card9Fight from "../assets/images/game/fight-card/card_9_fight.png";
 import Card10Fight from "../assets/images/game/fight-card/card_10_fight.png";
 
 
+import Card1Dead from "../assets/images/game/dead-card/card_1_dead.png";
+import Card2Dead from "../assets/images/game/dead-card/card_2_dead.png";
+import Card3Dead from "../assets/images/game/dead-card/card_3_dead.png";
+import Card4Dead from "../assets/images/game/dead-card/card_4_dead.png";
+import Card5Dead from "../assets/images/game/dead-card/card_5_dead.png";
+import Card6Dead from "../assets/images/game/dead-card/card_6_dead.png";
+import Card7Dead from "../assets/images/game/dead-card/card_7_dead.png";
+import Card8Dead from "../assets/images/game/dead-card/card_8_dead.png";
+import Card9Dead from "../assets/images/game/dead-card/card_9_dead.png";
+import Card10Dead from "../assets/images/game/dead-card/card_10_dead.png";
+
 export const stockCards = [
 	{
 		"id": 1,
@@ -43,7 +54,8 @@ export const stockCards = [
 		"health": 8,
 		"attack": 4,
 		"imageFull": Card1,
-		"imageFight": Card1Fight
+		"imageFight": Card1Fight,
+		"imageFightDead": Card1Dead
 	},
 	{
 		"id": 2,
@@ -54,7 +66,8 @@ export const stockCards = [
 		"health": 4,
 		"attack": 7,
 		"imageFull": Card2,
-		"imageFight": Card2Fight
+		"imageFight": Card2Fight,
+		"imageFightDead": Card2Dead
 
 	},
 	{
@@ -66,7 +79,8 @@ export const stockCards = [
 		"health": 12,
 		"attack": 3,
 		"imageFull": Card3,
-		"imageFight": Card3Fight
+		"imageFight": Card3Fight,
+		"imageFightDead": Card3Dead
 
 	},
 	{
@@ -78,19 +92,20 @@ export const stockCards = [
 		"health": 7,
 		"attack": 8,
 		"imageFull": Card4,
-		"imageFight": Card4Fight
-
+		"imageFight": Card4Fight,
+		"imageFightDead": Card4Dead
 	},
 	{
 		"id": 5,
 		"type": "character",
 		"name": "Laura Great",
 		"description": "Really love to read, spending hours with book in her hands. Good player in bridge.",
-		"cost": 10,
+		"cost": 5,
 		"health": 6,
 		"attack": 10,
 		"imageFull": Card5,
-		"imageFight": Card5Fight
+		"imageFight": Card5Fight,
+		"imageFightDead": Card5Dead
 
 	},
 	{
@@ -102,7 +117,8 @@ export const stockCards = [
 		"health": 8,
 		"attack": 9,
 		"imageFull": Card6,
-		"imageFight": Card6Fight
+		"imageFight": Card6Fight,
+		"imageFightDead": Card6Dead
 
 	},
 
@@ -115,7 +131,8 @@ export const stockCards = [
 		"health": 12,
 		"attack": 7,
 		"imageFull": Card7,
-		"imageFight": Card7Fight
+		"imageFight": Card7Fight,
+		"imageFightDead": Card7Dead
 
 	},
 	{
@@ -127,7 +144,8 @@ export const stockCards = [
 		"health": 8,
 		"attack": 11,
 		"imageFull": Card8,
-		"imageFight": Card8Fight
+		"imageFight": Card8Fight,
+		"imageFightDead": Card8Dead
 
 	},
 	{
@@ -139,7 +157,8 @@ export const stockCards = [
 		"health": 10,
 		"attack": 11,
 		"imageFull": Card9,
-		"imageFight": Card9Fight
+		"imageFight": Card9Fight,
+		"imageFightDead": Card9Dead
 
 	},
 	{
@@ -151,7 +170,8 @@ export const stockCards = [
 		"health": 20,
 		"attack": 5,
 		"imageFull": Card10,
-		"imageFight": Card10Fight
+		"imageFight": Card10Fight,
+		"imageFightDead": Card10Dead
 
 	}
 ]
