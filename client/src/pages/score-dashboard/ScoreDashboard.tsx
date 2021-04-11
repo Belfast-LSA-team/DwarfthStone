@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import InfoLine from "../../components/infoLine";
 import LeftsideButton from "../../components/leftsideButton";
 import Title from "../../components/title";
+import Modal from "../../components/modal";
+import Button from "../../components/button";
 
 import "../../css/info-page.css";
 import "./scoreDashboard.css";
@@ -70,11 +72,29 @@ const scoreList = scoreData.map((item, idx) => {
 });
 
 export const ScoreDashboardPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    function closeModalHandler() {
+        setIsModalOpen(false);
+    }
+
+    function openModalHandler() {
+        setIsModalOpen(true);
+    }
+
     return (
         <div className="info-page">
             <LeftsideButton />
 
             <main className="info-page__main">
+                <Button
+                    type="button"
+                    style="dark"
+                    clickHandler={openModalHandler}
+                >
+                    Open modal
+                </Button>
+
                 <Title text="Лучшие результаты" level={1} />
 
                 <div className="score-dashboard">
@@ -85,6 +105,13 @@ export const ScoreDashboardPage = () => {
                     <div className="score-dashboard__body">{scoreList}</div>
                 </div>
             </main>
+
+            <Modal isOpen={isModalOpen} closeModalHandler={closeModalHandler}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+                necessitatibus eligendi fugit nesciunt dolorem rem veniam
+                perferendis cupiditate, officia praesentium et corporis placeat.
+                Debitis commodi harum perspiciatis illum vel pariatur!
+            </Modal>
         </div>
     );
 };
