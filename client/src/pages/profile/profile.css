@@ -65,7 +65,30 @@
     }
 
     &__error {
+        height: 20px;
         margin-top: 10px;
         color: var(--text-error-color);
+    }
+
+    &__modal {
+        width: 470px;
+        border-radius: 10px;
+        background-color: var(--primary-color);
+        color: var(--text-light-color);
+        box-shadow: 5px 5px 5px var(--border-color);
+
+        &-submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    }
+
+    &__text-input {
+        margin: 20px auto;
+
+        input {
+            width: 100%;
+        }
     }
 }
