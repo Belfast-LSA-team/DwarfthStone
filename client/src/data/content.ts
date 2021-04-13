@@ -20,3 +20,7 @@ export const phoneError =
     'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
 export const passwordError =
     "Пароль может содержать буквы и цифры и быть не короче 6 символов";
+export const newPasswordMatchError =
+    "Новый пароль не может совпадать со старым";
+export const noAvatarError = "Загрузите файл";
+export const invalidImageResError = "Допускаются расширения .png .jpeg .jpg";

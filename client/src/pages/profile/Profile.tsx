@@ -8,8 +8,16 @@ import Modal from "../../components/modal";
 import Title from "../../components/title";
 import InputField from "../../components/inputField";
 import LeftSideButton from "../../components/leftsideButton";
+import { Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
-import { loginError, emailError, phoneError } from "../../data/content";
+import {
+    loginError,
+    emailError,
+    phoneError,
+    newPasswordMatchError,
+    noAvatarError,
+    invalidImageResError,
+} from "../../data/content";
 
 import "./profile.css";
 
@@ -24,7 +32,9 @@ type ChangePassData = {
     new_pass: string;
 };
 
-type FormErrors = Record<string, string>;
+interface ChangeAvatarData {
+    avatar: FileList;
+}
 
 const fields = {
     login: /^[a-zA-Z\d_]{2,12}$/,
@@ -60,35 +70,39 @@ export const Profile = () => {
         setChangePassOpen(false);
     }, []);
 
-    const onChangeAvatarSubmit = useCallback((data: Record<string, string>) => {
-        console.log(data);
+    const onChangeAvatarSubmit = useCallback((data: ChangeAvatarData) => {
+        if (!data.avatar) {
+            return { [FORM_ERROR]: noAvatarError };
+        }
 
-        /* Здесь отправляем форму аватарки */
+        const file = data.avatar[0];
+
+        if (!file.name.match(/^.*\.(?:png|jpg|jpeg)$/gi)) {
+            return { [FORM_ERROR]: invalidImageResError };
+        }
+
+        /* Здесь отправляем форму нового аватара */
     }, []);
 
     const onChangePassSubmit = useCallback((data: ChangePassData) => {
-        console.log(data);
+        if (data.new_pass === data.old_pass) {
+            return { [FORM_ERROR]: newPasswordMatchError };
+        }
 
         /* Здесь отправляем форму нового пароля */
     }, []);
 
     const onFormSubmit = useCallback((data: ProfileData) => {
-        const errors: FormErrors = {};
-
         if (!data.email || !fields.email.test(data.email)) {
-            errors[FORM_ERROR] = emailError;
+            return { [FORM_ERROR]: emailError };
         }
 
         if (!data.login || !fields.login.test(data.login)) {
-            errors[FORM_ERROR] = loginError;
+            return { [FORM_ERROR]: loginError };
         }
 
         if (!data.phone || !fields.phone.test(data.phone)) {
-            errors[FORM_ERROR] = phoneError;
-        }
-
-        if (errors[FORM_ERROR]) {
-            return errors;
+            return { [FORM_ERROR]: phoneError };
         }
 
         console.log(data);
@@ -168,7 +182,17 @@ export const Profile = () => {
                     onSubmit={onChangeAvatarSubmit}
                     render={({ submitError, handleSubmit }) => (
                         <form onSubmit={handleSubmit}>
-                            <input type="file" />
+                            <Field<FileList> name="avatar">
+                                {({ input: { value, onChange, ...input } }) => (
+                                    <input
+                                        {...input}
+                                        type="file"
+                                        onChange={({ target }) =>
+                                            onChange(target.files)
+                                        }
+                                    />
+                                )}
+                            </Field>
                             {submitError ? (
                                 <div className="profile__error">
                                     {submitError}
