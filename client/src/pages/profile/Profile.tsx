@@ -32,9 +32,9 @@ type ChangePassData = {
     new_pass: string;
 };
 
-interface ChangeAvatarData {
+type ChangeAvatarData = {
     avatar: FileList;
-}
+};
 
 const fields = {
     login: /^[a-zA-Z\d_]{2,12}$/,
@@ -42,17 +42,33 @@ const fields = {
     phone: /^[8\d]{11}$/,
 };
 
-const getProfileFields = () => {
+const getUser = () => {
+    return {
+        email: "user123@gmail.com",
+        phone: "89991234567",
+        login: "H3ll0W0R1D",
+        avatar: "path/image.png",
+    };
+};
+
+const prepareProfileFields = (email: string, phone: string, login: string) => {
     return [
-        { fieldKey: "Почта", name: "email", value: "user123@gmail.com" },
-        { fieldKey: "Телефон", name: "phone", value: "89991234567" },
-        { fieldKey: "Логин", name: "login", value: "H3ll0W0R1D" },
+        { fieldKey: "Почта", name: "email", value: email },
+        { fieldKey: "Телефон", name: "phone", value: phone },
+        { fieldKey: "Логин", name: "login", value: login },
     ];
 };
 
 export const Profile = () => {
     const [changeAvatarOpen, setChangeAvatarOpen] = useState(false);
     const [changePassOpen, setChangePassOpen] = useState(false);
+
+    const user = getUser();
+    const profileFields = prepareProfileFields(
+        user.email,
+        user.phone,
+        user.login
+    );
 
     const onChangeAvatarClick = useCallback(() => {
         setChangeAvatarOpen(true);
@@ -110,14 +126,16 @@ export const Profile = () => {
         /* Здесь отправляем форму профиля */
     }, []);
 
-    const profileFields = getProfileFields();
-
     return (
         <Fragment>
             <LeftSideButton className="leftside-button_fixed" />
             <GameLayout>
                 <div className="profile">
-                    <Avatar src="" size="large" className="profile__avatar" />
+                    <Avatar
+                        src={user.avatar}
+                        size="large"
+                        className="profile__avatar"
+                    />
                     <div className="profile__btns-top">
                         <Button
                             type="button"
