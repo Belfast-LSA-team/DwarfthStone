@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, RefObject, ReactEventHandler } from "react";
 import classnames from "classnames";
 import { Field } from "react-final-form";
 
@@ -10,25 +10,40 @@ type InputFieldProps = {
     stretch?: boolean;
     name: string;
     placeholder: string;
+    initialValue?: string;
+    inputRef?: RefObject<HTMLInputElement>;
+    onFocus?: ReactEventHandler<HTMLInputElement>;
+    onBlur?: ReactEventHandler<HTMLInputElement>;
 };
 
-export const InputField = (props: InputFieldProps) => {
-    const { className, type, stretch, name, placeholder } = props;
-
+export const InputField = ({
+    className,
+    type,
+    stretch,
+    name,
+    placeholder,
+    initialValue,
+    inputRef,
+    onFocus,
+    onBlur,
+}: InputFieldProps) => {
     const inputClassNames = classnames("input-field", {
         "input-field_fullwidth": stretch,
     });
 
     return (
         <div className={className}>
-            <Field name={name}>
+            <Field name={name} initialValue={initialValue}>
                 {({ input, meta }) => (
                     <Fragment>
                         <input
                             {...input}
+                            ref={inputRef}
                             className={inputClassNames}
                             type={type}
                             placeholder={placeholder}
+                            onBlur={onBlur}
+                            onFocus={onFocus}
                         />
                         {(meta.error || meta.submitError) && meta.touched ? (
                             <span className="input-error">

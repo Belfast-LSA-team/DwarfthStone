@@ -8,6 +8,7 @@ import Register from "../../pages/register";
 import Forum from "../../pages/forum";
 import Thread from "../../pages/thread";
 import ScoreDashboardPage from "../../pages/score-dashboard";
+import Profile from "../../pages/profile";
 import Page404 from "../../pages/404";
 
 export const GameRouter = (): JSX.Element => (
@@ -30,6 +31,9 @@ export const GameRouter = (): JSX.Element => (
             </Route>
             <Route path="/thread/:id">
                 <Thread />
+            </Route>
+            <Route path="/profile">
+                <Profile />
             </Route>
             <Route path="*">
                 <Page404 message="Страница не найдена" />
