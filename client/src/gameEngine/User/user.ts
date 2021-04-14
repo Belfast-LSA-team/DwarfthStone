@@ -11,7 +11,8 @@ export type UserGame = {
 	deck: stockCard[];
 	imageProfile: string;
 	userStockCard?: stockCard[];
-	fightDeck?: stockCard[]
+	fightDeck?: stockCard[];
+	isFightedDeck?: stockCard[];
 };
 
 export const userInstance = (name: string, id: string, userStockCard: stockCard[], userPic?: ImageBitmap) => {
@@ -23,8 +24,13 @@ export const userInstance = (name: string, id: string, userStockCard: stockCard[
 		deck: [],
 		imageProfile: userPic ? userPic : userPicDefault,
 		userStockCard: userStockCard,
-		fightDeck: []
+		fightDeck: [],
+		isFightedDeck: []
 	};
+}
+const USER_PIC_DATA = {
+	width: 128,
+	height: 124
 }
 
 export const userPics = (userProfile: UserGame, canvas: HTMLCanvasElement, current: boolean) => {
@@ -134,7 +140,7 @@ export const userPics = (userProfile: UserGame, canvas: HTMLCanvasElement, curre
 		};
 
 	}
-
+	return { user: userProfile, top: current ? 390 : 210, left: 200, width: USER_PIC_DATA.width, height: USER_PIC_DATA.width };
 }
 
 export const addMana = (userData: UserGame, canvas: HTMLCanvasElement, current: boolean) => {
@@ -175,5 +181,31 @@ export const useMana = (userData: UserGame, canvas: HTMLCanvasElement, current: 
 		);
 	};
 	context?.save();
+
+}
+
+export const setUserHealth = (userData: UserGame, canvas: HTMLCanvasElement, current: boolean) => {
+	const context = canvas.getContext('2d');
+	const userHealth = new Image();
+	userHealth.src = userNumbersHealth(userData.health.toString());
+
+	console.log(current);
+
+	userHealth.onload = () => {
+		context!.imageSmoothingEnabled = false;
+		context!.drawImage(
+			userHealth,
+			300,
+			current ? 490 : 310,
+			userHealth.naturalWidth,
+			userHealth.naturalHeight
+		);
+	};
+	context?.save();
+
+
+
+
+
 
 }

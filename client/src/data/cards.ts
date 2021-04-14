@@ -8,6 +8,8 @@ export type stockCard = {
 	attack: number;
 	imageFull: string;
 	imageFight: string;
+	imageFightDead: string;
+	isLeave: boolean;
 }
 
 import Card1 from "../assets/images/game/full-card/card_1.png";
@@ -55,7 +57,8 @@ export const stockCards = [
 		"attack": 4,
 		"imageFull": Card1,
 		"imageFight": Card1Fight,
-		"imageFightDead": Card1Dead
+		"imageFightDead": Card1Dead,
+		"isLeave": true
 	},
 	{
 		"id": 2,
@@ -67,7 +70,8 @@ export const stockCards = [
 		"attack": 7,
 		"imageFull": Card2,
 		"imageFight": Card2Fight,
-		"imageFightDead": Card2Dead
+		"imageFightDead": Card2Dead,
+		"isLeave": true
 
 	},
 	{
@@ -80,7 +84,8 @@ export const stockCards = [
 		"attack": 3,
 		"imageFull": Card3,
 		"imageFight": Card3Fight,
-		"imageFightDead": Card3Dead
+		"imageFightDead": Card3Dead,
+		"isLeave": true
 
 	},
 	{
@@ -93,7 +98,8 @@ export const stockCards = [
 		"attack": 8,
 		"imageFull": Card4,
 		"imageFight": Card4Fight,
-		"imageFightDead": Card4Dead
+		"imageFightDead": Card4Dead,
+		"isLeave": true
 	},
 	{
 		"id": 5,
@@ -105,7 +111,8 @@ export const stockCards = [
 		"attack": 10,
 		"imageFull": Card5,
 		"imageFight": Card5Fight,
-		"imageFightDead": Card5Dead
+		"imageFightDead": Card5Dead,
+		"isLeave": true
 
 	},
 	{
@@ -118,7 +125,8 @@ export const stockCards = [
 		"attack": 9,
 		"imageFull": Card6,
 		"imageFight": Card6Fight,
-		"imageFightDead": Card6Dead
+		"imageFightDead": Card6Dead,
+		"isLeave": true
 
 	},
 
@@ -132,7 +140,8 @@ export const stockCards = [
 		"attack": 7,
 		"imageFull": Card7,
 		"imageFight": Card7Fight,
-		"imageFightDead": Card7Dead
+		"imageFightDead": Card7Dead,
+		"isLeave": true
 
 	},
 	{
@@ -145,7 +154,8 @@ export const stockCards = [
 		"attack": 11,
 		"imageFull": Card8,
 		"imageFight": Card8Fight,
-		"imageFightDead": Card8Dead
+		"imageFightDead": Card8Dead,
+		"isLeave": true
 
 	},
 	{
@@ -158,7 +168,8 @@ export const stockCards = [
 		"attack": 11,
 		"imageFull": Card9,
 		"imageFight": Card9Fight,
-		"imageFightDead": Card9Dead
+		"imageFightDead": Card9Dead,
+		"isLeave": true
 
 	},
 	{
@@ -171,7 +182,8 @@ export const stockCards = [
 		"attack": 5,
 		"imageFull": Card10,
 		"imageFight": Card10Fight,
-		"imageFightDead": Card10Dead
+		"imageFightDead": Card10Dead,
+		"isLeave": true
 
 	}
 ]

@@ -1,6 +1,13 @@
 import { stockCard } from "../../data/cards";
 import { UserGame } from '../User/user';
-import { cardsNumbersHealth, cardsNumbersMana, cardsNumbersStrength } from '../../data/numbers';
+
+
+const CARD_POSITION_DATA_FIGHT = {
+	width: 87, height: 91
+}
+const CARD_POSITION_DATA = {
+	width: 120, height: 170
+}
 export const addCard = async (canvas: HTMLCanvasElement, user: UserGame, position: string, card: stockCard) => {
 
 	let topPosition = 540;
@@ -41,16 +48,15 @@ export const addCard = async (canvas: HTMLCanvasElement, user: UserGame, positio
 
 		topPosition = 10;
 	}
-	return { id: card.id, left: 10 + cardPosition, top: topPosition, cardWidth: 120, cardHeight: 170 }
+	return { id: card.id, left: 10 + cardPosition, top: topPosition, cardWidth: CARD_POSITION_DATA.width, cardHeight: CARD_POSITION_DATA.height, cardMana: card.cost }
 }
-
 
 
 export const addCardFight = (canvas: HTMLCanvasElement, user: UserGame, position: string, card: stockCard) => {
 	const cont = canvas.getContext('2d');
 	const nextCard = new Image();
 	nextCard.src = card.imageFight;
-	let topPosition = 370;
+	let topPosition = 390;
 	const cardPosition = 90 * user.fightDeck!.length;
 
 
@@ -61,7 +67,7 @@ export const addCardFight = (canvas: HTMLCanvasElement, user: UserGame, position
 			cont!.drawImage(
 				nextCard,
 				270 + cardPosition,
-				370,
+				390,
 				nextCard.naturalWidth,
 				nextCard.naturalHeight
 			);
@@ -73,14 +79,55 @@ export const addCardFight = (canvas: HTMLCanvasElement, user: UserGame, position
 			cont!.drawImage(
 				nextCard,
 				270 + cardPosition,
-				270,
+				210,
 				nextCard.naturalWidth,
 				nextCard.naturalHeight
 			);
 
 		};
-		topPosition = 270;
+		topPosition = 210;
 
 	}
-	return { id: card.id, left: 270 + cardPosition, top: topPosition, cardWidth: 87, cardHeight: 91 }
+	return { id: card.id, left: 270 + cardPosition, top: topPosition, cardWidth: CARD_POSITION_DATA_FIGHT.width, cardHeight: CARD_POSITION_DATA_FIGHT.height }
+}
+export const addDeadCard = (canvas: HTMLCanvasElement, user: UserGame, position: string, card: stockCard) => {
+	const cont = canvas.getContext('2d');
+	const nextCard = new Image();
+	nextCard.src = card.imageFightDead;
+	let topPosition = 390;
+
+	const findIndex = user.fightDeck!.findIndex(item => item.id === card.id);
+	console.log(findIndex);
+	const cardPosition = 90 * (findIndex + 1);
+
+
+
+	if (position === 'bottom') {
+		nextCard.onload = () => {
+			cont!.imageSmoothingEnabled = false;
+			cont!.drawImage(
+				nextCard,
+				270 + cardPosition,
+				390,
+				nextCard.naturalWidth,
+				nextCard.naturalHeight
+			);
+
+		};
+	} else {
+		nextCard.onload = () => {
+			cont!.imageSmoothingEnabled = false;
+			cont!.drawImage(
+				nextCard,
+				270 + cardPosition,
+				210,
+				nextCard.naturalWidth,
+				nextCard.naturalHeight
+			);
+
+		};
+		topPosition = 210;
+
+	}
+	return { id: card.id, left: 270 + cardPosition, top: topPosition, cardWidth: CARD_POSITION_DATA_FIGHT.width, cardHeight: CARD_POSITION_DATA_FIGHT.height }
 }

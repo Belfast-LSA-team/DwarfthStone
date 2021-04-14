@@ -8,9 +8,7 @@ export const ArrowHandler = (canvas: HTMLCanvasElement, userPosition: string) =>
 		const arrow = new Path2D();
 		const arrowShadow = new Path2D();
 		ctx!.beginPath();
-		// arrow.moveTo(175, 450);
-		// arrow.lineTo(155, 470);
-		// arrow.lineTo(155, 430);
+
 		if (userPosition === 'top') {
 			arrow.moveTo(175, 280);
 			arrow.lineTo(155, 300);
@@ -31,9 +29,7 @@ export const ArrowHandler = (canvas: HTMLCanvasElement, userPosition: string) =>
 
 		ctxShadow!.beginPath();
 
-		// arrowShadow.moveTo(175, 280);
-		// arrowShadow.lineTo(155, 300);
-		// arrowShadow.lineTo(155, 260);
+
 		if (userPosition === 'top') {
 
 			arrowShadow!.moveTo(175, 450);
