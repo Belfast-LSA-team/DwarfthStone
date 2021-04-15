@@ -8,6 +8,7 @@ const CARD_POSITION_DATA_FIGHT = {
 const CARD_POSITION_DATA = {
 	width: 120, height: 170
 }
+
 export const addCard = async (canvas: HTMLCanvasElement, user: UserGame, position: string, card: stockCard) => {
 
 	let topPosition = 540;
