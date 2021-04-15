@@ -31,7 +31,7 @@ export const LeftsideButton = ({
                     x2="18.6152"
                     y2="1.58579"
                     stroke="black"
-                    stroke-width="4"
+                    strokeWidth="4"
                 />
                 <line
                     x1="18.6151"
@@ -39,7 +39,7 @@ export const LeftsideButton = ({
                     x2="1.5857"
                     y2="16.4142"
                     stroke="black"
-                    stroke-width="4"
+                    strokeWidth="4"
                 />
                 <line
                     x1="11.5858"
@@ -47,7 +47,7 @@ export const LeftsideButton = ({
                     x2="28.6152"
                     y2="1.58579"
                     stroke="black"
-                    stroke-width="4"
+                    strokeWidth="4"
                 />
                 <line
                     x1="28.6151"
@@ -55,7 +55,7 @@ export const LeftsideButton = ({
                     x2="11.5857"
                     y2="16.4142"
                     stroke="black"
-                    stroke-width="4"
+                    strokeWidth="4"
                 />
             </svg>
         </button>
