@@ -1,5 +1,12 @@
 .sword {
-    position: absolute;
-    pointer-events: none;
-    z-index: 1000;
+    max-width: 1280px;
+    width: 100%;
+    /* background: green; */
+    position: relative;
+    margin: auto;
+    &__item {
+        position: absolute;
+        pointer-events: none;
+        z-index: 1000;
+    }
 }

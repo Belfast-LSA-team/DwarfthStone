@@ -1,0 +1,13 @@
+.endGame {
+    z-index: 10000;
+    h1 {
+        color: var(--secondary-color);
+    }
+    &__button-container {
+        padding: 20px;
+        text-align: center;
+        button:first-child {
+            margin-right: 17px;
+        }
+    }
+}

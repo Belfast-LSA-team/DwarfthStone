@@ -11,15 +11,17 @@ export type SwordProps = {
 
 export const Sword = ({ top, left, isActive }: SwordProps) => {
     return (
-        <div
-            className="sword"
-            style={{
-                top: `${top}px`,
-                left: `${left}px`,
-                display: `${isActive ? "block" : "none"}`,
-            }}
-        >
-            <img src={SwordImg} alt="" />
+        <div className="sword">
+            <div
+                className="sword__item"
+                style={{
+                    top: `${top}px`,
+                    left: `${left}px`,
+                    display: `${isActive ? "block" : "none"}`,
+                }}
+            >
+                <img src={SwordImg} alt="" />
+            </div>
         </div>
     );
 };

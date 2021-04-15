@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { GeneralErrorProps } from "../../types/generalError";
+import { GeneralErrorProps } from "../../types/errorTypes";
 import "./generalError.css";
 
 export const GeneralError = ({

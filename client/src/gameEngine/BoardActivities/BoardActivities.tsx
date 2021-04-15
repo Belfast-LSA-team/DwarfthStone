@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+import "./boardActivities.css";
 export const BoardActivities = ({ eventsLogs }: string[]): JSX.Element => {
     // console.log(eventsLogs);
     useEffect(() => {}, [eventsLogs]);
@@ -9,7 +10,9 @@ export const BoardActivities = ({ eventsLogs }: string[]): JSX.Element => {
 
             {eventsLogs &&
                 eventsLogs.map((log: string, index: number) => (
-                    <div key={index}>{log}</div>
+                    <div key={index}>
+                        <p>{log}</p>
+                    </div>
                 ))}
         </div>
     );

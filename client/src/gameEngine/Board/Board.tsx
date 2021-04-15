@@ -1,4 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import leftDecor from "../../assets/images/game/left-decor.png";
 import rightDecor from "../../assets/images/game/right-decor.png";
 import greenBg from "../../assets/images/game/green-bg.png";
@@ -48,6 +51,10 @@ type FightRoomCard = {
     fightCard: stockCard;
     userHolder: string;
 };
+type EndGameProps = {
+    status: boolean;
+    userData?: UserGame;
+};
 
 export const Board = (): JSX.Element => {
     let location = useLocation();
@@ -60,7 +67,9 @@ export const Board = (): JSX.Element => {
     const secondUser = userInstance("secondUser", "13", secondUserDeck);
     const [currentUser, setCurrentUser] = useState<string>(firstUser.id);
     const [cardsToFight, setCardsToFight] = useState<FightRoomCard[]>([]);
-    const [endGameStatus, setEndGameStatus] = useState<boolean>(false);
+    const [endGameStatus, setEndGameStatus] = useState<EndGameProps>({
+        status: false,
+    });
     const [gameState, setGameState] = useState<GameInstance>({
         gameId,
         firstUser,
@@ -96,7 +105,7 @@ export const Board = (): JSX.Element => {
             ) {
                 const eventArr = eventLog;
                 eventArr.push(`${gameState!.currentUser!}-${element.name}`);
-
+                toast.dark(`${gameState!.currentUser!}-${element.name}`);
                 setEventLog([...eventArr]);
 
                 switch (element.name) {
@@ -188,6 +197,7 @@ export const Board = (): JSX.Element => {
                                   ])
                                 : null;
                         }
+
                         if (cardsToFight.length < 2) {
                             if (swordData.isActive) {
                                 setSwordData({
@@ -196,8 +206,9 @@ export const Board = (): JSX.Element => {
                                     isActive: false,
                                 });
                             }
+                            console.log(element);
                             setSwordData({
-                                left: element.left + element.width,
+                                left: element.left + element.width - 35,
                                 top: element.top + element.height - 20,
                                 isActive: true,
                             });
@@ -210,7 +221,7 @@ export const Board = (): JSX.Element => {
                     case "endTurnButton":
                         setStatusElements([]);
                         setCardsToFight([]);
-
+                        console.log(element);
                         if (swordData.isActive) {
                             setSwordData({
                                 left: 10,
@@ -419,10 +430,6 @@ export const Board = (): JSX.Element => {
         return card;
     };
 
-    const renderStatus = () => {
-        return statusElements.join();
-    };
-
     const addCardToFirstUser = async (
         canvas: HTMLCanvasElement,
         position: string
@@ -529,7 +536,7 @@ export const Board = (): JSX.Element => {
                 // 			? false
                 // 			: true
                 // )
-                setEndGameStatus(true);
+                setEndGameStatus({ status: true, userData: attackerUser });
             } else {
                 defenderUser.health =
                     defenderUser.health - cardsToFight[0].fightCard.attack;
@@ -542,7 +549,7 @@ export const Board = (): JSX.Element => {
                 );
             }
             setCardsToFight([]);
-            setSwordData({ left: 10, top: 10, isActive: false });
+            // setSwordData({ left: 10, top: 10, isActive: false });
 
             return;
         }
@@ -673,6 +680,9 @@ export const Board = (): JSX.Element => {
                 endTurnButton.naturalWidth,
                 endTurnButton.naturalHeight
             );
+
+            console.log(endTurnButton.naturalWidth);
+            console.log(endTurnButton.naturalHeight);
             setGameElements((oldArray) => [
                 ...oldArray,
                 {
@@ -755,15 +765,31 @@ export const Board = (): JSX.Element => {
     }, []);
     return (
         <div className="game">
+            <Sword {...swordData} />
+
             <canvas
                 onClick={onClickHandler}
                 height="720"
                 width="1280"
                 ref={canvasRef}
             />
-            <Sword {...swordData} />
-            <EndGame status={endGameStatus} />
-            {renderStatus()}
+            <EndGame
+                status={endGameStatus.status}
+                userData={endGameStatus.userData && endGameStatus.userData}
+            />
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
             <BoardActivities eventsLogs={eventLog} />
         </div>
     );
