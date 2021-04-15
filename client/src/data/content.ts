@@ -1,5 +1,5 @@
-export const footerMessage = 'Все права защищены 2021';
-export const errorMessage404 = 'Страница не найдена';
+export const footerMessage = "Все права защищены 2021";
+export const errorMessage404 = "Страница не найдена";
 export const homeDescription = `Давным давно собрались несколько гномов  для того что б создать гильдию из добротных и сильных персон что б выжить в этом сложном мире. Им прийдется преодолеть
 долгий и трудный путь. Но бок об бок они справятся со всеми трудностями.`;
 
@@ -10,6 +10,17 @@ export const menuContact = "Связаться с нами";
 export const menuLogin = "Логин";
 export const menuRegister = "Регистрация";
 
+export const darkButtonHomeLabel = "Связаться с нами";
+export const lightButtonHomeLabel = "На кофе";
 
-export const darkButtonHomeLabel = 'Связаться с нами';
-export const lightButtonHomeLabel = 'На кофе';
+export const loginError =
+    "Логин может содержать буквы и цифры и быть от 2 до 12 символов";
+export const emailError = "Введите валидный email";
+export const phoneError =
+    'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
+export const passwordError =
+    "Пароль может содержать буквы и цифры и быть не короче 6 символов";
+export const newPasswordMatchError =
+    "Новый пароль не может совпадать со старым";
+export const noAvatarError = "Загрузите файл";
+export const invalidImageResError = "Допускаются расширения .png .jpeg .jpg";
