@@ -1,0 +1,54 @@
+.thread-page {
+    height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-light-color);
+    
+    &__container {
+        padding: 95px 0 60px 0;
+        background-color: var(--bg-color);
+    }
+
+    &__body {
+        width: 630px;
+        margin: 0 auto;
+    }
+
+    &__title {
+        text-align: left;
+        font-weight: 600;
+    }
+
+    &__reply-title {
+        margin-bottom: 0;
+    }
+}
+
+.thread {
+    &__title {
+        text-align: left;
+    }
+}
+
+.post {
+    margin: 15px auto;
+
+    &__author {
+        display: flex;
+        align-items: center;
+
+        &-name {
+            margin-left: 5px;
+            color: var(--important-color);
+            font-size: 24px;
+        }
+    }
+
+    &__text {
+        margin: 10px auto;
+        font-size: 18px;
+    }
+
+    &__hr {
+        color: var(--text-light-color);
+    }
+}

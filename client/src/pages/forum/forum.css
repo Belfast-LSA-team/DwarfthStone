@@ -18,6 +18,11 @@
         padding: 0;
     }
 
+    &__no-threads {
+        text-align: center;
+        font-size: 22px;
+    }
+
     &__thread { 
         height: 50px;
         display: flex;
@@ -47,7 +52,7 @@
 
     &__message-area {
         width: 100%;
-        margin: 20px auto;
+        margin: 15px auto;
         padding: 10px 0 0 15px;
         color: var(--text-dark-color);
         background-color: var(--text-light-color);
@@ -55,6 +60,7 @@
         border-radius: 10px;
         box-sizing: border-box;
         font-size: 17px;
+        resize: none;
     
         &:placeholder {
             color: var(--text-inactive-color);

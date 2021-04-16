@@ -15,7 +15,7 @@ type Thread = {
     replies: number;
 };
 
-const mockThreads = [
+const mockThreads: Thread[] = [
     { id: 1, title: "Lorem ipsum dolor sit amet", replies: 3 },
     { id: 2, title: "Consectetur adipiscing elit", replies: 0 },
     { id: 3, title: "Sed do eiusmod tempor incididunt", replies: 15 },
@@ -30,8 +30,7 @@ const getThreads = (): Promise<Thread[]> => {
 };
 
 export const Forum = () => {
-    const [threadsLoaded, setThreadsLoaded] = useState(false);
-    const [threads, setThreads] = useState([] as Thread[]);
+    const [threads, setThreads] = useState<null | Thread[]>(null);
 
     const onNewThreadSubmit = useCallback(() => {
         console.log("Создали тред");
@@ -39,38 +38,43 @@ export const Forum = () => {
 
     let threadList;
 
-    if (!threadsLoaded) {
+    if (!threads) {
         getThreads().then((threads) => {
-            setThreadsLoaded(true);
             setThreads(threads);
         });
 
         threadList = <Spinner color="light" />;
     } else {
-        threadList = threads.map((thread: Thread) => {
-            return (
-                <Fragment key={thread.id}>
-                    <li className="forum__thread">
-                        <Link
-                            to={`/thread/${thread.id}`}
-                            className="forum__thread-title"
-                        >
-                            {thread.title}
-                        </Link>
-                        <Link
-                            to={`/thread/${thread.id}`}
-                            className="forum__thread-right"
-                        >
-                            <span className="forum__thread-replies">
-                                {thread.replies}
-                            </span>
-                            <Papers />
-                        </Link>
-                    </li>
-                    <hr className="forum__thread-hr" />
-                </Fragment>
+        if (!threads.length) {
+            threadList = (
+                <div className="forum__no-threads">Здесь пока пусто...</div>
             );
-        });
+        } else {
+            threadList = threads.map((thread: Thread) => {
+                return (
+                    <Fragment key={thread.id}>
+                        <li className="forum__thread">
+                            <Link
+                                to={`/forum/thread/${thread.id}`}
+                                className="forum__thread-title"
+                            >
+                                {thread.title}
+                            </Link>
+                            <Link
+                                to={`/forum/thread/${thread.id}`}
+                                className="forum__thread-right"
+                            >
+                                <span className="forum__thread-replies">
+                                    {thread.replies}
+                                </span>
+                                <Papers />
+                            </Link>
+                        </li>
+                        <hr className="forum__thread-hr" />
+                    </Fragment>
+                );
+            });
+        }
     }
 
     return (
