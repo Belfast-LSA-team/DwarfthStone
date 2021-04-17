@@ -6,6 +6,8 @@ import Auth from "../../pages/auth";
 import Login from "../../pages/login";
 import ContactUs from "../../pages/contactUs";
 import Register from "../../pages/register";
+import Forum from "../../pages/forum";
+import ThreadPage from "../../pages/threadPage";
 import ScoreDashboardPage from "../../pages/score-dashboard";
 import Profile from "../../pages/profile";
 import Start from "../../pages/start";
@@ -37,6 +39,12 @@ export const GameRouter = (): JSX.Element => (
             </Route>
             <Route path="/score-dashboard">
                 <ScoreDashboardPage />
+            </Route>
+            <Route exact path="/forum">
+                <Forum />
+            </Route>
+            <Route path="/forum/thread/:id">
+                <ThreadPage />
             </Route>
             <Route path="/profile">
                 <Profile />
