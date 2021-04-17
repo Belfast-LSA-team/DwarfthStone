@@ -10,6 +10,11 @@ module.exports = {
         filename: "bundle.js",
     },
     resolve: {
+        alias: {
+            App: path.join("client", "app"),
+            Entities: path.join("client", "entities"),
+            Src: path.join("client", "src"),
+        },
         extensions: [".tsx", ".ts", ".js", ".css", ".scss", ".html"],
     },
     devServer: {
