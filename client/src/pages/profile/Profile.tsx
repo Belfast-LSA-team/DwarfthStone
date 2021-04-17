@@ -1,4 +1,12 @@
-import React, { useCallback, Fragment, useState } from "react";
+import React, { useCallback, Fragment, useState, useEffect } from "react";
+import axios from "axios";
+
+import type { State } from "../../redux/reducers";
+import type { User } from "../../redux/reducers/widgets/user";
+import { connect } from "react-redux";
+import { getUser } from "../../redux/selectors/widgets/user";
+import { fetchUserInfo } from "../../redux/thunks/user/userInfo";
+
 import { Form } from "react-final-form";
 import Avatar from "../../components/avatar";
 import GameLayout from "../../layouts/gamelayout";
@@ -42,14 +50,14 @@ const fields = {
     phone: /^[8\d]{11}$/,
 };
 
-const getUser = () => {
-    return {
-        email: "user123@gmail.com",
-        phone: "89991234567",
-        login: "H3ll0W0R1D",
-        avatar: "path/image.png",
-    };
-};
+// const getUser = () => {
+//     return {
+//         email: "user123@gmail.com",
+//         phone: "89991234567",
+//         login: "H3ll0W0R1D",
+//         avatar: "path/image.png",
+//     };
+// };
 
 const prepareProfileFields = (email: string, phone: string, login: string) => {
     return [
@@ -59,15 +67,40 @@ const prepareProfileFields = (email: string, phone: string, login: string) => {
     ];
 };
 
-export const Profile = () => {
+export const Profile = ({ user, fetchUserInfo }) => {
+    useEffect(() => {
+        const host = `https://ya-praktikum.tech/api/v2/`;
+
+        axios
+            .post(`${host}auth/signin`, {
+                login: "gutskalss",
+                password: "qwerty123456",
+            })
+            .then((res) => {
+                console.log(res);
+
+                axios
+                    .get(`${host}auth/user`)
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    // console.log("props", user);
+
     const [changeAvatarOpen, setChangeAvatarOpen] = useState(false);
     const [changePassOpen, setChangePassOpen] = useState(false);
 
-    const user = getUser();
+    // const user = getUser();
     const profileFields = prepareProfileFields(
-        user.email,
-        user.phone,
-        user.login
+        "user123@gmail.com",
+        "89991234567",
+        "H3ll0W0R1D"
     );
 
     const onChangeAvatarClick = useCallback(() => {
@@ -121,8 +154,6 @@ export const Profile = () => {
             return { [FORM_ERROR]: phoneError };
         }
 
-        console.log(data);
-
         /* Здесь отправляем форму профиля */
     }, []);
 
@@ -131,11 +162,7 @@ export const Profile = () => {
             <LeftSideButton className="leftside-button_fixed" />
             <GameLayout>
                 <div className="profile">
-                    <Avatar
-                        src={user.avatar}
-                        size="large"
-                        className="profile__avatar"
-                    />
+                    <Avatar src="#" size="large" className="profile__avatar" />
                     <div className="profile__btns-top">
                         <Button
                             type="button"
@@ -273,3 +300,9 @@ export const Profile = () => {
         </Fragment>
     );
 };
+
+const mapStateToProps = (state: State) => ({
+    user: getUser(state),
+});
+
+export default connect(mapStateToProps, { fetchUserInfo })(Profile);

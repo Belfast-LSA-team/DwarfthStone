@@ -10,9 +10,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            app: path.join("client", "app"),
-            entities: path.join("client", "entities"),
-            src: path.join("client", "src"),
+            App: path.join("client", "app"),
+            Entities: path.join("client", "entities"),
+            Src: path.join("client", "src"),
         },
         extensions: [".tsx", ".ts", ".js", ".css", ".scss", ".html"],
     },
