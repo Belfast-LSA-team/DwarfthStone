@@ -1,4 +1,11 @@
-import React, { useCallback, Fragment, useState } from "react";
+import React, { useCallback, Fragment, useState, useEffect } from "react";
+
+import type { State } from "../../redux/reducers";
+import type { User } from "../../redux/reducers/widgets/user";
+import { connect } from "react-redux";
+import { getUserInfo } from "../../redux/selectors/widgets/user";
+import { fetchUserInfo } from "../../redux/thunks/user/userInfo";
+
 import { Form } from "react-final-form";
 import Avatar from "../../components/avatar";
 import GameLayout from "../../layouts/gamelayout";
@@ -36,6 +43,11 @@ type ChangeAvatarData = {
     avatar: FileList;
 };
 
+type ProfileProps = {
+    userInfo: object;
+    fetchUserInfo: () => void;
+};
+
 const fields = {
     login: /^[a-zA-Z\d_]{2,12}$/,
     email: /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
@@ -59,16 +71,21 @@ const prepareProfileFields = (email: string, phone: string, login: string) => {
     ];
 };
 
-export const Profile = () => {
+export const Profile = ({ userInfo, fetchUserInfo }: ProfileProps) => {
     const [changeAvatarOpen, setChangeAvatarOpen] = useState(false);
     const [changePassOpen, setChangePassOpen] = useState(false);
-
     const user = getUser();
     const profileFields = prepareProfileFields(
         user.email,
         user.phone,
         user.login
     );
+
+    useEffect(() => {
+        fetchUserInfo();
+    }, []);
+
+    console.log(userInfo);
 
     const onChangeAvatarClick = useCallback(() => {
         setChangeAvatarOpen(true);
@@ -121,8 +138,6 @@ export const Profile = () => {
             return { [FORM_ERROR]: phoneError };
         }
 
-        console.log(data);
-
         /* Здесь отправляем форму профиля */
     }, []);
 
@@ -131,11 +146,7 @@ export const Profile = () => {
             <LeftSideButton className="leftside-button_fixed" />
             <GameLayout>
                 <div className="profile">
-                    <Avatar
-                        src={user.avatar}
-                        size="large"
-                        className="profile__avatar"
-                    />
+                    <Avatar src="#" size="large" className="profile__avatar" />
                     <div className="profile__btns-top">
                         <Button
                             type="button"
@@ -273,3 +284,9 @@ export const Profile = () => {
         </Fragment>
     );
 };
+
+const mapStateToProps = (state: State) => ({
+    userInfo: getUserInfo(state),
+});
+
+export default connect(mapStateToProps, { fetchUserInfo })(Profile);
