@@ -25,3 +25,11 @@
     color: var(--text-error-color);
     font-size: 12px;
 }
+
+.textarea-wrapper {
+    position: relative;
+    .input-error {
+        bottom: -15px;
+        top: unset;
+    }
+}
