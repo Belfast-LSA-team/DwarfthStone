@@ -52,7 +52,7 @@ export const Login = () => {
     return (
         <Fragment>
             <GameLayout>
-                <BoxWrapper className="auth">
+                <BoxWrapper className="page">
                     <h1 className="page__title">Вход</h1>
                     <Form
                         validate={validate}

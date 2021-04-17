@@ -9,6 +9,7 @@ export const InputList = (
 ) => {
     return values.map((input) => (
         <InputField
+            key={input.name}
             className={className}
             type={input.type}
             name={input.name}
