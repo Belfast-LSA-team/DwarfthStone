@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import BoxWrapper from "../../components/boxwrapper";
-import GameLayout from "../../components/gamelayout";
+import GameLayout from "../../layouts/gamelayout";
 import Button from "../../components/button";
 
 import "../../css/page.css";
