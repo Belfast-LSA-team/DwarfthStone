@@ -1,33 +1,34 @@
 import { FormErrors } from '../types/errorTypes';
 import { ContactFormData } from '../types/formDataTypes';
+import { isEmptyField, minLengthField, emailIsNotValid } from '../data/content';
 
 const validateEmail = (email: string) => {
 	const emailRegex = /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
 	if (!emailRegex.test(email)) {
-		return "Введите валидный email";
+		return emailIsNotValid;
 	}
 	return false;
 }
 const minLength = (input: string) => {
 	const minLengthRegex = /^[a-zA-Z\d]{6,}$/;
 	if (!minLengthRegex.test(input)) {
-		return "Длина поля должна быть больше 6 символов";
+		return minLengthField;
 	}
 	return false;
 }
 export const validateContact = (data: ContactFormData) => {
 	const errors: FormErrors = {};
 	if (!data.name) {
-		errors.name = 'Это поле не может быть пустым'
+		errors.name = isEmptyField
 	}
 	if (!data.title) {
-		errors.title = 'Это поле не может быть пустым'
+		errors.title = isEmptyField
 	}
 	if (!data.message) {
-		errors.message = 'Это поле не может быть пустым'
+		errors.message = isEmptyField
 	}
 	if (!data.email) {
-		errors.email = 'Это поле не может быть пустым'
+		errors.email = isEmptyField
 	}
 
 	const validName = minLength(data.name);
