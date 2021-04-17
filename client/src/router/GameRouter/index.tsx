@@ -10,12 +10,21 @@ import ScoreDashboardPage from "../../pages/score-dashboard";
 import Profile from "../../pages/profile";
 import Start from "../../pages/start";
 import Page404 from "../../pages/404";
+import Game from "../../pages/game";
 
 export const GameRouter = (): JSX.Element => (
     <Router>
         <Switch>
             <Route exact path="/">
                 <Homepage />
+            </Route>
+            <Route path="/game">
+                <Route path="/">
+                    <Game />
+                </Route>
+                <Route path=":id">
+                    <Game />
+                </Route>
             </Route>
             <Route exact path="/contact">
                 <ContactUs />

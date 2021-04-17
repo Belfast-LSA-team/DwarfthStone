@@ -22,5 +22,5 @@
   },
   "include": [
     "client", "server"
-, "tsconfig.json", "webpack.config.js", "postcss.config.js"  ]
+, "tsconfig.json", "webpack.config.js", "postcss.config.js", "../futureupdates/endMove.ts", "../futureupdates/gameEngine", "../futureupdates/game", "../futureupdates/onSubmit.ts"  ]
 }

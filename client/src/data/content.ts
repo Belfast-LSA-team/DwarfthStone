@@ -12,6 +12,8 @@ export const menuRegister = "Регистрация";
 
 export const darkButtonHomeLabel = "Связаться с нами";
 export const lightButtonHomeLabel = "На кофе";
+export const startNew = "Начать заново";
+export const backToProfile = "В профиль";
 
 export const loginError =
     "Логин может содержать буквы и цифры и быть от 2 до 12 символов";
