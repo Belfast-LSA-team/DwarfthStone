@@ -1,12 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-
+import { GeneralErrorProps } from "../../types/generalError";
 import "./generalError.css";
-
-type GeneralErrorProps = {
-    message: string;
-    errorStatus?: string;
-    errorCode?: string;
-};
 
 export const GeneralError = ({
     message,

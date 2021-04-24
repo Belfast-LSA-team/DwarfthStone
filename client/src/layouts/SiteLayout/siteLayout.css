@@ -5,7 +5,7 @@
         background: var(--important-color);
     }
     &.secondary {
-        background: var(--secondary-color);
+        background: var(--bg-color);
     }
     &__inner {
         height: 100%;
