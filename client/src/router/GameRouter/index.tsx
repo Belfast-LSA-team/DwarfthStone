@@ -7,6 +7,7 @@ import Login from "../../pages/login";
 import ContactUs from "../../pages/contactUs";
 import Register from "../../pages/register";
 import ScoreDashboardPage from "../../pages/score-dashboard";
+import Profile from "../../pages/profile";
 import Page404 from "../../pages/404";
 import Game from "../../pages/game";
 
@@ -35,6 +36,9 @@ export const GameRouter = (): JSX.Element => (
             </Route>
             <Route path="/score-dashboard">
                 <ScoreDashboardPage />
+            </Route>
+            <Route path="/profile">
+                <Profile />
             </Route>
             <Route path="*">
                 <Page404 message="Страница не найдена" />

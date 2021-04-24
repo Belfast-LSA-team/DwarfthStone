@@ -2,7 +2,7 @@ import React, { useCallback, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 import BoxWrapper from "../../components/boxwrapper";
-import GameLayout from "../../components/gamelayout";
+import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import { FormErrors, LoginFormData } from "../../types/auth";
