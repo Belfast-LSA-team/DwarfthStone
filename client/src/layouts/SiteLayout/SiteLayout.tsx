@@ -19,7 +19,7 @@ export const SiteLayout = ({
             <div className="global__inner">
                 <Header color={"blue"} />
                 {children}
-                <Footer color={"blue"} />
+                <Footer color={"dark"} />
             </div>
         </div>
     );

@@ -2,31 +2,30 @@ import React, { Fragment, RefObject, ReactEventHandler } from "react";
 import classnames from "classnames";
 import { Field } from "react-final-form";
 
-import "./inputfield.css";
+import "./textareafield.css";
 
 type InputFieldProps = {
     className?: string;
-    type?: string;
-    rows?: string;
+    rows?: number;
     stretch?: boolean;
     name: string;
     placeholder: string;
     initialValue?: string;
-    inputRef?: RefObject<HTMLInputElement>;
-    onFocus?: ReactEventHandler<HTMLInputElement>;
-    onBlur?: ReactEventHandler<HTMLInputElement>;
+    inputRef?: RefObject<HTMLTextAreaElement>;
+    onFocus?: ReactEventHandler<HTMLTextAreaElement>;
+    onBlur?: ReactEventHandler<HTMLTextAreaElement>;
 };
 
-export const InputField = ({
+export const TextareaField = ({
     className,
-    type,
+    rows,
     stretch,
     name,
     placeholder,
     initialValue,
     inputRef,
-    onFocus,
     onBlur,
+    onFocus,
 }: InputFieldProps) => {
     const inputClassNames = classnames("input-field", {
         "input-field_fullwidth": stretch,
@@ -37,11 +36,11 @@ export const InputField = ({
             <Field name={name} initialValue={initialValue}>
                 {({ input, meta }) => (
                     <Fragment>
-                        <input
+                        <textarea
+                            rows={rows}
                             {...input}
                             ref={inputRef}
                             className={inputClassNames}
-                            type={type}
                             placeholder={placeholder}
                             onBlur={onBlur}
                             onFocus={onFocus}
