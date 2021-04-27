@@ -1,5 +1,8 @@
 export const footerMessage = "Все права защищены 2021";
 export const errorMessage404 = "Страница не найдена";
+export const minLengthField = "Длина поля должна быть больше 6 символов";
+export const emailIsNotValid = "Введите валидный email";
+export const isEmptyField = 'Это поле не может быть пустым';
 export const homeDescription = `Давным давно собрались несколько гномов  для того что б создать гильдию из добротных и сильных персон что б выжить в этом сложном мире. Им прийдется преодолеть
 долгий и трудный путь. Но бок об бок они справятся со всеми трудностями.`;
 

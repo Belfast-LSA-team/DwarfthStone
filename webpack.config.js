@@ -1,11 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
     mode: "development",
     entry: "./client/src/index.tsx",
     output: {
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, "/dist"),
         publicPath: "/",
         filename: "bundle.js",
     },
@@ -46,6 +47,12 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./client/public/index.html",
+        }),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+            swDest: "serviceWorker.js",
+            navigateFallback: "index.html",
         }),
     ],
 };
