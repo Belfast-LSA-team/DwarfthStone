@@ -1,1 +1,6 @@
-export { Profile as default } from "./Profile";
+import { Profile } from "./Profile";
+
+export default {
+  component: Profile
+}
+

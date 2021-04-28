@@ -10,12 +10,29 @@ const config = {
     entry: "./server/index.ts",
 
     //Tell webpack where to put the output file that is generated
-
+    resolve: {
+        extensions: [".tsx", ".ts", ".js", ".css", ".scss", ".html"],
+    },
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "build"),
     },
     externals: [webpackNodeExternals()],
+    module: {
+        rules: [
+            {
+                test: /\.(png|svg|jpg|jpeg|gif|ico|ogg|mp3|wav)$/,
+                exclude: /node_modules/,
+                use: ["file-loader?name=assets/[name].[ext]"],
+            },
+            {
+                test: /\.(woff2|woff|ttf|eot)$/,
+                use: ["file-loader"],
+            },
+
+            { test: /\.(scss|css)$/, loader: "ignore-loader" },
+        ],
+    },
 };
 
 module.exports = merge(baseConfig, config);

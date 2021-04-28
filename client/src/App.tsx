@@ -1,17 +1,14 @@
 import React from "react";
 
-import { Provider } from "react-redux";
-import { GameRouter } from "./router/GameRouter";
+import { renderRoutes } from "react-router-config";
 
 import "./common.css";
 import "./assets/css/fonts.css";
 
-const App = () => {
-    return (
-        <div>
-            <GameRouter />
-        </div>
-    );
+const App = ({ route }) => {
+    return <div>{renderRoutes(route.routes)}</div>;
 };
 
-export default App;
+export default {
+    component: App,
+};

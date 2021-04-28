@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import reducers from '../client/reducers';
 
-export default (req) => {
+export const createStoreServer = (req) => {
   // console.log(req);
   const axiosInstance = axios.create({
     baseURL: 'http://react-ssr-api.herokuapp.com',

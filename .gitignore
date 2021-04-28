@@ -3,5 +3,6 @@ node_modules
 /dist
 /build
 build
-
+public
+/public
 dev.ts
