@@ -2,6 +2,7 @@ import React, { useCallback, Fragment, useState, useEffect } from "react";
 
 import type { State } from "../../redux/reducers";
 import type { User } from "../../redux/reducers/widgets/user";
+import type { UserInfo } from "../../../entities/user";
 import { connect } from "react-redux";
 import { getUserInfo } from "../../redux/selectors/widgets/user";
 import { fetchUserInfo } from "../../redux/thunks/user/userInfo";
@@ -44,7 +45,7 @@ type ChangeAvatarData = {
 };
 
 type ProfileProps = {
-    userInfo: object;
+    userInfo: User;
     fetchUserInfo: () => void;
 };
 
@@ -54,36 +55,55 @@ const fields = {
     phone: /^[8\d]{11}$/,
 };
 
-const getUser = () => {
-    return {
-        email: "user123@gmail.com",
-        phone: "89991234567",
-        login: "H3ll0W0R1D",
-        avatar: "path/image.png",
-    };
+type ProfileFiled = {
+    fieldKey: string;
+    name: string;
+    value?: string;
 };
 
-const prepareProfileFields = (email: string, phone: string, login: string) => {
+type ProfileFileds = ProfileFiled[];
+
+const prepareProfileFields = ({
+    firstName,
+    secondName,
+    login,
+    email,
+    phone,
+    displayName,
+}: Partial<UserInfo>): ProfileFileds => {
     return [
+        { fieldKey: "Имя", name: "firstName", value: firstName },
+        { fieldKey: "Фамилия", name: "secondName", value: secondName },
+        { fieldKey: "Логин", name: "login", value: login },
         { fieldKey: "Почта", name: "email", value: email },
         { fieldKey: "Телефон", name: "phone", value: phone },
-        { fieldKey: "Логин", name: "login", value: login },
+        { fieldKey: "Имя в чате", name: "displayName", value: displayName },
     ];
 };
 
 export const Profile = ({ userInfo, fetchUserInfo }: ProfileProps) => {
     const [changeAvatarOpen, setChangeAvatarOpen] = useState(false);
     const [changePassOpen, setChangePassOpen] = useState(false);
-    const user = getUser();
-    const profileFields = prepareProfileFields(
-        user.email,
-        user.phone,
-        user.login
-    );
+    const [profileFields, setProfileFields] = useState<ProfileFileds>([]);
 
     useEffect(() => {
         fetchUserInfo();
     }, []);
+
+    useEffect(() => {
+        if (userInfo.isAuth) {
+            const preparedProfileFields = prepareProfileFields({
+                firstName: userInfo.firstName,
+                secondName: userInfo.secondName,
+                login: userInfo.login,
+                email: userInfo.email,
+                phone: userInfo.phone,
+                displayName: userInfo.displayName,
+            });
+
+            setProfileFields(preparedProfileFields);
+        }
+    }, [userInfo]);
 
     console.log(userInfo);
 
@@ -171,16 +191,18 @@ export const Profile = ({ userInfo, fetchUserInfo }: ProfileProps) => {
                                 onSubmit={handleSubmit}
                             >
                                 <div className="profile__fields-container">
-                                    {profileFields.map((field) => {
-                                        return (
-                                            <ProfileField
-                                                key={field.name}
-                                                fieldKey={field.fieldKey}
-                                                name={field.name}
-                                                value={field.value}
-                                            />
-                                        );
-                                    })}
+                                    {profileFields.map(
+                                        (field: ProfileFiled) => {
+                                            return (
+                                                <ProfileField
+                                                    key={field.name}
+                                                    fieldKey={field.fieldKey}
+                                                    name={field.name}
+                                                    value={field.value}
+                                                />
+                                            );
+                                        }
+                                    )}
                                 </div>
                                 <div className="profile__error">
                                     {submitError}
