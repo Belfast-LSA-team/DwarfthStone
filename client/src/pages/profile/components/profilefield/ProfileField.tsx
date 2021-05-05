@@ -10,7 +10,7 @@ import InputField from "../../../../components/inputField";
 
 type ProfileFieldProps = {
     fieldKey: string;
-    value: string;
+    value?: string;
     name: string;
 };
 
