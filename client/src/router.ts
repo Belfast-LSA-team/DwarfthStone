@@ -10,7 +10,7 @@ import Forum from "./pages/forum";
 import ThreadPage from "./pages/threadPage";
 import ScoreDashboardPage from "./pages/score-dashboard";
 import Start from "./pages/start";
-import Profile from "./pages/profile";
+import Profile from "./pages/profile/Profile";
 import Page404 from "./pages/404";
 import Game from "./pages/game";
 

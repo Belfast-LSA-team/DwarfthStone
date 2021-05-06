@@ -8,7 +8,7 @@ import { matchRoutes } from 'react-router-config';
 import proxy from 'express-http-proxy';
 import { Routes } from '../client/src/router';
 import { renderer } from './helpers/renderer';
-// import { createStoreServer } from './helpers/createStore';
+import { createStoreServer } from './helpers/createStore';
 import { RequestOptions } from 'http';
 
 const app = express();
@@ -16,31 +16,46 @@ app.use(express.static('public'));
 
 app.use(
   '/api',
-  proxy('http://react-ssr-api.herokuapp.com', {
+  proxy('https://ya-praktikum.tech/api/v2', {
     proxyReqOptDecorator(opts: RequestOptions) {
-      opts.headers['x-forwarded-host'] = 'localhost:7000';
+      opts.headers['x-forwarded-host'] = 'localhost:3010';
       return opts;
     },
   })
 );
 
 app.get('*', (req, res) => {
-  //  const store = createStoreServer(req);
-  const store = {};
+  const store = createStoreServer(req);
+  //Some logic to init and load data into store
 
-  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-    return route.loadData ? route.loadData(store) : null;
-  });
+  const promises = matchRoutes(Routes, req.path)
+    .map(({ route }) => {
+      return route.loadData ? route.loadData(store) : null;
+    })
+    .map((promise) => {
+      if (promise) {
+        return new Promise((resolve, reject) => {
+          promise.then(resolve).catch(resolve);
+        });
+      }
+    });
 
-  // Promise.all(promises).then(() => {
-  //   res.send(renderer(req, store));
-  // });
-  Promise.all(promises).then(() => {
-    res.send(renderer(req));
-  });
+  const render = () => {
+    const context = {};
+    const content = renderer(req, store, context);
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
+    if (context.notFound) {
+      res.status(404);
+    } else {
+      res.send(content);
+    }
+  };
 
+  Promise.all(promises).then(render).catch(render);
 });
 
-app.listen(7000, () => {
+app.listen(3010, () => {
   console.log('Listening');
 });
