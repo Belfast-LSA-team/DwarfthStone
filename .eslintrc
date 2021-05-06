@@ -23,9 +23,10 @@
   },
   "overrides": [
     {
-      "files": ["*.spec.js"],
+      "files": ["*.spec.js", "*.spec.jsx"],
       "rules": {
-        "jest/no-hooks": "off"
+        "jest/no-hooks": "off",
+        "jest/prefer-expect-assertions": "off"
       }
     },
     {

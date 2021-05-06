@@ -1,5 +1,5 @@
 module.exports = {
-    testMatch: ["**/*.spec.js"],
+    testMatch: ["**/*.spec.js", "**/*.spec.jsx"],
     moduleNameMapper: {
         "^.+\\.css$": "identity-obj-proxy",
     },
