@@ -1,5 +1,5 @@
-import { fetchFulfilled } from "../../../actions/user/userInfo";
-import { user } from "./index";
+import { fetchFulfilled } from "../../../../actions/user/userInfo";
+import { user } from "../index";
 
 describe("user reducer", () => {
     it("записывает данные при получении юзера", () => {

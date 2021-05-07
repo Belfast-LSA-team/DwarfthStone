@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button рендерится корректно 1`] = `
+<Button
+  clickHandler={[Function]}
+  stretch={false}
+  style="primary"
+  type="button"
+>
+  <button
+    className="button button_primary"
+    onClick={[Function]}
+    type="button"
+  >
+    Test Button
+  </button>
+</Button>
+`;
