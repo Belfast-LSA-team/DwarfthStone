@@ -311,6 +311,9 @@ const mapStateToProps = (state: State) => ({
     userInfo: getUserInfo(state),
 });
 
+// function loadData(store) {
+//     return store.dispatch(fetchUserInfo);
+// }
 // export default connect(mapStateToProps, { fetchUserInfo })(Profile);
 export default {
     component: connect(mapStateToProps, { fetchUserInfo })(Profile),

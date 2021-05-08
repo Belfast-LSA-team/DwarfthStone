@@ -10,29 +10,41 @@ import { Routes } from '../client/src/router';
 import { renderer } from './helpers/renderer';
 import { createStoreServer } from './helpers/createStore';
 import { RequestOptions } from 'http';
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 app.use(express.static('public'));
 
+
+// app.use('/api/v2/auth/user', createProxyMiddleware({ target: 'https://ya-praktikum.tech/api/v2/auth/user', changeOrigin: true }));
+
+
 app.use(
-  '/api',
-  proxy('https://ya-praktikum.tech/api/v2', {
+  '/api/v2',
+  proxy('https://ya-praktikum.tech/api/v2/', {
+    https: true,
     proxyReqOptDecorator(opts: RequestOptions) {
-      opts.headers['x-forwarded-host'] = 'localhost:3010';
+      opts.headers["Content-Type"] = "application/json";
+      //withCredentials: true,
+      // opts.headers['x-forwarded-host'] = 'localhost:3010';
+      opts.method = 'GET';
       return opts;
     },
   })
 );
 
 app.get('*', (req, res) => {
+  console.log('console.log path', req.path);
   const store = createStoreServer(req);
   //Some logic to init and load data into store
 
   const promises = matchRoutes(Routes, req.path)
     .map(({ route }) => {
+      console.dir(route.loadData);
       return route.loadData ? route.loadData(store) : null;
     })
     .map((promise) => {
+
       if (promise) {
         return new Promise((resolve, reject) => {
           promise.then(resolve).catch(resolve);
