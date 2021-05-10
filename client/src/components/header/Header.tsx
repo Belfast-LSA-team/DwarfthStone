@@ -20,10 +20,10 @@ export const Header = ({ color }: HeaderProps): JSX.Element => {
                 <div className="header-content__menu">
                     <ul>
                         <li>
-                            <Link to="/"> {menuLogin}</Link>
+                            <Link to="/login"> {menuLogin}</Link>
                         </li>
                         <li>
-                            <Link to="/">{menuRegister} </Link>
+                            <Link to="/register">{menuRegister} </Link>
                         </li>
                     </ul>
                 </div>

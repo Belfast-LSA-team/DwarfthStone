@@ -25,6 +25,10 @@
         color: var(--text-light-color);
         border: 1px solid var(--important-color);
     }
+    &_logout {
+        background-color: transparent;
+        color: var(--text-error-color);
+    }
 
     &_fullwidth {
         width: 100%;

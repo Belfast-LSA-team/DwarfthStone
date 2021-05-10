@@ -1,12 +1,19 @@
 import React, { useCallback, Fragment } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
+
+import type { ProfileFormData } from "../../../app/resolvers/user";
+import type { FormErrors } from "../../types/auth";
+
+import { fetchSignupThunk } from "../../redux/thunks/user";
 import BoxWrapper from "../../components/boxwrapper";
 import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
-import { FormErrors, RegisterFormData } from "../../types/auth";
 import {
+    firstNameError,
+    secondNameError,
     loginError,
     passwordError,
     emailError,
@@ -17,13 +24,13 @@ import "../../css/page.css";
 
 const formValues = [
     {
-        placeholder: "Почта",
-        name: "email",
-        type: "email",
+        placeholder: "Имя",
+        name: "first_name",
+        type: "text",
     },
     {
-        placeholder: "Телефон",
-        name: "phone",
+        placeholder: "Фамилия",
+        name: "second_name",
         type: "text",
     },
     {
@@ -32,21 +39,41 @@ const formValues = [
         type: "text",
     },
     {
+        placeholder: "Почта",
+        name: "email",
+        type: "email",
+    },
+    {
         placeholder: "Пароль",
         name: "password",
         type: "password",
     },
+    {
+        placeholder: "Телефон",
+        name: "phone",
+        type: "tel",
+    },
 ];
 
-const validate = (data: RegisterFormData) => {
+const validate = (data: ProfileFormData) => {
     const errors: FormErrors = {};
 
     const fields = {
+        first_name: /^.{2,22}$/,
+        second_name: /^.{2,22}$/,
         login: /^[a-zA-Z\d_]{2,12}$/,
-        password: /^[a-zA-Z\d]{6,}$/,
         email: /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+        password: /^[a-zA-Z\d]{6,}$/,
         phone: /^[8\d]{11}$/,
     };
+
+    if (!data.first_name || !fields.first_name.test(data.first_name)) {
+        errors.first_name = firstNameError;
+    }
+
+    if (!data.second_name || !fields.second_name.test(data.second_name)) {
+        errors.second_name = secondNameError;
+    }
 
     if (!data.login || !fields.login.test(data.login)) {
         errors.login = loginError;
@@ -67,18 +94,22 @@ const validate = (data: RegisterFormData) => {
     return errors;
 };
 
-const onFormSubmit = (data: RegisterFormData) => {
-    console.log(data);
-
-    /* Здесь отправляем форму */
+type RegisterProps = {
+    fetchSignupThunk: <R>(signinData: ProfileFormData) => Promise<R>;
 };
 
-export const Register = () => {
+export const Register = ({ fetchSignupThunk }: RegisterProps) => {
     const history = useHistory();
 
     const onLoginClick = useCallback(() => {
         history.push("/login");
     }, []);
+
+    const onFormSubmit = (registerData: ProfileFormData) => {
+        fetchSignupThunk(registerData).then(() => {
+            console.log("resistered");
+        });
+    };
 
     return (
         <Fragment>
@@ -120,3 +151,5 @@ export const Register = () => {
         </Fragment>
     );
 };
+
+export default connect(() => ({}), { fetchSignupThunk })(Register);
