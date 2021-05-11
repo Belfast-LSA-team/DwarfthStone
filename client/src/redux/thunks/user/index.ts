@@ -1,4 +1,20 @@
-import type { Dispatch } from "redux";
+import type { ThunkCreator } from "../";
+import type {
+    SigninActions,
+    SignupActions,
+    LogoutActions,
+    UserInfoActions,
+    ChangeProfileActions,
+    ChangeAvatarActions,
+    ChangePasswordActions,
+} from "../../actions/user";
+
+import type {
+    LoginFormData,
+    ProfileFormData,
+    ChangeAvatarFormData,
+    ChangePasswordFormData,
+} from "../../../../app/resolvers/user";
 import {
     resolveSignin,
     resolveSignup,
@@ -32,16 +48,8 @@ import {
     fetchFailedChangePassword,
 } from "../../actions/user";
 
-import type {
-    LoginFormData,
-    ProfileFormData,
-    ChangeAvatarFormData,
-    ChangePasswordFormData,
-} from "../../../../app/resolvers/user";
-
-export const fetchSigninThunk = (signinData: LoginFormData) => (
-    dispatch: Dispatch
-) => {
+type FetchSignIn = ThunkCreator<SigninActions, LoginFormData>;
+export const fetchSigninThunk: FetchSignIn = (signinData) => (dispatch) => {
     dispatch(fetchSignin());
 
     return resolveSignin(signinData)
@@ -49,9 +57,8 @@ export const fetchSigninThunk = (signinData: LoginFormData) => (
         .catch((err) => dispatch(fetchFailedSignin(err)));
 };
 
-export const fetchSignupThunk = (signupData: ProfileFormData) => (
-    dispatch: Dispatch
-) => {
+type FetchSignup = ThunkCreator<SignupActions, ProfileFormData>;
+export const fetchSignupThunk: FetchSignup = (signupData) => (dispatch) => {
     dispatch(fetchSignup());
 
     return resolveSignup(signupData)
@@ -59,7 +66,8 @@ export const fetchSignupThunk = (signupData: ProfileFormData) => (
         .catch((err) => dispatch(fetchFailedSignup(err)));
 };
 
-export const fetchLogoutThunk = () => (dispatch: Dispatch) => {
+type FetchLogout = ThunkCreator<LogoutActions>;
+export const fetchLogoutThunk: FetchLogout = () => (dispatch) => {
     dispatch(fetchLogout());
 
     return resolveLogout()
@@ -67,7 +75,8 @@ export const fetchLogoutThunk = () => (dispatch: Dispatch) => {
         .catch((err) => dispatch(fetchFailedLogout(err)));
 };
 
-export const fetchUserInfoThunk = () => (dispatch: Dispatch) => {
+type FetchUserInfo = ThunkCreator<UserInfoActions>;
+export const fetchUserInfoThunk: FetchUserInfo = () => (dispatch) => {
     dispatch(fetchUserInfo());
 
     return resolveUserInfo()
@@ -75,9 +84,10 @@ export const fetchUserInfoThunk = () => (dispatch: Dispatch) => {
         .catch((err) => dispatch(fetchFailedUserInfo(err)));
 };
 
-export const fetchChangeProfileThunk = (changeProfileData: ProfileFormData) => (
-    dispatch: Dispatch
-) => {
+type FetchChangeProfile = ThunkCreator<ChangeProfileActions, ProfileFormData>;
+export const fetchChangeProfileThunk: FetchChangeProfile = (
+    changeProfileData
+) => (dispatch) => {
     dispatch(fetchChangeProfile());
 
     return resolveChangeProfile(changeProfileData)
@@ -85,9 +95,13 @@ export const fetchChangeProfileThunk = (changeProfileData: ProfileFormData) => (
         .catch((err) => dispatch(fetchFailedChangeProfile(err)));
 };
 
-export const fetchChangeAvatarThunk = (
-    changeAvatarData: ChangeAvatarFormData
-) => (dispatch: Dispatch) => {
+type FetchChangeAvatar = ThunkCreator<
+    ChangeAvatarActions,
+    ChangeAvatarFormData
+>;
+export const fetchChangeAvatarThunk: FetchChangeAvatar = (changeAvatarData) => (
+    dispatch
+) => {
     dispatch(fetchChangeAvatar());
 
     return resolveChangeAvatar(changeAvatarData)
@@ -95,9 +109,13 @@ export const fetchChangeAvatarThunk = (
         .catch((err) => dispatch(fetchFailedChangeAvatar(err)));
 };
 
-export const fetchChangePasswordThunk = (
-    changePasswordData: ChangePasswordFormData
-) => (dispatch: Dispatch) => {
+type FetchChangePassword = ThunkCreator<
+    ChangePasswordActions,
+    ChangePasswordFormData
+>;
+export const fetchChangePasswordThunk: FetchChangePassword = (
+    changePasswordData
+) => (dispatch) => {
     dispatch(fetchChangePassword());
 
     console.log("change pass");
