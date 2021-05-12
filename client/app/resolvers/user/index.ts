@@ -1,4 +1,5 @@
 import { get, post, put } from "../..";
+import type { UserInfo } from "../../../entities/user";
 
 export type LoginFormData = {
     login: string;
@@ -36,25 +37,24 @@ type UserServerResult = {
 };
 
 export const resolveSignin = (signinData: LoginFormData) =>
-    post("auth/signin", signinData).then((res) => res);
+    post<string>("auth/signin", signinData);
 
 export const resolveSignup = (signupData: ProfileFormData) =>
-    post("auth/signup", signupData).then((res) => res);
+    post<string>("auth/signup", signupData);
 
-export const resolveLogout = () => post("auth/logout").then((res) => res);
+export const resolveLogout = () => post<string>("auth/logout");
 
-export const resolveUserInfo = () =>
-    get<UserServerResult>("auth/user").then((res) => res);
+export const resolveUserInfo = () => get<UserInfo>("auth/user");
 
 export const resolveChangeProfile = (changeProfileData: ProfileFormData) =>
-    put("user/profile", changeProfileData).then((res) => res);
+    put<UserInfo>("user/profile", changeProfileData);
 
 export const resolveChangeAvatar = (newAvatar: ChangeAvatarFormData) =>
-    put("user/profile/avatar", newAvatar, {
+    put<UserInfo>("user/profile/avatar", newAvatar, {
         headers: null,
         withCredentials: true,
-    }).then((res) => res);
+    });
 
 export const resolveChangePassword = (
     changePasswordData: ChangePasswordFormData
-) => put("user/password", changePasswordData).then((res) => res);
+) => put<string>("user/password", changePasswordData);

@@ -1,6 +1,7 @@
 import React, { useCallback, Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import type { ConnectedThunk } from "../../redux/thunks";
 
 import type { State } from "../../redux/reducers";
 import type { User } from "../../redux/reducers/widgets/user";
@@ -47,11 +48,11 @@ type ChangeAvatarData = {
 
 type ProfileProps = {
     userInfo: User;
-    fetchUserInfoThunk: typeof fetchUserInfoThunk;
-    fetchLogoutThunk: typeof fetchLogoutThunk;
-    fetchChangeProfileThunk: typeof fetchChangeProfileThunk;
-    fetchChangeAvatarThunk: typeof fetchChangeAvatarThunk;
-    fetchChangePasswordThunk: typeof fetchChangePasswordThunk;
+    fetchUserInfoThunk: ConnectedThunk<typeof fetchUserInfoThunk>;
+    fetchLogoutThunk: ConnectedThunk<typeof fetchLogoutThunk>;
+    fetchChangeProfileThunk: ConnectedThunk<typeof fetchChangeProfileThunk>;
+    fetchChangeAvatarThunk: ConnectedThunk<typeof fetchChangeAvatarThunk>;
+    fetchChangePasswordThunk: ConnectedThunk<typeof fetchChangePasswordThunk>;
 };
 
 const fields = {
