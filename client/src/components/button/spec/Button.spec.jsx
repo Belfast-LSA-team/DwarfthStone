@@ -3,14 +3,14 @@ import { mount } from "enzyme";
 
 import Button from "..";
 
-describe("Button", () => {
+describe("button", () => {
     it("рендерится корректно", () => {
         const wrapper = mount(
             <Button
                 type="button"
                 style="primary"
                 stretch={false}
-                clickHandler={() => {}}
+                clickHandler={jest.fn()}
             >
                 Test Button
             </Button>

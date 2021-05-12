@@ -3,7 +3,7 @@ import { mockStore } from "../../../../../mock/store";
 
 describe("селектор getUserInfo", () => {
     it("получает данные юзера", () => {
-        const store = {
+        const store = mockStore({
             widgets: {
                 user: {
                     loading: false,
@@ -18,9 +18,9 @@ describe("селектор getUserInfo", () => {
                     phone: "test_phone",
                 },
             },
-        };
+        });
 
-        expect(getUserInfo(store)).toStrictEqual({
+        expect(getUserInfo(store.getState())).toStrictEqual({
             loading: false,
             isAuth: false,
             id: "123",
@@ -32,5 +32,5 @@ describe("селектор getUserInfo", () => {
             email: "test_email",
             phone: "test_phone",
         });
-    })
-})
+    });
+});
