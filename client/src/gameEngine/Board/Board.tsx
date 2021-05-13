@@ -162,8 +162,7 @@ export const Board = (): JSX.Element => {
                         const isFigthed = userInstance?.isFightedDeck!.find(
                             (card) => card.id === element.id
                         );
-                        console.log(isFigthed);
-                        console.log(!currCard?.isLeave);
+                  
                         if (isFigthed || !currCard?.isLeave) {
                             return;
                         }
@@ -206,7 +205,6 @@ export const Board = (): JSX.Element => {
                                     isActive: false,
                                 });
                             }
-                            console.log(element);
                             setSwordData({
                                 left: element.left + element.width - 35,
                                 top: element.top + element.height - 20,
@@ -214,14 +212,12 @@ export const Board = (): JSX.Element => {
                             });
                         }
 
-                        console.log(cardsToFight);
 
                         break;
 
                     case "endTurnButton":
                         setStatusElements([]);
                         setCardsToFight([]);
-                        console.log(element);
                         if (swordData.isActive) {
                             setSwordData({
                                 left: 10,
@@ -342,7 +338,6 @@ export const Board = (): JSX.Element => {
                                 setGameState(newGameIsntance);
                             }
 
-                            console.log(gameState);
 
                             setGameElements((oldArray) => [
                                 ...oldArray,
@@ -513,7 +508,6 @@ export const Board = (): JSX.Element => {
         const isAllMinionsDead = defenderUser?.fightDeck!.filter(
             (card) => !card.isLeave
         );
-        console.log("isAllMinionsDead", isAllMinionsDead);
         if (cardsToFight[1].fightCard.type === "user") {
             if (isAllMinionsDead.length != defenderUser?.fightDeck!.length) {
                 return;
@@ -681,8 +675,6 @@ export const Board = (): JSX.Element => {
                 endTurnButton.naturalHeight
             );
 
-            console.log(endTurnButton.naturalWidth);
-            console.log(endTurnButton.naturalHeight);
             setGameElements((oldArray) => [
                 ...oldArray,
                 {

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import "./boardActivities.css";
 export const BoardActivities = ({ eventsLogs }: string[]): JSX.Element => {
-    // console.log(eventsLogs);
     useEffect(() => {}, [eventsLogs]);
     return (
         <div className="eventLog">
