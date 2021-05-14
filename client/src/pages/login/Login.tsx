@@ -2,12 +2,12 @@ import React, { useCallback, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 import BoxWrapper from "../../components/boxwrapper";
-import GameLayout from "../../components/gamelayout";
+import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import { FormErrors, LoginFormData } from "../../types/auth";
 
-import "../../css/auth.css";
+import "../../css/page.css";
 
 const formValues = [
     {
@@ -53,18 +53,18 @@ export const Login = () => {
         <Fragment>
             <GameLayout>
                 <BoxWrapper className="auth">
-                    <h1 className="auth__title">Вход</h1>
+                    <h1 className="page__title">Вход</h1>
                     <Form
                         validate={validate}
                         onSubmit={onFormSubmit}
                         render={({ handleSubmit }) => (
                             <form
-                                className="auth__form"
+                                className="page__form"
                                 onSubmit={handleSubmit}
                             >
-                                {InputList(formValues, "auth__input", true)}
+                                {InputList(formValues, "page__input", true)}
                                 <Button
-                                    className="auth__btn"
+                                    className="page__btn"
                                     type="submit"
                                     stretch={true}
                                     style="primary"
@@ -76,7 +76,7 @@ export const Login = () => {
                         )}
                     ></Form>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="button"
                         stretch={true}
                         style="secondary"

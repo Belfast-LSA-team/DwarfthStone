@@ -5,6 +5,11 @@
     cursor: pointer;
     flex: 0 0 65px;
 
+    &_fixed {
+        position: fixed;
+        height: 100vh;
+    }
+
     &:hover {
         opacity: 0.8;
     }

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button рендерится корректно 1`] = `
+<Button
+  clickHandler={[MockFunction]}
+  stretch={false}
+  style="primary"
+  type="button"
+>
+  <button
+    className="button button_primary"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    Test Button
+  </button>
+</Button>
+`;

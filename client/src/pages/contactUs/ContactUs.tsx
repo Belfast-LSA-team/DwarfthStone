@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form } from "react-final-form";
 import InputField from "../../components/inputField";
+import TextareaField from "../../components/textareaField";
+
 import { SiteLayout } from "../../layouts/SiteLayout/SiteLayout";
 import Button from "../../components/button";
 import Title from "../../components/title";
@@ -19,42 +21,56 @@ import {
 
 import "./contactUs.css";
 
+const formValues = [
+    {
+        placeholder: nameLabel,
+        name: "name",
+        type: "text",
+    },
+    {
+        placeholder: emailLabel,
+        name: "email",
+        type: "email",
+    },
+
+    {
+        placeholder: titleLabel,
+        name: "title",
+        type: "text",
+    },
+    {
+        placeholder: messageLabel,
+        name: "message",
+        rows: "5",
+    },
+];
 export const ContactUs = (): JSX.Element => {
     const [isSent, setIsSent] = useState(false);
     const [error, setError] = useState<GeneralErrorProps | null>(null);
 
-    const formValues = [
-        {
-            placeholder: nameLabel,
-            name: "name",
-            type: "text",
-        },
-        {
-            placeholder: emailLabel,
-            name: "email",
-            type: "email",
-        },
-
-        {
-            placeholder: titleLabel,
-            name: "title",
-            type: "text",
-        },
-        {
-            placeholder: messageLabel,
-            name: "message",
-            rows: "5",
-        },
-    ];
     const renderInputs = () => {
-        return formValues.map((item) => {
-            return (
-                <InputField
-                    stretch={true}
-                    className="contact__input"
-                    {...item}
-                />
-            );
+        return formValues.map((item, index) => {
+            if (item.rows) {
+                return (
+                    <div key={index}>
+                        <TextareaField
+                            stretch={true}
+                            className="contact__input"
+                            {...item}
+                        />
+                    </div>
+                );
+            } else {
+                return (
+                    <div key={index}>
+                        <InputField
+                            stretch={true}
+                            className="contact__input"
+                            {...item}
+                        />
+                    </div>
+                );
+            }
         });
     };
 
@@ -104,7 +120,7 @@ export const ContactUs = (): JSX.Element => {
                     <Title level={3} text="Наши социальные сети" />
                 </div>
             </div>
-            {error != null ? (
+            {error !== null ? (
                 <GeneralError
                     message={error.message}
                     errorCode={error.errorCode}

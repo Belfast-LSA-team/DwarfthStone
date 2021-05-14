@@ -2,12 +2,18 @@ import React, { useCallback, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 import BoxWrapper from "../../components/boxwrapper";
-import GameLayout from "../../components/gamelayout";
+import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import { FormErrors, RegisterFormData } from "../../types/auth";
+import {
+    loginError,
+    passwordError,
+    emailError,
+    phoneError,
+} from "../../data/content";
 
-import "../../css/auth.css";
+import "../../css/page.css";
 
 const formValues = [
     {
@@ -43,22 +49,19 @@ const validate = (data: RegisterFormData) => {
     };
 
     if (!data.login || !fields.login.test(data.login)) {
-        errors.login =
-            "Логин может содержать латинские буквы и цифры и быть от 2 до 12 символов";
+        errors.login = loginError;
     }
 
     if (!data.password || !fields.password.test(data.password)) {
-        errors.password =
-            "Пароль может содержать латинские буквы и цифры и быть не короче 6 символов";
+        errors.password = passwordError;
     }
 
     if (!data.email || !fields.email.test(data.email)) {
-        errors.email = "Введите валидный email";
+        errors.email = emailError;
     }
 
     if (!data.phone || !fields.phone.test(data.phone)) {
-        errors.phone =
-            'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
+        errors.phone = phoneError;
     }
 
     return errors;
@@ -80,19 +83,19 @@ export const Register = () => {
     return (
         <Fragment>
             <GameLayout>
-                <BoxWrapper className="auth">
-                    <h1 className="auth__title">Регистрация</h1>
+                <BoxWrapper className="page">
+                    <h1 className="page__title">Регистрация</h1>
                     <Form
                         validate={validate}
                         onSubmit={onFormSubmit}
                         render={({ handleSubmit }) => (
                             <form
-                                className="auth__form"
+                                className="page__form"
                                 onSubmit={handleSubmit}
                             >
-                                {InputList(formValues, "auth__input", true)}
+                                {InputList(formValues, "page__input", true)}
                                 <Button
-                                    className="auth__btn"
+                                    className="page__btn"
                                     type="submit"
                                     stretch={true}
                                     style="primary"
@@ -104,7 +107,7 @@ export const Register = () => {
                         )}
                     ></Form>
                     <Button
-                        className="auth__btn"
+                        className="page__btn"
                         type="button"
                         stretch={true}
                         style="secondary"

@@ -1,0 +1,35 @@
+.input-field {
+    height: 32px;
+    line-height: 32px;
+    padding-left: 15px;
+    color: var(--text-dark-color);
+    background-color: var(--text-light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 17px;
+
+    &:placeholder {
+        color: var(--text-inactive-color);
+    }
+
+    &_fullwidth {
+        width: 100%;
+    }
+}
+
+.input-error {
+    position: absolute;
+    top: 35px;
+    left: 15px;
+    color: var(--text-error-color);
+    font-size: 12px;
+}
+
+.textarea-wrapper {
+    position: relative;
+    .input-error {
+        bottom: -15px;
+        top: unset;
+    }
+}

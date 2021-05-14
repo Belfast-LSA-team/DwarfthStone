@@ -3,15 +3,17 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier", "jest"],
   "extends": [
     "eslint:recommended",
     // "plugin:@typescript-eslint/eslint-recommended",
     // "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier"
+    "prettier",
+    "plugin:jest/all"
   ],
   "rules": {
     "no-unused-vars": "off"
@@ -20,6 +22,13 @@
     "import/resolver": "webpack"
   },
   "overrides": [
+    {
+      "files": ["*.spec.js", "*.spec.jsx"],
+      "rules": {
+        "jest/no-hooks": "off",
+        "jest/prefer-expect-assertions": "off"
+      }
+    },
     {
         "files": ["*.ts", "*.tsx"],
         "rules": {
