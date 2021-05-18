@@ -1,19 +1,15 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = {
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    replies: {
+    author_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    created: {
-        type: DataTypes.DATE,
+    content: {
+        type: DataTypes.TEXT,
         allowNull: false,
     },
-    last_updated: {
+    created: {
         type: DataTypes.DATE,
         allowNull: false,
     },
