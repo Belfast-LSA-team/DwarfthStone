@@ -22,8 +22,14 @@ module.exports = {
         contentBase: path.join(__dirname, "public"),
         historyApiFallback: true,
         compress: true,
-        port: 3010,
+        port: 5000,
         open: true,
+        proxy: {
+            "^/api*": {
+                target: "http://localhost:3010",
+                secure: false,
+            },
+        },
     },
     module: {
         rules: [

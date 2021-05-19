@@ -18,13 +18,16 @@ services:
     env_file:
       ./dev.env
     restart: always
+    volumes:
+      - ./client:/app/client
+      - ./server:/app/server
     ports:
       - "3010:3010"
     depends_on:
       - postgres
     networks:
       - ds_network
-    command: ./wait-for.sh postgres:5432 -- node server/index.js
+    command: ./wait-for.sh postgres:5432 -- sh -c "npm run start & npm run dev"
 networks:
   ds_network:
     driver: bridge 
