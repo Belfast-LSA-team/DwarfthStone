@@ -1,0 +1,30 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ./postgresdata:/var/lib/postgresql/data
+      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+    restart: always
+    env_file:
+      ./dev.env
+    networks:
+      - ds_network
+  dwarfthstone:
+    build:
+      context: .
+    env_file:
+      ./dev.env
+    restart: always
+    ports:
+      - "3010:3010"
+    depends_on:
+      - postgres
+    networks:
+      - ds_network
+    command: ./wait-for.sh postgres:5432 -- node server/index.js
+networks:
+  ds_network:
+    driver: bridge 
