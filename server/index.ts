@@ -18,11 +18,12 @@ app.use(express.static('public'));
 
 // app.use('/api/v2/auth/user', createProxyMiddleware({ target: 'https://ya-praktikum.tech/api/v2/auth/user', changeOrigin: true }));
 
+// app.use('/newGood',)
 
 app.use(
   '/api/v2',
-  proxy('https://ya-praktikum.tech/api/v2/', {
-    https: true,
+  proxy('http://ya-praktikum.tech/api/v2/', {
+    https: false,
     proxyReqOptDecorator(opts: RequestOptions) {
       opts.headers["Content-Type"] = "application/json";
       //withCredentials: true,
@@ -34,13 +35,11 @@ app.use(
 );
 
 app.get('*', (req, res) => {
-  console.log('console.log path', req.path);
   const store = createStoreServer(req);
   //Some logic to init and load data into store
 
   const promises = matchRoutes(Routes, req.path)
     .map(({ route }) => {
-      console.dir(route.loadData);
       return route.loadData ? route.loadData(store) : null;
     })
     .map((promise) => {

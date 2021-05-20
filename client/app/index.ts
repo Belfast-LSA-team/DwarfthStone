@@ -9,8 +9,6 @@ const axiosInstanse = axios.create({
   withCredentials: true,
 });
 
-const host = "https://ya-praktikum.tech/api/v2";
-// const host = "http://localhost:3010/api/v2";
 
 type ApiGetMethod = "auth/user";
 type ApiPostMethod = "auth/signin" | "auth/signup" | "auth/logout";
@@ -22,7 +20,6 @@ export function get<R>(
   apiMethod: ApiGetMethod,
   params: Record<string, Param> = {}
 ): Promise<R> {
-  console.log(params);
   return axiosInstanse
     .get<R>(`/${apiMethod}`, { params })
     .then(({ data }) => data)
@@ -33,6 +30,6 @@ export function post<R>(
   params: Record<string, Param> = {}
 ): Promise<R> {
   return axiosInstanse
-    .post<R>(`${host}/${apiMethod}`, { params })
+    .post<R>(`/${apiMethod}`, { params })
     .then(({ data }) => data);
 }
