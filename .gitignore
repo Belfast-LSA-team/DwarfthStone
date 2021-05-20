@@ -3,5 +3,6 @@ node_modules
 /dist
 /postgresdata
 dev.env
+.env
 
 dev.ts

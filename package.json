@@ -8,8 +8,7 @@
     "build": "webpack",
     "lint": "eslint client/src/*.tsx client/src/**/*.tsx",
     "dev": "nodemon server/index.js",
-    "test": "jest",
-    "all": "npm-run-all -p dev start"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

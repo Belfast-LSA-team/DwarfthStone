@@ -9,20 +9,20 @@ services:
       - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
     restart: always
     env_file:
-      ./dev.env
+      ./.env
     networks:
       - ds_network
   dwarfthstone:
     build:
       context: .
     env_file:
-      ./dev.env
+      ./.env
     restart: always
     volumes:
       - ./client:/app/client
       - ./server:/app/server
     ports:
-      - "3010:3010"
+      - "3000:3010"
     depends_on:
       - postgres
     networks:
