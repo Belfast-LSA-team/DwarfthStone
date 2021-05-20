@@ -6,11 +6,7 @@ module.exports = {
     mode: "development",
     entry: "./client/src/index.tsx",
     output: {
-<<<<<<< HEAD
-        path: path.join(__dirname, "dist"),
-=======
         path: path.join(__dirname, "/dist"),
->>>>>>> develop
         publicPath: "/",
         filename: "bundle.js",
     },
