@@ -5,6 +5,10 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    author_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     content: {
         type: DataTypes.TEXT,
         allowNull: false,

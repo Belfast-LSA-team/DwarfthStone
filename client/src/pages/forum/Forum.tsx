@@ -79,6 +79,13 @@ export const Forum = ({ threads, fetchThreads }: any) => {
                                         placeholder="Заголовок"
                                         stretch={true}
                                     />
+                                    <InputField
+                                        className="forum__input_margin"
+                                        type="text"
+                                        name="username"
+                                        placeholder="Имя"
+                                        stretch={true}
+                                    />
                                     <Field name="message">
                                         {({ textarea }) => (
                                             <textarea

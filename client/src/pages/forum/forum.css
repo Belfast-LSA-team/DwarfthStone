@@ -50,6 +50,10 @@
         }
     }
 
+    &__input_margin {
+        margin-top: 15px;
+    }
+
     &__message-area {
         width: 100%;
         margin: 15px auto;

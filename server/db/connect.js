@@ -1,7 +1,8 @@
 require("dotenv").config();
 
 const Thread = require("./models/thread");
-const { Sequelize, DataTypes } = require("sequelize");
+const Message = require("./models/message");
+const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
     process.env.POSTGRES_DB,
@@ -14,6 +15,9 @@ const sequelize = new Sequelize(
     }
 );
 
-sequelize.define("Thread", Thread, {});
+const threadModel = sequelize.define("Thread", Thread, {});
+const messageModel = sequelize.define("Message", Message, {});
+
+threadModel.hasMany(messageModel);
 
 module.exports = sequelize;
