@@ -5,7 +5,7 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    replies: {
+    replies_count: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },

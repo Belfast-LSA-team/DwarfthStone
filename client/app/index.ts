@@ -10,7 +10,7 @@ const axiosInstanse = axios.create({
 
 const host = "https://ya-praktikum.tech/api/v2/";
 
-type ApiGetMethod = "auth/user";
+type ApiGetMethod = "auth/user" | "api/threads";
 type ApiPostMethod = "auth/signin" | "auth/signup" | "auth/logout";
 type Param = string | string[] | number | number[];
 
@@ -22,6 +22,15 @@ export function get<R>(
 ): Promise<R> {
     return axiosInstanse
         .get<R>(`${host}/${apiMethod}`, { params })
+        .then(({ data }) => data);
+}
+
+export function getLocal<R>(
+    apiMethod: ApiGetMethod,
+    params: Record<string, Param> = {}
+): Promise<R> {
+    return axiosInstanse
+        .get<R>(`/${apiMethod}`, { params })
         .then(({ data }) => data);
 }
 

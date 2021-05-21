@@ -1,6 +1,9 @@
-import React, { useCallback, Fragment, useState } from "react";
+import React, { useCallback, Fragment, useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Form, Field } from "react-final-form";
+import { fetchThreads } from "../../redux/thunks/forum/threads";
+import { getThreads } from "../../redux/selectors/widgets/forum";
 import Button from "../../components/button";
 import InputField from "../../components/inputField";
 import LeftSideButton from "../../components/leftsideButton";
@@ -8,41 +11,21 @@ import Spinner from "../../components/spinner";
 import Title from "../../components/title";
 import Papers from "./components/papers";
 import "./forum.css";
+import { State } from "../../redux/reducers";
+import { Thread } from "../../../entities/thread";
 
-type Thread = {
-    id: number;
-    title: string;
-    replies: number;
-};
-
-const mockThreads: Thread[] = [
-    { id: 1, title: "Lorem ipsum dolor sit amet", replies: 3 },
-    { id: 2, title: "Consectetur adipiscing elit", replies: 0 },
-    { id: 3, title: "Sed do eiusmod tempor incididunt", replies: 15 },
-];
-
-const getThreads = (): Promise<Thread[]> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockThreads);
-        }, 1000);
-    });
-};
-
-export const Forum = () => {
-    const [threads, setThreads] = useState<null | Thread[]>(null);
-
+export const Forum = ({ threads, fetchThreads }: any) => {
     const onNewThreadSubmit = useCallback(() => {
         console.log("Создали тред");
     }, []);
 
     let threadList;
 
-    if (!threads) {
-        getThreads().then((threads) => {
-            setThreads(threads);
-        });
+    useEffect(() => {
+        fetchThreads();
+    }, []);
 
+    if (!threads) {
         threadList = <Spinner color="light" />;
     } else {
         if (!threads.length) {
@@ -65,7 +48,7 @@ export const Forum = () => {
                                 className="forum__thread-right"
                             >
                                 <span className="forum__thread-replies">
-                                    {thread.replies}
+                                    {thread.replies_count}
                                 </span>
                                 <Papers />
                             </Link>
@@ -124,3 +107,9 @@ export const Forum = () => {
         </Fragment>
     );
 };
+
+const mapStateToProps = (state: State) => ({
+    threads: getThreads(state),
+});
+
+export default connect(mapStateToProps, { fetchThreads })(Forum);
