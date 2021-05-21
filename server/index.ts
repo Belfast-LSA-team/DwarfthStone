@@ -16,18 +16,13 @@ const app = express();
 app.use(express.static('public'));
 
 
-// app.use('/api/v2/auth/user', createProxyMiddleware({ target: 'https://ya-praktikum.tech/api/v2/auth/user', changeOrigin: true }));
-
-// app.use('/newGood',)
 
 app.use(
-  '/api/v2',
-  proxy('http://ya-praktikum.tech/api/v2/', {
+  '/yand-api',
+  proxy('http://ya-praktikum.tech/', {
     https: false,
     proxyReqOptDecorator(opts: RequestOptions) {
       opts.headers["Content-Type"] = "application/json";
-      //withCredentials: true,
-      // opts.headers['x-forwarded-host'] = 'localhost:3010';
       opts.method = 'GET';
       return opts;
     },
