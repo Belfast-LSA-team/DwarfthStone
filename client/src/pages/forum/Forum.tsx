@@ -2,7 +2,8 @@ import React, { useCallback, Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Form, Field } from "react-final-form";
-import { fetchThreads } from "../../redux/thunks/forum/threads";
+import { FORM_ERROR } from "final-form";
+import { fetchThreads, createThread } from "../../redux/thunks/forum/threads";
 import { getThreads } from "../../redux/selectors/widgets/forum";
 import Button from "../../components/button";
 import InputField from "../../components/inputField";
@@ -14,9 +15,18 @@ import "./forum.css";
 import { State } from "../../redux/reducers";
 import { Thread } from "../../../entities/thread";
 
-export const Forum = ({ threads, fetchThreads }: any) => {
-    const onNewThreadSubmit = useCallback(() => {
-        console.log("Создали тред");
+type CreateThreadData = {
+    title: string;
+    username: string;
+    message: string;
+};
+
+export const Forum = ({ threads, fetchThreads, createThread }: any) => {
+    const onNewThreadSubmit = useCallback((data: CreateThreadData) => {
+        if (!data.title || !data.username || !data.message) {
+            return { [FORM_ERROR]: "Заполните все поля." };
+        }
+        createThread(data);
     }, []);
 
     let threadList;
@@ -48,7 +58,7 @@ export const Forum = ({ threads, fetchThreads }: any) => {
                                 className="forum__thread-right"
                             >
                                 <span className="forum__thread-replies">
-                                    {thread.replies_count}
+                                    {thread.repliesCount}
                                 </span>
                                 <Papers />
                             </Link>
@@ -71,7 +81,7 @@ export const Forum = ({ threads, fetchThreads }: any) => {
                         <Title level={2} text="Создать тему" />
                         <Form
                             onSubmit={onNewThreadSubmit}
-                            render={({ handleSubmit }) => (
+                            render={({ submitError, handleSubmit }) => (
                                 <form onSubmit={handleSubmit}>
                                     <InputField
                                         type="text"
@@ -86,16 +96,18 @@ export const Forum = ({ threads, fetchThreads }: any) => {
                                         placeholder="Имя"
                                         stretch={true}
                                     />
-                                    <Field name="message">
-                                        {({ textarea }) => (
-                                            <textarea
-                                                {...textarea}
-                                                className="forum__message-area"
-                                                placeholder="Сообщение"
-                                                rows={3}
-                                            ></textarea>
-                                        )}
-                                    </Field>
+                                    <Field
+                                        className="forum__message-area"
+                                        name="message"
+                                        component="textarea"
+                                        placeholder="Сообщение"
+                                        rows={3}
+                                    />
+                                    {submitError ? (
+                                        <div className="forum__submit-error">
+                                            {submitError}
+                                        </div>
+                                    ) : null}
                                     <Button
                                         className=""
                                         type="submit"
@@ -119,4 +131,4 @@ const mapStateToProps = (state: State) => ({
     threads: getThreads(state),
 });
 
-export default connect(mapStateToProps, { fetchThreads })(Forum);
+export default connect(mapStateToProps, { fetchThreads, createThread })(Forum);

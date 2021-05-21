@@ -1,7 +1,7 @@
 export type Thread = {
     id: number;
     title: string;
-    replies_count: number;
+    repliesCount: number;
     created: Date;
-    last_updated: Date;
+    lastUpdated: Date;
 };

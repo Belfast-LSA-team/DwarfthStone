@@ -30,9 +30,16 @@ const sequelize = new Sequelize(POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, {
     dialect: "postgres",
 });
 
-const threadModel = sequelize.define("Thread", Thread, {});
-const messageModel = sequelize.define("Message", Message, {});
+export const threadModel = sequelize.define("Thread", Thread, {
+    timestamps: false,
+});
 
-threadModel.hasMany(messageModel);
+export const messageModel = sequelize.define("Message", Message, {
+    timestamps: false,
+});
+
+threadModel.hasMany(messageModel, {
+    foreignKey: "thread_id",
+});
 
 export default sequelize;

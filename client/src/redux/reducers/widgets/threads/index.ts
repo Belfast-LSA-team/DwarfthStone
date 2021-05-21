@@ -32,6 +32,7 @@ export const threads = (state: Threads = initialState, action: Actions) => {
         }
         case FETCH_THREADS_FULFILLED: {
             state.loading = false;
+
             state.threads = action.payload;
 
             return state;

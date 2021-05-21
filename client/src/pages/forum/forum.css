@@ -23,6 +23,11 @@
         font-size: 22px;
     }
 
+    &__submit-error {
+        color: var(--text-error-color);
+        margin-bottom: 15px;
+    }
+
     &__thread { 
         height: 50px;
         display: flex;

@@ -1,4 +1,4 @@
-import { getLocal } from "../..";
+import { getLocal, postLocal } from "../..";
 
 type ThreadsServerResult = {
     id: number;
@@ -9,11 +9,18 @@ type ThreadsServerResult = {
 }[];
 
 export const resolveThreads = () =>
-    getLocal<ThreadsServerResult>("api/threads").then((threads) => {
+    getLocal<ThreadsServerResult>("db/threads").then((threads) => {
         return threads.map((thread) => {
             return {
+                id: thread.id,
                 lastUpdated: thread.last_updated,
-                ...thread,
+                repliesCount: thread.replies_count,
+                created: thread.created,
+                title: thread.title,
             };
         });
     });
+
+export const resolveCreateThread = (data: any) => {
+    return postLocal("db/threads", data).then(() => {});
+};

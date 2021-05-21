@@ -3,15 +3,19 @@ import axios from "axios";
 
 const axiosInstanse = axios.create({
     //TODO: and dev - prod url
-    baseURL: "http://localhost:3010/yand-api",
+    baseURL: "http://localhost:3010/api",
     headers: {
         "Content-Type": "application/json",
     },
     withCredentials: true,
 });
 
-type ApiGetMethod = "auth/user" | "api/threads";
-type ApiPostMethod = "auth/signin" | "auth/signup" | "auth/logout";
+type ApiGetMethod = "auth/user" | "db/threads";
+type ApiPostMethod =
+    | "auth/signin"
+    | "auth/signup"
+    | "auth/logout"
+    | "db/threads";
 type Param = string | string[] | number | number[];
 
 export type ErrorType = AxiosError;
@@ -21,7 +25,7 @@ export function get<R>(
     params: Record<string, Param> = {}
 ): Promise<R> {
     return axiosInstanse
-        .get<R>(`/${apiMethod}`, { params })
+        .get<R>(`/yandex/${apiMethod}`, { params })
         .then(({ data }) => data);
 }
 
@@ -39,6 +43,15 @@ export function post<R>(
     params: Record<string, Param> = {}
 ): Promise<R> {
     return axiosInstanse
-        .post<R>(`/${apiMethod}`, { params })
+        .post<R>(`/yandex/${apiMethod}`, { params })
+        .then(({ data }) => data);
+}
+
+export function postLocal<R>(
+    apiMethod: ApiPostMethod,
+    params: Record<string, Param> = {}
+): Promise<R> {
+    return axiosInstanse
+        .post<R>(`/${apiMethod}`, params)
         .then(({ data }) => data);
 }
