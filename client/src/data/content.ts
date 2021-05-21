@@ -13,8 +13,12 @@ export const menuContact = "Связаться с нами";
 export const menuLogin = "Логин";
 export const menuRegister = "Регистрация";
 
-export const darkButtonHomeLabel = "Связаться с нами";
-export const lightButtonHomeLabel = "На кофе";
+export const startNew = "Начать заново";
+export const backToProfile = "В профиль";
+
+export const darkButtonHomeLabel = 'Связаться с нами';
+export const lightButtonHomeLabel = 'На кофе';
+
 
 export const nameLabel = 'Имя';
 export const emailLabel = 'Почта';
@@ -23,13 +27,13 @@ export const messageLabel = 'Сообщение';
 export const contactUsTitle = 'Написать нам';
 export const thankYouText = 'Спасибо ваще сообщение принято! Мы отреагируем в ближайшее время';
 export const loginError =
-	"Логин может содержать буквы и цифры и быть от 2 до 12 символов";
+  "Логин может содержать буквы и цифры и быть от 2 до 12 символов";
 export const emailError = "Введите валидный email";
 export const phoneError =
-	'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
+  'Номер телефона должен быть записан в формате "8XXXXXXXXXX"';
 export const passwordError =
-	"Пароль может содержать буквы и цифры и быть не короче 6 символов";
+  "Пароль может содержать буквы и цифры и быть не короче 6 символов";
 export const newPasswordMatchError =
-	"Новый пароль не может совпадать со старым";
+  "Новый пароль не может совпадать со старым";
 export const noAvatarError = "Загрузите файл";
 export const invalidImageResError = "Допускаются расширения .png .jpeg .jpg";

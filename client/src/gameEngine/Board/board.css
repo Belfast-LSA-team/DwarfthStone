@@ -1,0 +1,21 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    position: relative;
+    canvas {
+        width: 100%;
+        max-width: 1280px;
+        height: 100%;
+        min-height: 720px;
+        margin: auto;
+        position: relative;
+        z-index: 1;
+    }
+    .Toastify__toast--dark {
+        background: #3a2411;
+    }
+    .Toastify__progress-bar--dark {
+        background: #323f2e;
+    }
+}

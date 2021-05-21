@@ -1,0 +1,17 @@
+.eventLog {
+    position: relative;
+    max-width: 1280px;
+    margin: auto;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    background: var(--secondary-color);
+    h2 {
+        color: var(--text-light-color);
+        padding: 0px 10px;
+    }
+    p {
+        color: var(--text-light-color);
+        padding: 0px 10px;
+    }
+}

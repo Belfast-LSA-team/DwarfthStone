@@ -2,4 +2,8 @@
 node_modules
 /dist
 
+/dist
+/public
+public
+
 dev.ts
