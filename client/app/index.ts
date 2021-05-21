@@ -2,6 +2,7 @@ import type { AxiosError } from "axios";
 import axios from "axios";
 
 const axiosInstanse = axios.create({
+  //TODO: and dev - prod url
   baseURL: 'http://localhost:3010/yand-api',
   headers: {
     "Content-Type": "application/json",
