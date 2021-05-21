@@ -2,20 +2,18 @@ import { stockCards } from '../../data/cards';
 
 
 export const shulledCards = () => {
-	const stockShuffledCards = [...stockCards];
-	let currentIndex = stockShuffledCards.length;
-	let randomIndex;
-	let temporaryValue;
+  const stockShuffledCards = [...stockCards];
+  let randomIndex;
+  let temporaryValue;
 
-	while (0 !== currentIndex) {
+  for (let currentIndex = stockShuffledCards.length; currentIndex > 0; --currentIndex) {
 
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
+    randomIndex = Math.floor(Math.random() * currentIndex);
 
-		temporaryValue = stockShuffledCards[currentIndex];
-		stockShuffledCards[currentIndex] = stockShuffledCards[randomIndex];
-		stockShuffledCards[randomIndex] = temporaryValue;
-	}
+    temporaryValue = stockShuffledCards[currentIndex];
+    stockShuffledCards[currentIndex] = stockShuffledCards[randomIndex];
+    stockShuffledCards[randomIndex] = temporaryValue;
+  }
 
-	return stockShuffledCards;
+  return stockShuffledCards;
 }

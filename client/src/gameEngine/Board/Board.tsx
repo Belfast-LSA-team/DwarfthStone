@@ -8,22 +8,23 @@ import greenBg from "../../assets/images/game/green-bg.png";
 import deck from "../../assets/images/game/deck.jpg";
 import endTurn from "../../assets/images/game/end-turn.png";
 
+import {onClickHandler} from '../eventHandler/clickHandler';
+ 
 import { stockCard } from "../../data/cards";
 import BoardActivities from "../BoardActivities";
 import {
     userInstance,
     UserGame,
     userPics,
-    addMana,
-    useMana,
+
     setUserHealth,
 } from "../User/user";
 import { shulledCards } from "../eventHandler/shuffle";
 import { ArrowHandler } from "../eventHandler/Arrow";
 import { Sword, SwordProps } from "../Sword/sword";
-import { StatusCard, StatusProps } from "../eventHandler/StatusCard/statusCard";
+import { StatusCard } from "../eventHandler/StatusCard/statusCard";
 import "./board.css";
-import { addCard, addCardFight, addDeadCard } from "../eventHandler/addCard";
+import { addCard, addDeadCard } from "../eventHandler/addCard";
 import { setHealth } from "../eventHandler/setCardData";
 import { useLocation } from "react-router-dom";
 import EndGame from "../EndGame";
@@ -89,285 +90,6 @@ export const Board = (): JSX.Element => {
         []
     );
 
-    const onClickHandler = (event: MouseEvent) => {
-        const canvas = canvasRef.current;
-        const elemLeft = canvas!.offsetLeft + canvas!.clientLeft;
-        const elemTop = canvas!.offsetTop + canvas!.clientTop;
-
-        let x = event.pageX - elemLeft,
-            y = event.pageY - elemTop;
-        gameElements.forEach(async function (element) {
-            if (
-                y > element.top &&
-                y < element.top + element.height &&
-                x > element.left &&
-                x < element.left + element.width
-            ) {
-                const eventArr = eventLog;
-                eventArr.push(`${gameState!.currentUser!}-${element.name}`);
-                toast.dark(`${gameState!.currentUser!}-${element.name}`);
-                setEventLog([...eventArr]);
-
-                switch (element.name) {
-                    case "UserCard":
-                        const userDefenderInstance =
-                            gameState.currentUser != gameState.firstUser!.id
-                                ? gameState.firstUser
-                                : gameState.secondUser;
-
-                        const isAllMinionsDead = userDefenderInstance?.fightDeck!.filter(
-                            (card) => !card.isLeave
-                        );
-                        if (
-                            isAllMinionsDead?.length !=
-                            userDefenderInstance?.fightDeck!.length
-                        ) {
-                            return;
-                        }
-                        if (
-                            element.user === userDefenderInstance!.id &&
-                            cardsToFight.length > 0
-                        ) {
-                            setCardsToFight((oldArray) => [
-                                ...oldArray,
-                                {
-                                    fightCard: {
-                                        id: 0,
-                                        type: "user",
-                                        name: userDefenderInstance!.name,
-                                        description: userDefenderInstance!.name,
-                                        cost: userDefenderInstance!.mana,
-                                        health: userDefenderInstance!.health,
-                                        attack: 0,
-                                        imageFull: "",
-                                        imageFight: "",
-                                        imageFightDead: "",
-                                        isLeave: true,
-                                    },
-                                    userHolder: element.user!,
-                                },
-                            ]);
-                        }
-
-                        break;
-
-                    case "CardFightDeck":
-                        const userInstance =
-                            element.user === gameState.firstUser!.id
-                                ? gameState.firstUser
-                                : gameState.secondUser;
-                        const currCard = userInstance?.fightDeck!.find(
-                            (card) => card.id === element.id
-                        );
-                        const isFigthed = userInstance?.isFightedDeck!.find(
-                            (card) => card.id === element.id
-                        );
-                        console.log(isFigthed);
-                        console.log(!currCard?.isLeave);
-                        if (isFigthed || !currCard?.isLeave) {
-                            return;
-                        }
-                        if (
-                            gameState.currentUser != element.user &&
-                            !currCard?.isLeave
-                        ) {
-                            return;
-                        }
-                        if (
-                            gameState.currentUser != element.user &&
-                            cardsToFight.length === 0
-                        ) {
-                            return;
-                        }
-                        if (cardsToFight.length === 0) {
-                            setCardsToFight([
-                                {
-                                    fightCard: element.card,
-                                    userHolder: element.user!,
-                                },
-                            ]);
-                        } else {
-                            element.user != cardsToFight[0].userHolder
-                                ? setCardsToFight((oldArray) => [
-                                      ...oldArray,
-                                      {
-                                          fightCard: element.card,
-                                          userHolder: element.user!,
-                                      },
-                                  ])
-                                : null;
-                        }
-
-                        if (cardsToFight.length < 2) {
-                            if (swordData.isActive) {
-                                setSwordData({
-                                    left: 10,
-                                    top: 10,
-                                    isActive: false,
-                                });
-                            }
-                            console.log(element);
-                            setSwordData({
-                                left: element.left + element.width - 35,
-                                top: element.top + element.height - 20,
-                                isActive: true,
-                            });
-                        }
-
-                        console.log(cardsToFight);
-
-                        break;
-
-                    case "endTurnButton":
-                        setStatusElements([]);
-                        setCardsToFight([]);
-                        console.log(element);
-                        if (swordData.isActive) {
-                            setSwordData({
-                                left: 10,
-                                top: 10,
-                                isActive: false,
-                            });
-                        }
-
-                        const newGameState = { ...gameState };
-                        newGameState.currentUser =
-                            gameState.currentUser === gameState.firstUser!.id
-                                ? gameState.secondUser!.id
-                                : gameState.firstUser!.id;
-                        newGameState.firstUser!.mana =
-                            newGameState.currentUser === gameState.firstUser!.id
-                                ? gameState.firstUser!.mana
-                                : gameState.firstUser!.mana + 1;
-
-                        newGameState.secondUser!.mana =
-                            newGameState.currentUser ===
-                            gameState.secondUser!.id
-                                ? gameState.secondUser!.mana
-                                : gameState.secondUser!.mana + 1;
-
-                        newGameState.secondUser!.isFightedDeck = [];
-                        newGameState.firstUser!.isFightedDeck = [];
-                        setGameState({ ...newGameState });
-                        addCardToUser(canvas!, "top", gameState.currentUser!);
-
-                        const currentUserInstance =
-                            gameState.currentUser === gameState.firstUser!.id
-                                ? gameState.firstUser
-                                : gameState.secondUser;
-                        addMana(
-                            currentUserInstance!,
-                            canvas!,
-                            gameState.currentUser === gameState.firstUser!.id
-                        );
-                        ArrowHandler(
-                            canvas!,
-                            gameState.currentUser === gameState.firstUser!.id
-                                ? "top"
-                                : "bottom"
-                        );
-
-                        break;
-
-                    case "CardDeck":
-                        const currUserInstance =
-                            gameState.currentUser === gameState.firstUser!.id
-                                ? gameState.firstUser
-                                : gameState.secondUser;
-
-                        if (element.cost! > currUserInstance!.mana) {
-                            return;
-                        }
-                        if (
-                            element.isUsed ||
-                            gameState.currentUser != element.user
-                        ) {
-                            return;
-                        }
-
-                        element.isUsed = true;
-                        setGameElements((oldArray) => [...oldArray, element]);
-                        let position;
-                        let newGameIsntance = { ...gameState };
-                        if (gameState.currentUser === gameState.firstUser!.id) {
-                            position = "bottom";
-                        } else {
-                            position = "top";
-                        }
-
-                        const currCardIncance = currUserInstance!.deck.find(
-                            (card) => card.id === element.id
-                        );
-
-                        if (
-                            element.user === gameState.currentUser &&
-                            currUserInstance!.mana >= currCardIncance!.cost
-                        ) {
-                            const context = canvas!.getContext("2d");
-                            context!.fillStyle = "rgba(255, 255, 255, 0.5)";
-                            context!.fillRect(
-                                element.left,
-                                element.top,
-                                element.width,
-                                element.height
-                            );
-
-                            currUserInstance!.mana =
-                                currUserInstance!.mana - currCardIncance!.cost;
-                            currUserInstance!.fightDeck!.push(currCardIncance!);
-                            useMana(
-                                currUserInstance!,
-                                canvas!,
-                                gameState.currentUser ===
-                                    gameState.firstUser!.id
-                            );
-                            const fightCard = await addCardFight(
-                                canvas!,
-                                currUserInstance!,
-                                position,
-                                currCardIncance!
-                            );
-
-                            if (position === "top") {
-                                newGameIsntance = {
-                                    ...newGameIsntance,
-                                    secondUser: currUserInstance,
-                                };
-                                setGameState(newGameIsntance);
-                            } else {
-                                newGameIsntance = {
-                                    ...newGameIsntance,
-                                    firstUser: currUserInstance,
-                                };
-                                setGameState(newGameIsntance);
-                            }
-
-                            console.log(gameState);
-
-                            setGameElements((oldArray) => [
-                                ...oldArray,
-                                {
-                                    id: fightCard.id,
-                                    card: currCardIncance,
-                                    name: `CardFightDeck`,
-                                    user: currUserInstance!.id,
-                                    width: fightCard.cardWidth,
-                                    height: fightCard.cardHeight,
-                                    top: fightCard.top,
-                                    left: fightCard.left,
-                                    isUsed: false,
-                                },
-                            ]);
-                        }
-
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        });
-    };
 
     const addCardToUser = async (
         canvas: HTMLCanvasElement,
@@ -513,7 +235,6 @@ export const Board = (): JSX.Element => {
         const isAllMinionsDead = defenderUser?.fightDeck!.filter(
             (card) => !card.isLeave
         );
-        console.log("isAllMinionsDead", isAllMinionsDead);
         if (cardsToFight[1].fightCard.type === "user") {
             if (isAllMinionsDead.length != defenderUser?.fightDeck!.length) {
                 return;
@@ -529,13 +250,7 @@ export const Board = (): JSX.Element => {
                         ? false
                         : true
                 );
-                // setUserDead(
-                // 	defenderUser,
-                // 	canvas!,
-                // 	cardsToFight[0].userHolder === gameState.firstUser!.id
-                // 			? false
-                // 			: true
-                // )
+               
                 setEndGameStatus({ status: true, userData: attackerUser });
             } else {
                 defenderUser.health =
@@ -549,8 +264,6 @@ export const Board = (): JSX.Element => {
                 );
             }
             setCardsToFight([]);
-            // setSwordData({ left: 10, top: 10, isActive: false });
-
             return;
         }
 
@@ -611,14 +324,11 @@ export const Board = (): JSX.Element => {
             const canvas = canvasRef.current;
             const context = canvas!.getContext("2d");
 
-            // if (typeof localStorage.getItem(gameId) === null) {
             await addCardToFirstUser(canvas!, "bottom");
             await addCardToFirstUser(canvas!, "bottom");
             await addCardToSecondUser(canvas!, "top");
             await addCardToSecondUser(canvas!, "top");
             ArrowHandler(canvas!, "bottom");
-
-            // }
 
             const userFirstClickElem = await userPics(firstUser, canvas!, true);
             const userSecondClickElem = await userPics(
@@ -650,9 +360,6 @@ export const Board = (): JSX.Element => {
                 },
             ]);
         })();
-    }, []);
-
-    useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas!.getContext("2d");
         const contextTopDeck = canvas!.getContext("2d");
@@ -681,8 +388,6 @@ export const Board = (): JSX.Element => {
                 endTurnButton.naturalHeight
             );
 
-            console.log(endTurnButton.naturalWidth);
-            console.log(endTurnButton.naturalHeight);
             setGameElements((oldArray) => [
                 ...oldArray,
                 {
@@ -763,12 +468,14 @@ export const Board = (): JSX.Element => {
         context!.fillRect(0, 0, context!.canvas.width, context!.canvas.width);
         context?.closePath();
     }, []);
+
+
     return (
         <div className="game">
             <Sword {...swordData} />
 
             <canvas
-                onClick={onClickHandler}
+                onClick={(event)=>onClickHandler({event, canvasRef, gameElements, eventLog, gameState, setEventLog, cardsToFight, setCardsToFight, setGameState, setGameElements, setStatusElements, swordData,setSwordData, addCardToUser})}
                 height="720"
                 width="1280"
                 ref={canvasRef}
