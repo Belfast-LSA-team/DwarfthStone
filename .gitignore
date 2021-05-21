@@ -4,5 +4,9 @@ node_modules
 /postgresdata
 dev.env
 .env
-
+/build
+build
+public
+/public
 dev.ts
+yarn.lock

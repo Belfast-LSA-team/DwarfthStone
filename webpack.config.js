@@ -57,7 +57,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./client/public/index.html",
+            template: "./client/index.html",
         }),
         new WorkboxPlugin.GenerateSW({
             clientsClaim: true,

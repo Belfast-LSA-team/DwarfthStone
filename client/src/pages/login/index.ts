@@ -1,1 +1,6 @@
-export { Login as default } from "./Login";
+import { Login } from "./Login";
+
+export default {
+  component: Login
+}
+

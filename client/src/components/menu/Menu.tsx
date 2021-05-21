@@ -27,7 +27,7 @@ export const Menu = ({ color }: MenuProps): JSX.Element => {
                     <Link to="/">{menuForum}</Link>
                 </li>
                 <li>
-                    <Link to="/contact">{menuContact}</Link>
+                    <Link to="/contact-us">{menuContact}</Link>
                 </li>
             </ul>
         </nav>

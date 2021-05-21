@@ -113,7 +113,7 @@ export const ContactUs = (): JSX.Element => {
                                     </Button>
                                 </form>
                             )}
-                        ></Form>
+                        />
                     )}
                 </div>
                 <div className="contact-right">
