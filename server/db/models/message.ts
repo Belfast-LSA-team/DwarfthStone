@@ -1,6 +1,6 @@
-const { DataTypes } = require("sequelize");
+import DataTypes from "sequelize";
 
-module.exports = {
+export const Message = {
     author_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

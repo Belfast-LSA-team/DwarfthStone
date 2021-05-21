@@ -1,6 +1,6 @@
-const { DataTypes } = require("sequelize");
+import DataTypes from "sequelize";
 
-module.exports = {
+export const Thread = {
     title: {
         type: DataTypes.STRING,
         allowNull: false,
