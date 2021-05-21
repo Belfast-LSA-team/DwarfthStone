@@ -1,1 +1,7 @@
-export { ScoreDashboardPage as default } from "./ScoreDashboard";
+import { ScoreDashboardPage } from "./ScoreDashboard";
+
+
+export default {
+  component: ScoreDashboardPage
+}
+

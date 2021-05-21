@@ -1,9 +1,11 @@
 /node_modules
 node_modules
 /dist
-
-/dist
-/public
+/build
+build
 public
+/public
+dev.ts
+yarn.lock
 
 dev.ts

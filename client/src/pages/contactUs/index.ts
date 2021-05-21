@@ -1,1 +1,6 @@
-export { ContactUs as default } from "./ContactUs";
+import { ContactUs } from "./ContactUs";
+
+export default {
+  component: ContactUs
+}
+

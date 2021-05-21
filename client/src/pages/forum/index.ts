@@ -1,1 +1,7 @@
-export { Forum as default } from "./Forum";
+import { Forum } from "./Forum";
+
+
+export default {
+  component: Forum
+}
+

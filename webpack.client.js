@@ -1,39 +1,33 @@
 const path = require("path");
+const merge = require("webpack-merge");
+const baseConfig = require("./webpack.base.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
-module.exports = {
-    mode: "development",
+const config = {
+    //Tell webpack the root file of our server application
     entry: "./client/src/index.tsx",
+
+    //Tell webpack where to put the output file that is generated
+
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.join(__dirname, "public"),
         publicPath: "/",
         filename: "bundle.js",
     },
+    // output: {
+    //     filename: "bundle.js",
+    //     path: path.resolve(__dirname, "public"),
+    // },
     resolve: {
-        alias: {
-            App: path.join("client", "app"),
-            Entities: path.join("client", "entities"),
-            Src: path.join("client", "src"),
-        },
         extensions: [".tsx", ".ts", ".js", ".css", ".scss", ".html"],
     },
-    devServer: {
-        contentBase: path.join(__dirname, "public"),
-        historyApiFallback: true,
-        compress: true,
-        port: 3010,
-        open: true,
-    },
+    //tell webpack to run babel on every file it run through
+
     module: {
         rules: [
-            {
-                test: /\.(ts|js)x?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                },
-            },
             {
                 test: /\.(png|svg|jpg|jpeg|gif|ico|ogg|mp3|wav)$/,
                 exclude: /node_modules/,
@@ -49,10 +43,8 @@ module.exports = {
             },
         ],
     },
+
     plugins: [
-        new HtmlWebpackPlugin({
-            template: "./client/index.html",
-        }),
         new WorkboxPlugin.GenerateSW({
             clientsClaim: true,
             skipWaiting: true,
@@ -61,3 +53,5 @@ module.exports = {
         }),
     ],
 };
+
+module.exports = merge(baseConfig, config);

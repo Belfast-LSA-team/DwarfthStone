@@ -1,3 +1,6 @@
-export { Game as default } from "./Game";
+import { Game } from "./Game";
 
 
+export default {
+  component: Game
+}

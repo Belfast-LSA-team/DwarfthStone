@@ -26,6 +26,8 @@ export const titleLabel = 'Заголовок';
 export const messageLabel = 'Сообщение';
 export const contactUsTitle = 'Написать нам';
 export const thankYouText = 'Спасибо ваще сообщение принято! Мы отреагируем в ближайшее время';
+
+
 export const loginError =
   "Логин может содержать буквы и цифры и быть от 2 до 12 символов";
 export const emailError = "Введите валидный email";
