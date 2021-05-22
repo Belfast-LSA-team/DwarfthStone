@@ -1,7 +1,5 @@
-import { Forum } from "./Forum";
-
+import { default as Forum } from "./Forum";
 
 export default {
-  component: Forum
-}
-
+    component: Forum,
+};

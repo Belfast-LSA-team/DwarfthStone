@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import classnames from "classnames";
 
-import "./avatar.css";
+import "./Avatar.css";
 
 type AvatarProps = {
     className?: string;

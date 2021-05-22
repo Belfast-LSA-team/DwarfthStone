@@ -14,59 +14,55 @@ import Profile from "./pages/profile/Profile";
 import Page404 from "./pages/404";
 import Game from "./pages/game";
 
-
 export const Routes = [
-  {
-    ...App,
-    routes: [
-      {
-        ...Homepage,
-        path: '/',
-        exact: true,
-      },
-      {
-        ...Game,
-        path: '/game/',
-        exact: true,
-      },
-      {
-        ...ThreadPage,
-        path: '/forum/thread/:id',
-      },
-      {
-        ...ScoreDashboardPage,
-        path: '/score-dashboard',
-      },
-      {
-        ...Profile,
-        path: '/profile',
-      },
-      {
-        ...Start,
-        path: '/start',
-      },
-      {
-        ...Login,
-        path: '/login',
-      },
-      {
-        ...Register,
-        path: '/register',
-      },
-      {
-        ...Forum,
-        path: '/forum',
-      },
-      {
-        ...ContactUs,
-        path: '/contact-us',
-      },
-      {
-        ...Page404,
-      },
-
-    ],
-  },
+    {
+        ...App,
+        routes: [
+            {
+                ...Homepage,
+                path: "/",
+                exact: true,
+            },
+            {
+                ...Game,
+                path: "/game/",
+                exact: true,
+            },
+            {
+                ...ThreadPage,
+                path: "/forum/thread/:id",
+            },
+            {
+                ...ScoreDashboardPage,
+                path: "/score-dashboard",
+            },
+            {
+                ...Profile,
+                path: "/profile",
+            },
+            {
+                ...Start,
+                path: "/start",
+            },
+            {
+                ...Login,
+                path: "/login",
+            },
+            {
+                ...Register,
+                path: "/register",
+            },
+            {
+                ...Forum,
+                path: "/forum",
+            },
+            {
+                ...ContactUs,
+                path: "/contact-us",
+            },
+            {
+                ...Page404,
+            },
+        ],
+    },
 ];
-
-
