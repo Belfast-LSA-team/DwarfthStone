@@ -10,12 +10,13 @@ const axiosInstanse = axios.create({
     withCredentials: true,
 });
 
-type ApiGetMethod = "auth/user" | "db/threads";
+type ApiGetMethod = "auth/user" | "db/threads" | string;
 type ApiPostMethod =
     | "auth/signin"
     | "auth/signup"
     | "auth/logout"
-    | "db/threads";
+    | "db/threads"
+    | "db/threads/message";
 type Param = string | string[] | number | number[];
 
 export type ErrorType = AxiosError;

@@ -26,7 +26,10 @@ export const Forum = ({ threads, fetchThreads, createThread }: any) => {
         if (!data.title || !data.username || !data.message) {
             return { [FORM_ERROR]: "Заполните все поля." };
         }
-        createThread(data);
+
+        createThread(data).then(() => {
+            fetchThreads();
+        });
     }, []);
 
     let threadList;

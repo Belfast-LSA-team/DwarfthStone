@@ -1,6 +1,5 @@
-import { ThreadPage } from "./ThreadPage";
+import { default as ThreadPage } from "./ThreadPage";
 
 export default {
-  component: ThreadPage
-}
-
+    component: ThreadPage,
+};
