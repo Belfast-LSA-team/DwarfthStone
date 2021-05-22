@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
-
+import '../../assets/css/toastify.css';
 import leftDecor from "../../assets/images/game/left-decor.png";
 import rightDecor from "../../assets/images/game/right-decor.png";
 import greenBg from "../../assets/images/game/green-bg.png";
