@@ -13,6 +13,6 @@ export function withAuth<T>(Component: React.ComponentType<T>) {
 
         dispatch(fetchUserInfoThunk());
 
-        return <Component {...props} />;
+        return <Component isAuth={isAuth} {...props} />;
     };
 }

@@ -6,18 +6,20 @@ import "./leftsideButton.css";
 type LeftsideButtonProps = {
     className?: string;
     dark?: boolean;
+    onClick: () => void;
 };
 
 export const LeftsideButton = ({
     className,
     dark = false,
+    onClick,
 }: LeftsideButtonProps) => {
     const classNames = classnames("leftside-button", className, {
         leftsideButton_dark: dark,
     });
 
     return (
-        <button className={classNames}>
+        <button className={classNames} onClick={onClick}>
             <svg
                 width="31"
                 height="35"

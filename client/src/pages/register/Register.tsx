@@ -107,7 +107,9 @@ export const Register = ({ fetchSignupThunk }: RegisterProps) => {
 
     const onFormSubmit = (registerData: ProfileFormData) => {
         fetchSignupThunk(registerData).then(() => {
-            console.log("resistered");
+            console.log("register");
+
+            history.push("/start");
         });
     };
 

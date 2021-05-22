@@ -10,6 +10,7 @@ export const menuMain = "Главная";
 export const menuAbout = "О нас";
 export const menuForum = "Форум";
 export const menuContact = "Связаться с нами";
+export const menuStart = "Меню";
 export const menuLogin = "Логин";
 export const menuRegister = "Регистрация";
 

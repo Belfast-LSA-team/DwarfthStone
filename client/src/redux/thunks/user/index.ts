@@ -118,15 +118,7 @@ export const fetchChangePasswordThunk: FetchChangePassword = (
 ) => (dispatch) => {
     dispatch(fetchChangePassword());
 
-    console.log("change pass");
-
     return resolveChangePassword(changePasswordData)
-        .then((res) => {
-            dispatch(fetchFulfilledChangePassword(res));
-            console.log(res);
-        })
-        .catch((err) => {
-            dispatch(fetchFailedChangePassword(err));
-            console.log(err);
-        });
+        .then((res) => dispatch(fetchFulfilledChangePassword(res)))
+        .catch((err) => dispatch(fetchFailedChangePassword(err)));
 };

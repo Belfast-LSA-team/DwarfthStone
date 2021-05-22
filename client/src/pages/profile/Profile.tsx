@@ -1,6 +1,6 @@
 import React, { useCallback, Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import type { ConnectedThunk } from "../../redux/thunks";
 
 import type { State } from "../../redux/reducers";
@@ -29,6 +29,7 @@ import Modal from "../../components/modal";
 import Title from "../../components/title";
 import InputField from "../../components/inputField";
 import LeftSideButton from "../../components/leftsideButton";
+import withAuth from "../../components/withAuth";
 import { Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 import {
@@ -95,6 +96,7 @@ const Profile = ({
     fetchChangeAvatarThunk,
     fetchChangePasswordThunk,
 }: ProfileProps) => {
+    const history = useHistory();
     const [changeAvatarOpen, setChangeAvatarOpen] = useState(false);
     const [changePassOpen, setChangePassOpen] = useState(false);
     const [profileFields, setProfileFields] = useState<ProfileFileds>([]);
@@ -149,7 +151,7 @@ const Profile = ({
         formData.append("avatar", file!);
 
         /* Здесь отправляем форму нового аватара */
-        fetchChangeAvatarThunk(formData);
+        fetchChangeAvatarThunk(formData).then(() => setChangeAvatarOpen(false));
     }, []);
 
     const onChangePassSubmit = useCallback((data: ChangePasswordFormData) => {
@@ -158,7 +160,7 @@ const Profile = ({
         }
 
         /* Здесь отправляем форму нового пароля */
-        fetchChangePasswordThunk(data);
+        fetchChangePasswordThunk(data).then(() => setChangePassOpen(false));
     }, []);
 
     const onFormSubmit = useCallback((data: ProfileFormData) => {
@@ -194,11 +196,15 @@ const Profile = ({
         fetchChangeProfileThunk(sendData);
     }, []);
 
-    const logoutHandler = () => fetchLogoutThunk();
+    const logoutHandler = () =>
+        fetchLogoutThunk().then(() => history.push("/"));
 
     return (
         <Fragment>
-            <LeftSideButton className="leftside-button_fixed" />
+            <LeftSideButton
+                onClick={() => history.push("/start")}
+                className="leftside-button_fixed"
+            />
             <GameLayout>
                 <div className="profile">
                     <Avatar
@@ -247,7 +253,7 @@ const Profile = ({
                                         <Button
                                             type="submit"
                                             style="primary"
-                                            clickHandler={() => {}}
+                                            clickHandler={() => history.go(0)}
                                         >
                                             Сохранить изменения
                                         </Button>
@@ -354,18 +360,6 @@ const mapStateToProps = (state: State) => ({
     userInfo: getUserInfo(state),
 });
 
-// export default connect(mapStateToProps, {
-//     fetchUserInfoThunk,
-//     fetchLogoutThunk,
-//     fetchChangeProfileThunk,
-//     fetchChangeAvatarThunk,
-//     fetchChangePasswordThunk,
-// })(Profile);
-
-// function loadData(store) {
-//     return store.dispatch(fetchUserInfo);
-// }
-// export default connect(mapStateToProps, { fetchUserInfo })(Profile);
 export default {
     component: connect(mapStateToProps, {
         fetchUserInfoThunk,

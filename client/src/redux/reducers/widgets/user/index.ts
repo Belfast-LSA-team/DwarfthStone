@@ -54,7 +54,7 @@ export type User = UserInfo & {
 
 const initialState = {
     loading: false,
-    isAuth: null,
+    isAuth: false,
     id: 0,
     first_name: "",
     second_name: "",
@@ -96,6 +96,7 @@ export const user = (state: User = initialState, action: Actions) => {
         }
         case FETCH_SIGNIN_FULFILLED: {
             state.loading = false;
+            state.isAuth = true;
             return state;
         }
         case FETCH_SIGNIN_FAILED: {
@@ -108,6 +109,7 @@ export const user = (state: User = initialState, action: Actions) => {
         }
         case FETCH_SIGNUP_FULFILLED: {
             state.loading = false;
+            state.isAuth = true;
             return state;
         }
         case FETCH_SIGNUP_FAILED: {

@@ -55,7 +55,11 @@ export const Login = ({ fetchSigninThunk }: LoginProps) => {
 
     const onFormSubmit = (signinData: LoginFormData) => {
         /* Здесь отправляем форму */
-        fetchSigninThunk(signinData);
+        fetchSigninThunk(signinData).then(() => {
+            console.log("login");
+
+            history.push("/start");
+        });
     };
 
     return (
