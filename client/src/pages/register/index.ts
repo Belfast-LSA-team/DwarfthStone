@@ -1,1 +1,5 @@
-export { default as default } from "./Register";
+import { default as Register } from "./Register";
+
+export default {
+    component: Register,
+};

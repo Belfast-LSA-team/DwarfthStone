@@ -1,21 +1,18 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { GameRouter } from "./router/GameRouter";
-import { createApp } from "./redux/store";
+import { renderRoutes } from "react-router-config";
 
 import "./common.css";
 import "./assets/css/fonts.css";
+//@ts-ignore
 
-const initialState = (window as any).__INITIAL_STATE__ || {};
-
-const { store } = createApp(initialState);
-
-const App = () => {
+const App = ({ route }) => {
     return (
-        <Provider store={store}>
-            <GameRouter />
-        </Provider>
+        <div>
+            <div>{renderRoutes(route.routes)}</div>
+        </div>
     );
 };
 
-export default App;
+export default {
+    component: App,
+};

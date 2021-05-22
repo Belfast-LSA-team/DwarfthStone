@@ -1,1 +1,6 @@
-export { ThreadPage as default } from "./ThreadPage";
+import { ThreadPage } from "./ThreadPage";
+
+export default {
+  component: ThreadPage
+}
+

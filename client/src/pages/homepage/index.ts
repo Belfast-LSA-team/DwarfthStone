@@ -1,3 +1,6 @@
-export { Homepage as default } from "./Homepage";
+import { Homepage } from "./Homepage";
 
+export default {
+  component: Homepage
+}
 

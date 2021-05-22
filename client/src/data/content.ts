@@ -13,6 +13,9 @@ export const menuContact = "Связаться с нами";
 export const menuLogin = "Логин";
 export const menuRegister = "Регистрация";
 
+export const startNew = "Начать заново";
+export const backToProfile = "В профиль";
+
 export const darkButtonHomeLabel = "Связаться с нами";
 export const lightButtonHomeLabel = "На кофе";
 

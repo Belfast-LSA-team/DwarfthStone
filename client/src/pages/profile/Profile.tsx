@@ -354,10 +354,25 @@ const mapStateToProps = (state: State) => ({
     userInfo: getUserInfo(state),
 });
 
-export default connect(mapStateToProps, {
-    fetchUserInfoThunk,
-    fetchLogoutThunk,
-    fetchChangeProfileThunk,
-    fetchChangeAvatarThunk,
-    fetchChangePasswordThunk,
-})(Profile);
+// export default connect(mapStateToProps, {
+//     fetchUserInfoThunk,
+//     fetchLogoutThunk,
+//     fetchChangeProfileThunk,
+//     fetchChangeAvatarThunk,
+//     fetchChangePasswordThunk,
+// })(Profile);
+
+// function loadData(store) {
+//     return store.dispatch(fetchUserInfo);
+// }
+// export default connect(mapStateToProps, { fetchUserInfo })(Profile);
+export default {
+    component: connect(mapStateToProps, {
+        fetchUserInfoThunk,
+        fetchLogoutThunk,
+        fetchChangeProfileThunk,
+        fetchChangeAvatarThunk,
+        fetchChangePasswordThunk,
+    })(Profile),
+    loadData: ({ dispatch }) => dispatch(fetchUserInfoThunk()),
+};

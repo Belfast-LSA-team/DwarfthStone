@@ -1,14 +1,16 @@
 import type { AxiosError, AxiosRequestConfig } from "axios";
 import axios from "axios";
 
+const localHost = "http://localhost:3010/yand-api/api/v2";
+const yandxHost = "https://ya-praktikum.tech/api/v2";
+
 const defaultAxiosConfig = {
+    //TODO: and dev - prod url
     headers: {
         "Content-Type": "application/json",
     },
     withCredentials: true,
 };
-
-const host = "https://ya-praktikum.tech/api/v2";
 
 type ApiGetMethod = "auth/user";
 type ApiPostMethod = "auth/signin" | "auth/signup" | "auth/logout";
@@ -22,7 +24,7 @@ export function get<R>(
     config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
     return axios
-        .get<R>(`${host}/${apiMethod}`, config)
+        .get<R>(`${localHost}/${apiMethod}`, config)
         .then(({ data }) => data);
 }
 
@@ -32,7 +34,7 @@ export function post<R>(
     config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
     return axios
-        .post<R>(`${host}/${apiMethod}`, data, config)
+        .post<R>(`${yandxHost}/${apiMethod}`, data, config)
         .then(({ data }) => data)
         .catch((err) => err);
 }
@@ -43,7 +45,7 @@ export function put<R>(
     config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
     return axios
-        .put<R>(`${host}/${apiMethod}`, data, config)
+        .put<R>(`${yandxHost}/${apiMethod}`, data, config)
         .then(({ data }) => data)
         .catch((err) => err);
 }
