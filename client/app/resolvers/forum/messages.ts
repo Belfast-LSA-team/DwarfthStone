@@ -6,8 +6,8 @@ type ThreadMessagesServerResult = {
 };
 
 export const resolveMessages = (id: string) =>
-    getLocal<ThreadMessagesServerResult>(`db/threads/${id}`).then((thread) => {
-        return "";
+    getLocal<ThreadMessagesServerResult>(`db/thread/${id}`).then((thread) => {
+        return thread;
     });
 
 export const resolveCreateMessage = (data: any) => {

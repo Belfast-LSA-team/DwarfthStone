@@ -12,50 +12,68 @@ import Spinner from "../../components/spinner";
 import Title from "../../components/title";
 import { State } from "../../redux/reducers";
 import "./threadPage.css";
-import { Thread } from "../../../../server/db/models/thread";
-import { fetchThreads } from "../../redux/thunks/forum/threads";
 import { getMessages } from "../../redux/selectors/widgets/forum";
+import { useParams } from "react-router-dom";
+import InputField from "../../components/inputField";
 
-export const ThreadPage = ({ thread, fetchThreadById, createMessage }: any) => {
-    const onReplySubmit = useCallback(() => {
-        console.log("Ответили в тред");
+type replyFormData = {
+    username: string;
+    message: string;
+    threadId: number;
+};
+
+export const ThreadPage = ({ messages, fetchMessages, createMessage }: any) => {
+    const { id } = useParams();
+
+    const onReplySubmit = useCallback((data: replyFormData) => {
+        data.threadId = Number(id);
+
+        createMessage(data).then(() => {
+            fetchMessages(id);
+        });
     }, []);
 
     let threadComponent;
 
     useEffect(() => {
-        fetchThreads();
+        fetchMessages(id);
     }, []);
 
-    if (!thread) {
+    if (!messages.messages.thread) {
         threadComponent = <Spinner color="light" />;
     } else {
         threadComponent = (
             <div className="thread">
-                <Title
-                    level={4}
-                    className="thread__title"
-                    text={thread.title}
-                />
+                {
+                    <Title
+                        level={4}
+                        className="thread__title"
+                        text={messages.messages.thread[0].title}
+                    />
+                }
                 <div className="thread__posts">
-                    {/*thread.messages.map(() => {
-                        return null;
-                        return (
-                            <div key={post.id} className="post">
-                                <div className="post__author">
-                                    <Avatar
-                                        src={post.author.avatar}
-                                        size="small"
-                                    />
-                                    <span className="post__author-name">
-                                        {post.author.name}
-                                    </span>
+                    {
+                        // явно напортачил, но сроки горят
+                        messages.messages.messages.map((msg: any) => {
+                            return (
+                                <div key={msg.id} className="post">
+                                    <div className="post__author">
+                                        <Avatar
+                                            src={msg.author_avatar}
+                                            size="small"
+                                        />
+                                        <span className="post__author-name">
+                                            {msg.author_name}
+                                        </span>
+                                    </div>
+                                    <div className="post__text">
+                                        {msg.content}
+                                    </div>
+                                    <hr className="post__hr" />
                                 </div>
-                                <div className="post__text">{post.text}</div>
-                                <hr className="post__hr" />
-                            </div>
-                        );
-                    })*/}
+                            );
+                        })
+                    }
                 </div>
             </div>
         );
@@ -78,16 +96,20 @@ export const ThreadPage = ({ thread, fetchThreadById, createMessage }: any) => {
                             onSubmit={onReplySubmit}
                             render={({ handleSubmit }) => (
                                 <form onSubmit={handleSubmit}>
-                                    <Field name="message">
-                                        {({ textarea }) => (
-                                            <textarea
-                                                {...textarea}
-                                                className="forum__message-area"
-                                                placeholder="Сообщение"
-                                                rows={3}
-                                            ></textarea>
-                                        )}
-                                    </Field>
+                                    <InputField
+                                        className="forum__input_margin"
+                                        type="text"
+                                        name="username"
+                                        placeholder="Имя"
+                                        stretch={true}
+                                    />
+                                    <Field
+                                        className="forum__message-area"
+                                        name="message"
+                                        component="textarea"
+                                        placeholder="Сообщение"
+                                        rows={3}
+                                    />
                                     <Button
                                         className=""
                                         type="submit"
@@ -108,7 +130,7 @@ export const ThreadPage = ({ thread, fetchThreadById, createMessage }: any) => {
 };
 
 const mapStateToProps = (state: State) => ({
-    thread: getMessages(state),
+    messages: getMessages(state),
 });
 
 export default connect(mapStateToProps, { fetchMessages, createMessage })(

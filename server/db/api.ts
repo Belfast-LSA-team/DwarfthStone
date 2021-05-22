@@ -56,4 +56,31 @@ apiRouter.get("/thread/:threadId", async (req, res) => {
     res.json(data);
 });
 
+apiRouter.post("/threads/message", async (req, res) => {
+    const date = new Date();
+
+    const new_message = await messageModel.create({
+        author_id: 1,
+        author_name: req.body.username,
+        content: req.body.message,
+        created: date,
+        thread_id: req.body.threadId,
+    });
+
+    const newCount = await messageModel.count({
+        where: { thread_id: req.body.threadId },
+    });
+
+    await threadModel.update(
+        { replies_count: newCount },
+        {
+            where: {
+                id: req.body.threadId,
+            },
+        }
+    );
+
+    res.json(new_message.toJSON());
+});
+
 export default apiRouter;
