@@ -53,7 +53,9 @@ app.get('*', (req, res) => {
       return res.redirect(301, context.url);
     }
     if (context.notFound) {
-      res.status(404);
+      // res.sendStatus(404);
+      res.status(404).send(content);
+
     } else {
       res.send(content);
     }

@@ -5,10 +5,12 @@ import "./page404.css";
 
 type Page404Props = {
     message: string;
+    staticContext:{notFound:boolean} |{}
 };
+export const Page404 = ({ message, staticContext = {} }: Page404Props): JSX.Element => {
+  staticContext.notFound = true;
 
-export const Page404 = ({ message }: Page404Props): JSX.Element => (
-    <div className="error">
+    return(<div className="error">
         <div className="error-content">
             <div className="error-content__title">
                 <svg
@@ -31,5 +33,4 @@ export const Page404 = ({ message }: Page404Props): JSX.Element => (
                 <Link to="/">Вернуться на главную</Link>
             </div>
         </div>
-    </div>
-);
+    </div>)};
