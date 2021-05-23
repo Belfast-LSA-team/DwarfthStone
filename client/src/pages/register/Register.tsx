@@ -11,6 +11,7 @@ import BoxWrapper from "../../components/boxwrapper";
 import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
+import LeftsideButton from "../../components/leftsideButton";
 import {
     firstNameError,
     secondNameError,
@@ -114,7 +115,8 @@ export const Register = ({ fetchSignupThunk }: RegisterProps) => {
     };
 
     return (
-        <Fragment>
+        <div className="info-page">
+            <LeftsideButton onClick={() => history.push("/")} />
             <GameLayout>
                 <BoxWrapper className="page">
                     <h1 className="page__title">Регистрация</h1>
@@ -150,7 +152,7 @@ export const Register = ({ fetchSignupThunk }: RegisterProps) => {
                     </Button>
                 </BoxWrapper>
             </GameLayout>
-        </Fragment>
+        </div>
     );
 };
 

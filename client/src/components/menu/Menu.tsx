@@ -24,7 +24,7 @@ export const Menu = ({ color }: MenuProps): JSX.Element => {
                     <Link to="/">{menuAbout}</Link>
                 </li>
                 <li>
-                    <Link to="/">{menuForum}</Link>
+                    <Link to="/forum">{menuForum}</Link>
                 </li>
                 <li>
                     <Link to="/contact-us">{menuContact}</Link>

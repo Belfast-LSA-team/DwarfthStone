@@ -12,6 +12,7 @@ import BoxWrapper from "../../components/boxwrapper";
 import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
+import LeftsideButton from "../../components/leftsideButton";
 
 import "../../css/page.css";
 
@@ -63,7 +64,8 @@ export const Login = ({ fetchSigninThunk }: LoginProps) => {
     };
 
     return (
-        <Fragment>
+        <div className="info-page">
+            <LeftsideButton onClick={() => history.push("/")} />
             <GameLayout>
                 <BoxWrapper className="auth">
                     <h1 className="page__title">Вход</h1>
@@ -99,7 +101,7 @@ export const Login = ({ fetchSigninThunk }: LoginProps) => {
                     </Button>
                 </BoxWrapper>
             </GameLayout>
-        </Fragment>
+        </div>
     );
 };
 

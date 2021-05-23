@@ -22,15 +22,6 @@ export const Start = () => {
                         type="submit"
                         stretch={true}
                         style="primary"
-                        clickHandler={() => {}}
-                    >
-                        Собрать колоду
-                    </Button>
-                    <Button
-                        className="page__btn"
-                        type="submit"
-                        stretch={true}
-                        style="primary"
                         clickHandler={() => history.push("/game")}
                     >
                         Начать игру
