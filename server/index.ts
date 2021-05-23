@@ -11,12 +11,18 @@ import { renderer } from "./helpers/renderer";
 import { createStoreServer } from "./helpers/createStore";
 import { RequestOptions } from "http";
 const { createProxyMiddleware } = require("http-proxy-middleware");
+import bodyParser from "body-parser";
+
+import apiRouter from "./db/api";
+import db from "./db/connect";
 
 const app = express();
 app.use(express.static("public"));
 
+app.use(bodyParser.json());
+
 app.use(
-    "/yand-api",
+    "/api/yandex",
     proxy("http://ya-praktikum.tech/", {
         https: false,
         proxyReqOptDecorator(opts: RequestOptions) {
@@ -26,6 +32,8 @@ app.use(
         },
     })
 );
+
+app.use("/api/db", apiRouter);
 
 app.get("*", (req, res) => {
     const store = createStoreServer(req);
@@ -58,6 +66,9 @@ app.get("*", (req, res) => {
 
     Promise.all(promises).then(render).catch(render);
 });
+
+db.authenticate();
+db.sync(); // Передай {force: true} чтобы дропнуть все имеющиеся таблицы
 
 app.listen(3010, () => {
     console.log("Listening");

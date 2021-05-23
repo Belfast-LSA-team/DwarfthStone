@@ -46,7 +46,7 @@ export const GameRouter = (): JSX.Element => (
             <Route exact path="/forum">
                 <Forum />
             </Route>
-            <Route path="/forum/thread/:id">
+            <Route path="/thread">
                 <ThreadPage />
             </Route>
             <Route path="/profile">

@@ -1,4 +1,4 @@
-import { get, post, put } from "../..";
+import { get, post, put, paths } from "../..";
 import type { UserInfo } from "../../../entities/user";
 
 export type LoginFormData = {
@@ -37,24 +37,24 @@ type UserServerResult = {
 };
 
 export const resolveSignin = (signinData: LoginFormData) =>
-    post<string>("auth/signin", signinData);
+    post<string>(paths.signin, signinData);
 
 export const resolveSignup = (signupData: ProfileFormData) =>
-    post<string>("auth/signup", signupData);
+    post<string>(paths.signup, signupData);
 
-export const resolveLogout = () => post<string>("auth/logout");
+export const resolveLogout = () => post<string>(paths.logout);
 
-export const resolveUserInfo = () => get<UserInfo>("auth/user");
+export const resolveUserInfo = () => get<UserInfo>(paths.userInfo);
 
 export const resolveChangeProfile = (changeProfileData: ProfileFormData) =>
-    put<UserInfo>("user/profile", changeProfileData);
+    put<UserInfo>(paths.changeProfile, changeProfileData);
 
 export const resolveChangeAvatar = (newAvatar: ChangeAvatarFormData) =>
-    put<UserInfo>("user/profile/avatar", newAvatar, {
+    put<UserInfo>(paths.changeAvatar, newAvatar, {
         headers: null,
         withCredentials: true,
     });
 
 export const resolveChangePassword = (
     changePasswordData: ChangePasswordFormData
-) => put<string>("user/password", changePasswordData);
+) => put<string>(paths.changePassword, changePasswordData);
