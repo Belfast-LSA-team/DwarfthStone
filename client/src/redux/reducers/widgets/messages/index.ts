@@ -15,7 +15,7 @@ const initialState = {
     loading: false,
     messages: {
         messages: [],
-        thread: null,
+        thread: [],
     },
 };
 

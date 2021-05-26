@@ -15,14 +15,26 @@ import "./threadPage.css";
 import { getMessages } from "../../redux/selectors/widgets/forum";
 import { useParams } from "react-router-dom";
 import InputField from "../../components/inputField";
+import { Message } from "../../../entities/thread";
+import { MessagesState } from "../../redux/reducers/widgets/messages";
 
-type replyFormData = {
+export type replyFormData = {
     username: string;
     message: string;
     threadId: number;
 };
 
-export const ThreadPage = ({ messages, fetchMessages, createMessage }: any) => {
+type ThreadPageProps = {
+    messages: MessagesState;
+    fetchMessages: (id: number) => void;
+    createMessage: (data: replyFormData) => Promise<void>;
+};
+
+export const ThreadPage = ({
+    messages,
+    fetchMessages,
+    createMessage,
+}: ThreadPageProps) => {
     const { id } = useParams();
 
     const onReplySubmit = useCallback((data: replyFormData) => {
@@ -48,20 +60,17 @@ export const ThreadPage = ({ messages, fetchMessages, createMessage }: any) => {
                     <Title
                         level={4}
                         className="thread__title"
-                        text={messages.messages.thread[0].title}
+                        text={messages.messages.thread[0]!.title}
                     />
                 }
                 <div className="thread__posts">
                     {
                         // явно напортачил, но сроки горят
-                        messages.messages.messages.map((msg: any) => {
+                        messages.messages.messages.map((msg: Message) => {
                             return (
                                 <div key={msg.id} className="post">
                                     <div className="post__author">
-                                        <Avatar
-                                            src={msg.author_avatar}
-                                            size="small"
-                                        />
+                                        <Avatar src="" size="small" />
                                         <span className="post__author-name">
                                             {msg.author_name}
                                         </span>
