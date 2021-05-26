@@ -1,15 +1,15 @@
 import { getLocal, postLocal } from "../..";
+import { Thread, Message } from "../../../entities/thread";
+import { replyFormData } from "../../../src/pages/threadPage";
 
-type ThreadMessagesServerResult = {
-    thread: any;
-    messages: any;
+export type ThreadMessagesServerResult = {
+    thread: Thread;
+    messages: Message;
 };
 
 export const resolveMessages = (id: string) =>
-    getLocal<ThreadMessagesServerResult>(`db/thread/${id}`).then((thread) => {
-        return thread;
-    });
+    getLocal<ThreadMessagesServerResult>(`db/thread/${id}`);
 
-export const resolveCreateMessage = (data: any) => {
-    return postLocal("db/threads/message", data).then(() => {});
+export const resolveCreateMessage = (data: replyFormData) => {
+    return postLocal("db/threads/message", data);
 };

@@ -3,6 +3,7 @@ import {
     resolveMessages,
     resolveCreateMessage,
 } from "../../../../app/resolvers/forum/messages";
+import { replyFormData } from "../../../pages/threadPage";
 import {
     fetch,
     fetchFailed,
@@ -20,7 +21,7 @@ export const fetchMessages = (id: string) => (dispatch: Dispatch) => {
         .catch((err) => dispatch(fetchFailed(err)));
 };
 
-export const createMessage = (data: any) => (dispatch: Dispatch) => {
+export const createMessage = (data: replyFormData) => (dispatch: Dispatch) => {
     dispatch(create());
 
     return resolveCreateMessage(data)

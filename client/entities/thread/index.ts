@@ -7,6 +7,7 @@ export type Thread = {
 } | null;
 
 export type Message = {
+    id: number;
     author_id: number;
     author_name: string;
     content: string;
@@ -14,6 +15,6 @@ export type Message = {
 };
 
 export type Messages = {
-    thread: Thread;
+    thread: Thread[];
     messages: Message[];
 };
