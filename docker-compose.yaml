@@ -27,7 +27,7 @@ services:
       - postgres
     networks:
       - ds_network
-    command: ./wait-for.sh postgres:5432 -- sh -c "npm run start & npm run dev"
+    command: ./wait-for.sh postgres:5432 -- sh -c "npm run prod"
 networks:
   ds_network:
     driver: bridge 
