@@ -3,7 +3,7 @@ import axios from "axios";
 
 const axiosInstanse = axios.create({
     //TODO: and dev - prod url
-    baseURL: "http://localhost:3010/api",
+    baseURL: "/api",
     headers: {
         "Content-Type": "application/json",
     },

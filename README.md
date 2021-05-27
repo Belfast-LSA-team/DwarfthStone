@@ -5,6 +5,7 @@ POSTGRES_DB=*название БД*
 POSTGRES_USER=*юзер для входа в БД*
 POSTGRES_PASSWORD=*пароль для входа в БД*
 POSTGRES_PORT=5432
+POSTGRES_HOST=localhost
 ```
 ## Запуск конейнера
 ```

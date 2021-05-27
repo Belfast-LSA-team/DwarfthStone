@@ -51,7 +51,7 @@ export const ThreadPage = ({
         fetchMessages(id);
     }, []);
 
-    if (!messages.messages.thread) {
+    if (!messages.messages.thread.length) {
         threadComponent = <Spinner color="light" />;
     } else {
         threadComponent = (
