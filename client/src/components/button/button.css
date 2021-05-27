@@ -1,0 +1,32 @@
+.button {
+    height: 35px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+
+    &_primary {
+        background-color: var(--important-color);
+        color: var(--text-dark-color);
+    }
+    &_dark {
+        background-color: var(--secondary-color);
+        color: var(--text-light-color);
+    }
+    &_light {
+        background-color: transparent;
+        color: var(--text-light-color);
+        border: 1px solid var(--text-light-color);
+    }
+    &_secondary {
+        background-color: transparent;
+        color: var(--text-light-color);
+        border: 1px solid var(--important-color);
+    }
+
+    &_fullwidth {
+        width: 100%;
+    }
+}

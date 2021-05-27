@@ -1,4 +1,12 @@
 /node_modules
 node_modules
-
+/dist
+/postgresdata
+dev.env
+.env
+/build
+build
+public
+/public
 dev.ts
+yarn.lock

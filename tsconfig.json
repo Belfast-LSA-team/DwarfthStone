@@ -18,9 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": false,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true, 
   },
   "include": [
     "client", "server"
-, "tsconfig.json", "webpack.config.js", "postcss.config.js"  ]
+, "tsconfig.json", "webpack.config.js", "postcss.config.js",  ]
 }

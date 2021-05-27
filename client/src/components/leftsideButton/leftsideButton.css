@@ -1,0 +1,20 @@
+.leftside-button {
+    background-color: var(--important-color);
+    border: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    flex: 0 0 65px;
+
+    &_fixed {
+        position: fixed;
+        height: 100vh;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}

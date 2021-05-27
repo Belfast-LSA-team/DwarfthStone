@@ -1,0 +1,32 @@
+.generalError {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &_content {
+        background: #f9bfbf;
+        max-width: 600px;
+        width: 100%;
+        position: absolute;
+        top: 90vh;
+        margin: auto;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-content: baseline;
+        justify-content: space-between;
+        padding: 3px 20px;
+
+        &_close {
+            display: flex;
+            align-self: center;
+            cursor: pointer;
+        }
+
+        &_message {
+            p {
+                color: #f9f6f6;
+            }
+        }
+    }
+}
