@@ -1,4 +1,5 @@
 import { getLocal, postLocal } from "../..";
+import { CreateThreadData } from "../../../src/pages/forum";
 
 type ThreadsServerResult = {
     id: number;
@@ -21,6 +22,6 @@ export const resolveThreads = () =>
         });
     });
 
-export const resolveCreateThread = (data: any) => {
-    return postLocal("db/threads", data).then(() => {});
+export const resolveCreateThread = (data: CreateThreadData) => {
+    return postLocal("db/threads", data);
 };

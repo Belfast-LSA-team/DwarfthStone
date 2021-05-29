@@ -1,17 +1,15 @@
 import { getLocal, postLocal, paths } from "../..";
+import { Thread, Message } from "../../../entities/thread";
+import { replyFormData } from "../../../src/pages/threadPage";
 
-type ThreadMessagesServerResult = {
-    thread: any;
-    messages: any;
+export type ThreadMessagesServerResult = {
+    thread: Thread;
+    messages: Message;
 };
 
 export const resolveMessages = (id: string) =>
-    getLocal<ThreadMessagesServerResult>(`${paths.threads}/${id}`).then(
-        (thread) => {
-            return thread;
-        }
-    );
+    getLocal<ThreadMessagesServerResult>(`${paths.threads}/${id}`);
 
-export const resolveCreateMessage = (data: any) => {
-    return postLocal(paths.threadsMessages, data).then(() => {});
+export const resolveCreateMessage = (data: replyFormData) => {
+    return postLocal(paths.threadsMessages, data);
 };

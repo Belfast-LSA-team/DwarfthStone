@@ -15,15 +15,20 @@ import "./forum.css";
 import { State } from "../../redux/reducers";
 import { Thread } from "../../../entities/thread";
 
-type CreateThreadData = {
+export type CreateThreadData = {
     title: string;
     username: string;
     message: string;
 };
 
-export const Forum = ({ threads, fetchThreads, createThread }: any) => {
-    const history = useHistory();
+type ForumProps = {
+    threads: Thread[];
+    fetchThreads: () => void;
+    createThread: (data: CreateThreadData) => Promise<void>;
+};
 
+export const Forum = ({ threads, fetchThreads, createThread }: ForumProps) => {
+    const history = useHistory();
     const onNewThreadSubmit = useCallback((data: CreateThreadData) => {
         if (!data.title || !data.username || !data.message) {
             return { [FORM_ERROR]: "Заполните все поля." };
@@ -49,6 +54,10 @@ export const Forum = ({ threads, fetchThreads, createThread }: any) => {
             );
         } else {
             threadList = threads.map((thread: Thread) => {
+                if (thread === null) {
+                    return null;
+                }
+
                 return (
                     <Fragment key={thread.id}>
                         <li className="forum__thread">

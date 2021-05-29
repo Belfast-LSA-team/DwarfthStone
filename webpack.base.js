@@ -1,5 +1,5 @@
 module.exports = {
-    mode: "development",
+    mode: process.env.NODE_ENV === "production" ? "production" : "development",
     //tell webpack to run babel on every file it run through
     module: {
         rules: [

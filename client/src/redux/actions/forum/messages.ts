@@ -1,6 +1,7 @@
 import type { Thread } from "../../../../entities/thread";
 import type { ErrorType } from "../../../../app";
 import type { Action } from "..";
+import { ThreadMessagesServerResult } from "../../../../app/resolvers/forum/messages";
 
 export const FETCH_MESSAGES = "messages/FETCH";
 export const FETCH_MESSAGES_FULFILLED = "messages/FETCH_FULFILLED";
@@ -29,7 +30,7 @@ export const fetch = () =>
         type: FETCH_MESSAGES,
     } as FetchAction);
 
-export const fetchFulfilled = (payload: any) =>
+export const fetchFulfilled = (payload: ThreadMessagesServerResult) =>
     ({
         type: FETCH_MESSAGES_FULFILLED,
         payload,

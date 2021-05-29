@@ -3,6 +3,7 @@ import {
     resolveThreads,
     resolveCreateThread,
 } from "../../../../app/resolvers/forum/threads";
+import { CreateThreadData } from "../../../pages/forum";
 import {
     fetch,
     fetchFailed,
@@ -20,7 +21,9 @@ export const fetchThreads = () => (dispatch: Dispatch) => {
         .catch((err) => dispatch(fetchFailed(err)));
 };
 
-export const createThread = (data) => (dispatch: Dispatch) => {
+export const createThread = (data: CreateThreadData) => (
+    dispatch: Dispatch
+) => {
     dispatch(create());
 
     return resolveCreateThread(data)

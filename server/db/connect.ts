@@ -11,6 +11,7 @@ const {
     POSTGRES_USER,
     POSTGRES_PASSWORD,
     POSTGRES_PORT,
+    POSTGRES_HOST,
 } = process.env;
 
 if (
@@ -26,7 +27,7 @@ if (
 
 const sequelize = new Sequelize(POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, {
     port: Number(POSTGRES_PORT),
-    host: "localhost",
+    host: POSTGRES_HOST,
     dialect: "postgres",
 });
 
