@@ -16,10 +16,10 @@ const { store } = createApp(initialState);
 
 const AppWithAuth = widthAuth(({ isAuth }) => {
     if (isAuth) {
-        return <>{renderRoutes(RoutesWithAuth)}</>;
+        return renderRoutes(RoutesWithAuth);
     }
 
-    return <>{renderRoutes(RoutesWithoutAuth)}</>;
+    return renderRoutes(RoutesWithoutAuth);
 });
 
 ReactDOM.hydrate(

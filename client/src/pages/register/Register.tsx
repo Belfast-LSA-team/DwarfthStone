@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 
+import type { ConnectedThunk } from "../../redux/thunks";
 import type { ProfileFormData } from "../../../app/resolvers/user";
 import type { FormErrors } from "../../types/auth";
 
@@ -96,7 +97,7 @@ const validate = (data: ProfileFormData) => {
 };
 
 type RegisterProps = {
-    fetchSignupThunk: <R>(signinData: ProfileFormData) => Promise<R>;
+    fetchSignupThunk: ConnectedThunk<typeof fetchSignupThunk>;
 };
 
 export const Register = ({ fetchSignupThunk }: RegisterProps) => {
@@ -156,4 +157,4 @@ export const Register = ({ fetchSignupThunk }: RegisterProps) => {
     );
 };
 
-export default connect(() => ({}), { fetchSignupThunk })(Register);
+export default connect(null, { fetchSignupThunk })(Register);
