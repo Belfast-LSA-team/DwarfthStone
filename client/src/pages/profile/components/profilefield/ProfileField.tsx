@@ -46,12 +46,10 @@ export const ProfileField = ({ fieldKey, value, name }: ProfileFieldProps) => {
     });
 
     return (
-        <Fragment>
+        <div className="profile__field-container" onClick={onValueClick}>
             <div className="profile__field">
                 <span className="profile__field-key">{fieldKey}</span>
-                <span className={valueClassNames} onClick={onValueClick}>
-                    {currentValue}
-                </span>
+                <span className={valueClassNames}>{currentValue}</span>
                 <InputField
                     className={inputClassNames}
                     type="text"
@@ -63,6 +61,6 @@ export const ProfileField = ({ fieldKey, value, name }: ProfileFieldProps) => {
                 />
             </div>
             <hr className="profile__hr" />
-        </Fragment>
+        </div>
     );
 };

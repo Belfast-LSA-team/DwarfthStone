@@ -1,6 +1,6 @@
 import React, { useCallback, Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Form, Field } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 import { fetchThreads, createThread } from "../../redux/thunks/forum/threads";
@@ -28,6 +28,7 @@ type ForumProps = {
 };
 
 export const Forum = ({ threads, fetchThreads, createThread }: ForumProps) => {
+    const history = useHistory();
     const onNewThreadSubmit = useCallback((data: CreateThreadData) => {
         if (!data.title || !data.username || !data.message) {
             return { [FORM_ERROR]: "Заполните все поля." };
@@ -85,7 +86,10 @@ export const Forum = ({ threads, fetchThreads, createThread }: ForumProps) => {
 
     return (
         <Fragment>
-            <LeftSideButton className="leftside-button_fixed" />
+            <LeftSideButton
+                onClick={() => history.push("/")}
+                className="leftside-button_fixed"
+            />
             <div className="forum">
                 <div className="forum__container">
                     <div className="forum__body">

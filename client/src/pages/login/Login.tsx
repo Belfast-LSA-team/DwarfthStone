@@ -1,11 +1,18 @@
 import React, { useCallback, Fragment } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
+
+import type { ConnectedThunk } from "../../redux/thunks";
+import type { LoginFormData } from "../../../app/resolvers/user";
+import type { FormErrors } from "../../types/auth";
+
+import { fetchSigninThunk } from "../../redux/thunks/user";
 import BoxWrapper from "../../components/boxwrapper";
 import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
-import { FormErrors, LoginFormData } from "../../types/auth";
+import LeftsideButton from "../../components/leftsideButton";
 
 import "../../css/page.css";
 
@@ -22,12 +29,6 @@ const formValues = [
     },
 ];
 
-const onFormSubmit = (data: LoginFormData) => {
-    console.log(data);
-
-    /* Здесь отправляем форму */
-};
-
 const validate = (data: LoginFormData) => {
     const errors: FormErrors = {};
 
@@ -42,15 +43,29 @@ const validate = (data: LoginFormData) => {
     return errors;
 };
 
-export const Login = () => {
+type LoginProps = {
+    fetchSigninThunk: ConnectedThunk<typeof fetchSigninThunk>;
+};
+
+export const Login = ({ fetchSigninThunk }: LoginProps) => {
     const history = useHistory();
 
     const onRegisterClick = useCallback(() => {
         history.push("/register");
     }, []);
 
+    const onFormSubmit = (signinData: LoginFormData) => {
+        /* Здесь отправляем форму */
+        fetchSigninThunk(signinData).then(() => {
+            console.log("login");
+
+            history.push("/start");
+        });
+    };
+
     return (
-        <Fragment>
+        <div className="info-page">
+            <LeftsideButton onClick={() => history.push("/")} />
             <GameLayout>
                 <BoxWrapper className="auth">
                     <h1 className="page__title">Вход</h1>
@@ -86,6 +101,8 @@ export const Login = () => {
                     </Button>
                 </BoxWrapper>
             </GameLayout>
-        </Fragment>
+        </div>
     );
 };
+
+export default connect(null, { fetchSigninThunk })(Login);

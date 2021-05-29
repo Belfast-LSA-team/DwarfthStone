@@ -1,13 +1,13 @@
-import { fetchFulfilled } from "../../../../actions/user/userInfo";
+import { fetchFulfilledUserInfo } from "../../../../actions/user";
 import { user } from "../index";
 
 describe("user reducer", () => {
     it("записывает данные при получении юзера", () => {
         const mockUser = {
             id: "123",
-            firstName: "test_first_name",
-            secondName: "test_last_name",
-            displayName: "test_display_name",
+            first_name: "test_first_name",
+            second_name: "test_last_name",
+            display_name: "test_display_name",
             login: "test_login",
             avatar: "test_avatar",
             email: "test_email",
@@ -15,7 +15,7 @@ describe("user reducer", () => {
         };
 
         const initialState = {};
-        const action = fetchFulfilled(mockUser);
+        const action = fetchFulfilledUserInfo(mockUser);
 
         expect(user(initialState, action)).toStrictEqual({
             ...mockUser,

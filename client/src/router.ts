@@ -66,3 +66,70 @@ export const Routes = [
         ],
     },
 ];
+
+const commonRoutes = [
+    {
+        ...Homepage,
+        path: "/",
+        exact: true,
+    },
+    {
+        ...ContactUs,
+        path: "/contact-us",
+    },
+    {
+        ...Page404,
+        path: "*",
+    },
+];
+
+export const RoutesWithoutAuth = [
+    {
+        ...App,
+        routes: [
+            {
+                ...Login,
+                path: "/login",
+            },
+            {
+                ...Register,
+                path: "/register",
+            },
+            ...commonRoutes,
+        ],
+    },
+];
+
+export const RoutesWithAuth = [
+    {
+        ...App,
+        routes: [
+            {
+                ...Game,
+                path: "/game/",
+                exact: true,
+            },
+            {
+                ...ThreadPage,
+                path: "/forum/thread/:id",
+            },
+            {
+                ...ScoreDashboardPage,
+                path: "/score-dashboard",
+            },
+            {
+                ...Profile,
+                path: "/profile",
+            },
+            {
+                ...Start,
+                path: "/start",
+            },
+            {
+                ...Forum,
+                path: "/forum",
+            },
+            ...commonRoutes,
+        ],
+    },
+];
