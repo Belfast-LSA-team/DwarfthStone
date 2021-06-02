@@ -2,7 +2,6 @@ import React from "react";
 import App from "./App";
 
 import Homepage from "./pages/homepage";
-// import Auth from "./pages/auth";
 import Login from "./pages/login";
 import ContactUs from "./pages/contactUs";
 import Register from "./pages/register";

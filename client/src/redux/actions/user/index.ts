@@ -223,3 +223,68 @@ export const fetchFailedChangePassword = (payload: ErrorType) =>
         type: FETCH_CHANGE_PASSWORD_FAILED,
         payload,
     } as FailedChangePassword);
+
+export const FETCH_SERVICE_ID = "serviceId/FETCH";
+export const FETCH_SERVICE_ID_FULFILLED = "serviceId/FETCH_FULFILLED";
+export const FETCH_SERVICE_ID_FAILED = "serviceId/FETCH_FAILED";
+
+export type FetchServiceId = Action<typeof FETCH_SERVICE_ID>;
+export type FulfilledServiceId = Action<
+    typeof FETCH_SERVICE_ID_FULFILLED,
+    string
+>;
+export type FailedServiceId = Action<typeof FETCH_SERVICE_ID_FAILED, ErrorType>;
+
+export type ServiceIdActions =
+    | FetchServiceId
+    | FulfilledServiceId
+    | FailedServiceId;
+
+export const fetchServiceId = () =>
+    ({
+        type: FETCH_SERVICE_ID,
+    } as FetchServiceId);
+
+export const fetchFulfilledServiceId = (payload: string) =>
+    ({
+        type: FETCH_SERVICE_ID_FULFILLED,
+        payload,
+    } as FulfilledServiceId);
+
+export const fetchFailedServiceId = (payload: ErrorType) =>
+    ({
+        type: FETCH_SERVICE_ID_FAILED,
+        payload,
+    } as FailedServiceId);
+
+export const FETCH_OAUTH_SIGNIN = "oauthSignin/FETCH";
+export const FETCH_OAUTH_SIGNIN_FULFILLED = "oauthSignin/FETCH_FULFILLED";
+export const FETCH_OAUTH_SIGNIN_FAILED = "oauthSignin/FETCH_FAILED";
+
+export type FetchOAuthSignin = Action<typeof FETCH_OAUTH_SIGNIN>;
+export type FulfilledOAuthSignin = Action<typeof FETCH_OAUTH_SIGNIN_FULFILLED>;
+export type FailedOAuthSignin = Action<
+    typeof FETCH_OAUTH_SIGNIN_FAILED,
+    ErrorType
+>;
+
+export type OAuthSigninActions =
+    | FetchOAuthSignin
+    | FulfilledOAuthSignin
+    | FailedOAuthSignin;
+
+export const fetchOAuthSignin = () =>
+    ({
+        type: FETCH_OAUTH_SIGNIN,
+    } as FetchOAuthSignin);
+
+export const fetchFulfilledOAuthSignin = () =>
+    ({
+        type: FETCH_OAUTH_SIGNIN_FULFILLED,
+    } as FulfilledOAuthSignin);
+
+export const fetchFailedOAuthSignin = (payload: ErrorType) =>
+    ({
+        type: FETCH_OAUTH_SIGNIN_FAILED,
+        payload,
+    } as FailedOAuthSignin);

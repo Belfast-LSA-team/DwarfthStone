@@ -7,6 +7,8 @@ import type {
     ChangeProfileActions,
     ChangeAvatarActions,
     ChangePasswordActions,
+    ServiceIdActions,
+    OAuthSigninActions,
 } from "../../actions/user";
 
 import type {
@@ -14,6 +16,7 @@ import type {
     ProfileFormData,
     ChangeAvatarFormData,
     ChangePasswordFormData,
+    OAuthSigninDataType,
 } from "../../../../app/resolvers/user";
 import {
     resolveSignin,
@@ -23,6 +26,8 @@ import {
     resolveChangeProfile,
     resolveChangeAvatar,
     resolveChangePassword,
+    resolveServiceId,
+    resolveOAuthSignin,
 } from "../../../../app/resolvers/user";
 import {
     fetchSignin,
@@ -46,6 +51,12 @@ import {
     fetchChangePassword,
     fetchFulfilledChangePassword,
     fetchFailedChangePassword,
+    fetchServiceId,
+    fetchFulfilledServiceId,
+    fetchFailedServiceId,
+    fetchOAuthSignin,
+    fetchFulfilledOAuthSignin,
+    fetchFailedOAuthSignin,
 } from "../../actions/user";
 
 type FetchSignIn = ThunkCreator<SigninActions, LoginFormData>;
@@ -121,4 +132,26 @@ export const fetchChangePasswordThunk: FetchChangePassword = (
     return resolveChangePassword(changePasswordData)
         .then((res) => dispatch(fetchFulfilledChangePassword(res)))
         .catch((err) => dispatch(fetchFailedChangePassword(err)));
+};
+
+type FetchServiceId = ThunkCreator<ServiceIdActions, string>;
+export const fetchServiceIdThunk: FetchServiceId = (redirectURI) => (
+    dispatch
+) => {
+    dispatch(fetchServiceId());
+
+    return resolveServiceId(redirectURI)
+        .then((res: string) => dispatch(fetchFulfilledServiceId(res)))
+        .catch((err) => dispatch(fetchFailedServiceId(err)));
+};
+
+type FetchOAuthSignin = ThunkCreator<OAuthSigninActions, OAuthSigninDataType>;
+export const fetchOAuthSigninThunk: FetchOAuthSignin = (
+    OAuthSigninData: OAuthSigninDataType
+) => (dispatch) => {
+    dispatch(fetchOAuthSignin());
+
+    return resolveOAuthSignin(OAuthSigninData)
+        .then(() => dispatch(fetchFulfilledOAuthSignin()))
+        .catch((err) => dispatch(fetchFailedOAuthSignin(err)));
 };

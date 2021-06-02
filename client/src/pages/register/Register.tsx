@@ -13,6 +13,7 @@ import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import LeftsideButton from "../../components/leftsideButton";
+import YandexOAuth from "../../components/yandexOAuth";
 import {
     firstNameError,
     secondNameError,
@@ -109,8 +110,6 @@ export const Register = ({ fetchSignupThunk }: RegisterProps) => {
 
     const onFormSubmit = (registerData: ProfileFormData) => {
         fetchSignupThunk(registerData).then(() => {
-            console.log("register");
-
             history.push("/start");
         });
     };
@@ -151,6 +150,7 @@ export const Register = ({ fetchSignupThunk }: RegisterProps) => {
                     >
                         Войти
                     </Button>
+                    <YandexOAuth />
                 </BoxWrapper>
             </GameLayout>
         </div>

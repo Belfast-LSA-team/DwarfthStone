@@ -13,6 +13,7 @@ import GameLayout from "../../layouts/gamelayout";
 import InputList from "../../components/inputList";
 import Button from "../../components/button";
 import LeftsideButton from "../../components/leftsideButton";
+import YandexOAuth from "../../components/yandexOAuth";
 
 import "../../css/page.css";
 
@@ -57,8 +58,6 @@ export const Login = ({ fetchSigninThunk }: LoginProps) => {
     const onFormSubmit = (signinData: LoginFormData) => {
         /* Здесь отправляем форму */
         fetchSigninThunk(signinData).then(() => {
-            console.log("login");
-
             history.push("/start");
         });
     };
@@ -90,6 +89,7 @@ export const Login = ({ fetchSigninThunk }: LoginProps) => {
                             </form>
                         )}
                     ></Form>
+                    <YandexOAuth />
                     <Button
                         className="page__btn"
                         type="button"

@@ -21,6 +21,12 @@ import type {
     FetchChangePassword,
     FulfilledChangePassword,
     FailedChangePassword,
+    FetchServiceId,
+    FulfilledServiceId,
+    FailedServiceId,
+    FetchOAuthSignin,
+    FulfilledOAuthSignin,
+    FailedOAuthSignin,
 } from "../../../actions/user";
 
 import {
@@ -45,16 +51,26 @@ import {
     FETCH_CHANGE_PASSWORD,
     FETCH_CHANGE_PASSWORD_FULFILLED,
     FETCH_CHANGE_PASSWORD_FAILED,
+    FETCH_SERVICE_ID,
+    FETCH_SERVICE_ID_FULFILLED,
+    FETCH_SERVICE_ID_FAILED,
+    FETCH_OAUTH_SIGNIN,
+    FETCH_OAUTH_SIGNIN_FULFILLED,
+    FETCH_OAUTH_SIGNIN_FAILED,
 } from "../../../actions/user";
 
 export type User = UserInfo & {
     loading: boolean;
     isAuth: boolean | null;
+    isOAuth: boolean | null;
+    serviceId: string | null;
 };
 
 const initialState = {
     loading: false,
-    isAuth: false,
+    isAuth: null,
+    isOAuth: null,
+    serviceId: null,
     id: 0,
     first_name: "",
     second_name: "",
@@ -86,7 +102,13 @@ type Actions =
     | FailedChangeAvatar
     | FetchChangePassword
     | FulfilledChangePassword
-    | FailedChangePassword;
+    | FailedChangePassword
+    | FetchServiceId
+    | FulfilledServiceId
+    | FailedServiceId
+    | FetchOAuthSignin
+    | FulfilledOAuthSignin
+    | FailedOAuthSignin;
 
 export const user = (state: User = initialState, action: Actions) => {
     switch (action.type) {
@@ -222,6 +244,32 @@ export const user = (state: User = initialState, action: Actions) => {
             return state;
         }
         case FETCH_CHANGE_PASSWORD_FAILED: {
+            state.loading = false;
+            return state;
+        }
+        case FETCH_SERVICE_ID: {
+            state.loading = true;
+            return state;
+        }
+        case FETCH_SERVICE_ID_FULFILLED: {
+            state.loading = false;
+            state.serviceId = action.payload.service_id;
+            return state;
+        }
+        case FETCH_SERVICE_ID_FAILED: {
+            state.loading = false;
+            return state;
+        }
+        case FETCH_OAUTH_SIGNIN: {
+            state.loading = true;
+            return state;
+        }
+        case FETCH_OAUTH_SIGNIN_FULFILLED: {
+            state.loading = false;
+            state.isOAuth = true;
+            return state;
+        }
+        case FETCH_OAUTH_SIGNIN_FAILED: {
             state.loading = false;
             return state;
         }
