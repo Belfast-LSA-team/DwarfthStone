@@ -1,7 +1,7 @@
 import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
 
-const localHost = "http://localhost:3010/api";
+const localHost = "/api";
 const yandxHost = "https://ya-praktikum.tech/api/v2";
 
 const defaultAxiosConfig = {
@@ -20,6 +20,8 @@ export const paths = {
     changeProfile: "user/profile",
     changeAvatar: "user/profile/avatar",
     changePassword: "user/password",
+    oauthServiceId: "/oauth/yandex/service-id",
+    oAuthSignin: "/oauth/yandex",
     threads: "db/threads",
     threadsMessages: "db/threads/message",
 } as const;
@@ -34,7 +36,7 @@ export function get<R>(
     config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
     return axios
-        .get<R>(`${localHost}/${apiMethod}`, config)
+        .get<R>(`${yandxHost}/${apiMethod}`, config)
         .then(({ data }) => data);
 }
 

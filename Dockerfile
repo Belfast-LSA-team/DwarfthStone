@@ -10,4 +10,4 @@ RUN chmod +x wait-for.sh
 
 RUN npm install
 
-EXPOSE 3010
+EXPOSE 3000

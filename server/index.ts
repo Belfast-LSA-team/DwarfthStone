@@ -70,6 +70,6 @@ app.get("*", (req, res) => {
 db.authenticate();
 db.sync(); // Передай {force: true} чтобы дропнуть все имеющиеся таблицы
 
-app.listen(3010, () => {
+app.listen(3000, () => {
     console.log("Listening");
 });

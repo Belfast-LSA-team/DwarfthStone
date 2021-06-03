@@ -1,4 +1,4 @@
-import { Homepage } from "./Homepage";
+import { default as Homepage } from "./Homepage";
 
 export default {
     component: Homepage,

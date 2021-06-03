@@ -1,4 +1,4 @@
-import { get, post, put, paths } from "../..";
+import { get, getLocal, post, put, paths } from "../..";
 import type { UserInfo } from "../../../entities/user";
 
 export type LoginFormData = {
@@ -25,15 +25,9 @@ export type ChangePasswordFormData = {
     newPassword: string;
 };
 
-type UserServerResult = {
-    id: number;
-    first_name: string | null;
-    last_name: string | null;
-    display_name: string | null;
-    login: string;
-    avatar: string | null;
-    email: string;
-    phone: string | null;
+export type OAuthSigninDataType = {
+    code: string;
+    redirect_uri: string;
 };
 
 export const resolveSignin = (signinData: LoginFormData) =>
@@ -44,7 +38,7 @@ export const resolveSignup = (signupData: ProfileFormData) =>
 
 export const resolveLogout = () => post<string>(paths.logout);
 
-export const resolveUserInfo = () => get<UserInfo>(paths.userInfo);
+export const resolveUserInfo = () => getLocal<UserInfo>(paths.userInfo);
 
 export const resolveChangeProfile = (changeProfileData: ProfileFormData) =>
     put<UserInfo>(paths.changeProfile, changeProfileData);
@@ -58,3 +52,11 @@ export const resolveChangeAvatar = (newAvatar: ChangeAvatarFormData) =>
 export const resolveChangePassword = (
     changePasswordData: ChangePasswordFormData
 ) => put<string>(paths.changePassword, changePasswordData);
+
+export const resolveServiceId = (redirectURI: string) =>
+    get<string>(paths.oauthServiceId, {
+        params: { redirect_uri: redirectURI },
+    });
+
+export const resolveOAuthSignin = (OAuthSigninData: OAuthSigninDataType) =>
+    post<string>(paths.oAuthSignin, OAuthSigninData);

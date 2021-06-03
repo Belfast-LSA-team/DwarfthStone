@@ -1,7 +1,16 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 import "./homepage.css";
 
+import type { State } from "../../redux/reducers";
+import type { ConnectedThunk } from "../../redux/thunks";
+import { getOIsAuth, getIsAuth } from "../../redux/selectors/widgets/user";
+import {
+    fetchOAuthSigninThunk,
+    fetchUserInfoThunk,
+} from "../../redux/thunks/user";
+import { REDIRECT_URI } from "../../constants";
 import homeImg from "../../assets/images/GameMedia.png";
 import { SiteLayout } from "../../layouts/SiteLayout/SiteLayout";
 import { LogoHome } from "../../components/logos/Logo";
@@ -12,8 +21,31 @@ import {
     lightButtonHomeLabel,
 } from "../../data/content";
 
-export const Homepage = () => {
+type HomepageProps = {
+    isAuth: boolean | null;
+    isOAuth: boolean | null;
+    fetchOAuthSigninThunk: ConnectedThunk<typeof fetchOAuthSigninThunk>;
+    fetchUserInfoThunk: ConnectedThunk<typeof fetchUserInfoThunk>;
+};
+
+export const Homepage = ({
+    isOAuth,
+    fetchOAuthSigninThunk,
+    fetchUserInfoThunk,
+}: HomepageProps) => {
     const history = useHistory();
+    const search = useLocation().search;
+    const code = new URLSearchParams(search).get("code");
+
+    if (code && !isOAuth) {
+        fetchOAuthSigninThunk({ code, redirect_uri: REDIRECT_URI });
+    }
+
+    useEffect(() => {
+        if (isOAuth) {
+            fetchUserInfoThunk();
+        }
+    }, [isOAuth]);
 
     const contactUsHandler = () => {
         history.push("/contact");
@@ -53,3 +85,13 @@ export const Homepage = () => {
         </SiteLayout>
     );
 };
+
+const mapStateToProps = (state: State) => ({
+    isAuth: getIsAuth(state),
+    isOAuth: getOIsAuth(state),
+});
+
+export default connect(mapStateToProps, {
+    fetchOAuthSigninThunk,
+    fetchUserInfoThunk,
+})(Homepage);
