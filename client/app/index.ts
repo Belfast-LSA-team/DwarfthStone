@@ -1,7 +1,7 @@
 import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
 
-const localHost = "http://localhost:3000/api";
+const localHost = "/api";
 const yandxHost = "https://ya-praktikum.tech/api/v2";
 
 const defaultAxiosConfig = {
