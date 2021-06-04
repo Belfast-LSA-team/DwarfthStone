@@ -1,33 +1,31 @@
 version: "3"
 services:
-  postgres:
-    image: postgres:12
-    ports:
-      - "5432:5432"
-    volumes: 
-      - ./postgresdata:/var/lib/postgresql/data
-      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
-    restart: always
-    env_file:
-      ./.env
-    networks:
-      - ds_network
-  dwarfthstone:
-    build:
-      context: .
-    env_file:
-      ./.env
-    restart: always
-    volumes:
-      - ./client:/app/client
-      - ./server:/app/server
-    ports:
-      - "3000:3010"
-    depends_on:
-      - postgres
-    networks:
-      - ds_network
-    command: ./wait-for.sh postgres:5432 -- sh -c "npm run prod"
+    postgres:
+        image: postgres:12
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./postgresdata:/var/lib/postgresql/data
+            - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+        restart: always
+        env_file: ./.env
+        networks:
+            - ds_network
+    dwarfthstone:
+        build:
+            context: .
+        env_file: ./.env
+        restart: always
+        volumes:
+            - ./client:/app/client
+            - ./server:/app/server
+        ports:
+            - "3000:3000"
+        depends_on:
+            - postgres
+        networks:
+            - ds_network
+        command: ./wait-for.sh postgres:5432 -- sh -c "npm run prod"
 networks:
-  ds_network:
-    driver: bridge 
+    ds_network:
+        driver: bridge

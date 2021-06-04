@@ -1,58 +1,80 @@
-import type { AxiosError } from "axios";
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
 
-const axiosInstanse = axios.create({
+const localHost = "/api";
+const yandxHost = "https://ya-praktikum.tech/api/v2";
+
+const defaultAxiosConfig = {
     //TODO: and dev - prod url
-    baseURL: "/api",
     headers: {
         "Content-Type": "application/json",
     },
     withCredentials: true,
-});
+};
 
-type ApiGetMethod = "auth/user" | "db/threads" | string;
-type ApiPostMethod =
-    | "auth/signin"
-    | "auth/signup"
-    | "auth/logout"
-    | "db/threads"
-    | "db/threads/message";
+export const paths = {
+    signin: "auth/signin",
+    signup: "auth/signup",
+    logout: "auth/logout",
+    userInfo: "yandex/api/v2/auth/user",
+    changeProfile: "user/profile",
+    changeAvatar: "user/profile/avatar",
+    changePassword: "user/password",
+    oauthServiceId: "/oauth/yandex/service-id",
+    oAuthSignin: "/oauth/yandex",
+    threads: "db/threads",
+    threadsMessages: "db/threads/message",
+} as const;
+
+export type ApiRoute = typeof paths[keyof typeof paths];
 type Param = string | string[] | number | number[];
 
 export type ErrorType = AxiosError;
 
 export function get<R>(
-    apiMethod: ApiGetMethod,
-    params: Record<string, Param> = {}
+    apiMethod: ApiRoute,
+    config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
-    return axiosInstanse
-        .get<R>(`/yandex/${apiMethod}`, { params })
+    return axios
+        .get<R>(`${yandxHost}/${apiMethod}`, config)
         .then(({ data }) => data);
 }
 
 export function getLocal<R>(
-    apiMethod: ApiGetMethod,
-    params: Record<string, Param> = {}
+    apiMethod: ApiRoute,
+    config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
-    return axiosInstanse
-        .get<R>(`/${apiMethod}`, { params })
+    return axios
+        .get<R>(`${localHost}/${apiMethod}`, config)
         .then(({ data }) => data);
 }
 
 export function post<R>(
-    apiMethod: ApiPostMethod,
-    params: Record<string, Param> = {}
+    apiMethod: ApiRoute,
+    data: Record<string, Param> = {},
+    config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
-    return axiosInstanse
-        .post<R>(`/yandex/${apiMethod}`, { params })
+    return axios
+        .post<R>(`${yandxHost}/${apiMethod}`, data, config)
+        .then(({ data }) => data);
+}
+
+export function put<R>(
+    apiMethod: ApiRoute,
+    data: Record<string, Param | FileList> = {},
+    config: AxiosRequestConfig = defaultAxiosConfig
+): Promise<R> {
+    return axios
+        .put<R>(`${yandxHost}/${apiMethod}`, data, config)
         .then(({ data }) => data);
 }
 
 export function postLocal<R>(
-    apiMethod: ApiPostMethod,
-    params: Record<string, Param> = {}
+    apiMethod: ApiRoute,
+    data: Record<string, Param> = {},
+    config: AxiosRequestConfig = defaultAxiosConfig
 ): Promise<R> {
-    return axiosInstanse
-        .post<R>(`/${apiMethod}`, params)
+    return axios
+        .post<R>(`${localHost}/${apiMethod}`, data, config)
         .then(({ data }) => data);
 }

@@ -1,6 +1,5 @@
-import { Profile } from "./Profile";
+import { default as Profile } from "./Profile";
 
 export default {
-  component: Profile
-}
-
+    component: Profile,
+};
