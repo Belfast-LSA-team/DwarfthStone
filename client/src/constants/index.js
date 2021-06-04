@@ -1,1 +1,1 @@
-export const REDIRECT_URI = "http://localhost:3000";
+export const REDIRECT_URI = "https://belfast-dwarfthstone-4.ya-praktikum.tech/";

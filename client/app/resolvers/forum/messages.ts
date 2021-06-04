@@ -8,7 +8,7 @@ export type ThreadMessagesServerResult = {
 };
 
 export const resolveMessages = (id: string) =>
-    getLocal<ThreadMessagesServerResult>(`${paths.threads}/${id}`);
+    getLocal<ThreadMessagesServerResult>(`db/thread/${id}`);
 
 export const resolveCreateMessage = (data: replyFormData) => {
     return postLocal(paths.threadsMessages, data);
